@@ -1,4 +1,4 @@
 challenge-game-a-week
 =====================
 
-creating one game in a week without experience =)
+Creating one game in a week for 6 months without experience =)
