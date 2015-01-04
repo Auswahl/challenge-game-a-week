@@ -153,5 +153,6 @@ function draw() {
     beaver.draw();
 };
 
-
-
+function keyPressed() {
+  return false;
+}
