@@ -2,11 +2,14 @@
 var playerImg;
 var playerImgHop;
 var grassBlockImg;
+var birthdayMusic;
 
 function preload() {
-  playerImg = loadImage("../assets/Hopper-Happy.png");
-  playerImgHop = loadImage("../assets/Hopper-Jumping.png");
-  grassBlockImg = loadImage("../assets/GrassBlock.png")
+  playerImg = loadImage("../assets/Hopper-Happy1.png");
+  playerImgHop = loadImage("../assets/Hopper-Jumping1.png");
+  grassBlockImg = loadImage("../assets/GrassBlock.png");
+  happyPoint = loadImage("../assets/happyPoint1.png");
+  birthdayMusic = loadSound('../assets/8-bit happy birthday.mp3');
 }
 
 var Beaver = function(x,y) {
@@ -19,7 +22,7 @@ var Beaver = function(x,y) {
 Beaver.prototype.draw = function() {
    fill(255,0,0);
    this.y = constrain(this.y, 0, height-50);
-   image(this.img, this.x, this.y, 40, 40);
+   image(this.img, this.x, this.y, 60, 60);
 };
 
 Beaver.prototype.hop = function(){
@@ -48,13 +51,15 @@ var Stick = function(x,y) {
 };
 
 Stick.prototype.draw = function() {
-     fill(117, 58, 58);
-        rectMode(CENTER);
-     rect(this.x, this.y, 5, 40);
+    imageMode(CENTER);
+    image(happyPoint, this.x, this.y, 20, 50); //points
+     // fill(117, 58, 58);
+     //    rectMode(CENTER);
+     // rect(this.x, this.y, 5, 40);
 };
 
 
-var beaver = new Beaver(10, 300);//so all connected to Beaver - like all staff with prototypes - a related to this variable
+var beaver = new Beaver(30, 300);//so all connected to Beaver - like all staff with prototypes - a related to this variable
 
 
 // environment
@@ -77,15 +82,17 @@ function setup() {
 	for ( var i = 0; i < 40; i++){
 		sticks.push(new Stick(i * 40 + 300, random(20, 260)));
 	}
+
+  birthdayMusic.loop();
 }
 
 function draw() {
     //background and footer
-     background(255, 236, 140);
+     background(252, 245, 255);
      rectMode(CORNER);
      noStroke();
-     fill(92, 148, 78);
-     rect(0, height*0.95, width, height*0.1);
+     fill(19, 59, 43);
+     rect(0, height*0.93, width, height*0.1);
      
     //grass
     for (var i = 0; i < grassXs.length; i++) {
@@ -112,12 +119,31 @@ function draw() {
     }
 
     textSize(20);
-    text("Score: " + beaver.sticks, 20, 30);
+    fill(128, 16, 72);
+    text("Happy points: " + beaver.sticks, 20, 30);
+    fill(255, 255, 255);
+    textSize(13);
+    text("Misha is a BIRTHDAY BOY! Purple pineapples make him happy", 10, 395);
 
-    if (beaver.sticks/sticks.length >= 0.95) {
-        textSize(36);
-        text("YOU WIN!!!!", 100, 200);
-    }
+    if (beaver.sticks/sticks.length >= 0.85) {
+        textSize(26); 
+        fill(128, 16, 72);       
+        text("WOW!!!", 120, 150);
+        text("Misha will be", 95, 200);
+        text("totally happy this year!", 55, 250);
+    } else if (beaver.sticks/sticks.length >= 0.70 && beaver.sticks/sticks.length < 0.85) {
+        fill(128, 16, 72);
+        textSize(20);        
+        text("A bit happier!", 100, 200);
+        
+    } else if (beaver.sticks/sticks.length >= 0.40 && beaver.sticks/sticks.length < 0.65) {
+        fill(128, 16, 72);
+        textSize(20);        
+        text("Misha looks happy", 95, 200);
+        
+    } 
+
+    
 
     if (keyIsDown(32)){
           beaver.hop();
