@@ -170,3 +170,7 @@ draw = function() {
 	}
 
 };
+
+function keyPressed() {
+  return false;
+}
