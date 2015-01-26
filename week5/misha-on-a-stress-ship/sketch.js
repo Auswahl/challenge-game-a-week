@@ -169,7 +169,7 @@ draw = function() {
 		noLoop();
 	}
 
-	if (score >= 0) {
+	if (score >= 30) {
 		background(255, 55, 0);
 		noStroke();
 		fill(255,255,255);
