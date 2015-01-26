@@ -52,7 +52,7 @@ Player.prototype.draw = function() {
 
 //Other objects
 var score = 0;
-var hitpoints = 10;
+var hitpoints = 7;
 
 
 var FunRock = function(x, y) {
