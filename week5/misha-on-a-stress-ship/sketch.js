@@ -169,6 +169,18 @@ draw = function() {
 		noLoop();
 	}
 
+	if (score >= 0) {
+		background(255, 55, 0);
+		noStroke();
+		fill(255,255,255);
+		textSize(35);
+		text("ALL FUN IS DEAD!", 75, 150);
+		textSize(17);
+		text("Misha is a real Party Killer", 100, 200);
+		text("Thanks to you", 125, 250);
+		noLoop();
+	}
+
 };
 
 function keyPressed() {
