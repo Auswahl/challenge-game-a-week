@@ -174,7 +174,7 @@ draw = function() {
 		noStroke();
 		fill(255,255,255);
 		textSize(35);
-		text("ALL FUN IS DEAD!", 75, 150);
+		text("ALL FUN IS DEAD!", 50, 150);
 		textSize(17);
 		text("Misha is a real Party Killer", 100, 200);
 		text("Thanks to you", 125, 250);
