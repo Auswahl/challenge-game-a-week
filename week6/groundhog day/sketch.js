@@ -163,7 +163,7 @@ var drawScene4 = function() { // Scene 4
 
 
 var drawScene5 = function() { // Scene 5
-    currentScene = 3;
+    currentScene = 5;
     background(92, 92, 92);
     
     // Prologue
@@ -179,7 +179,7 @@ var drawScene5 = function() { // Scene 5
     text("You have found something strange - it's totally frozen dog", width/16, height/1.5);
     text("You can leave it there and think about it later - ", width/16, height/1.6+45);
     text("The Beutsche Dank is waiting for its heroes NOW!", width/16, height/1.6+65);
-    text("Or you can bring frozen dog in the house", width/16, height/1.6+85);
+    text("Or you can bring frozen dog inside the house", width/16, height/1.6+85);
     
   
     button6.draw();
