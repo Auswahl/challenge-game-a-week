@@ -105,6 +105,7 @@ var drawScene2 = function() { // Scene 2
 
     button2.draw();
     button3.draw();
+    groundhogMusic.loop();
 };
 
 
@@ -340,7 +341,7 @@ function setup() {
     button7 = new Button(width*0.06,height*0.87,140,34,"WALK TO WORK");
     button8 = new Button(width*0.33,height*0.87,140,34,"WHAT ABOUT PHIL?");
     button9 = new Button(width*0.33,height*0.87,140,34,"WHAT ABOUT PHIL?");
-    groundhogMusic.loop();
+    
     drawScene1();
 
 }
