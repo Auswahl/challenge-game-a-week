@@ -6,9 +6,12 @@ var door2;
 var door3;
 var positionImg;
 var machineImg;
+var stripImg;
+var strip1;
 var machineSmall;
 var machineBig;
 var arrowImg;
+var finalImg;
 
 
 function preload() {
@@ -21,6 +24,18 @@ function preload() {
     machineImg = [
     loadImage("../assets/machine1.png"),
     loadImage("../assets/machine2.png"),
+    ];
+
+    stripImg = [
+    loadImage("../assets/strip1.png"),
+    loadImage("../assets/strip3.png"),
+    loadImage("../assets/strip2.png"),
+    loadImage("../assets/strip3.png")
+    ];
+
+    finalImg = [
+    loadImage("../assets/final1.png"),
+    loadImage("../assets/final2.png")
     ];
     arrowImg = loadImage("../assets/arrow.png");
 }
@@ -114,6 +129,61 @@ Machine.prototype.checkForCollision = function(Player) {
         drawScene3();
     }
 };
+
+//Stripper
+var Strip = function(x,y, arrayOfImages, width, height){
+    this.x = x;
+    this.y = y;
+    this.images = arrayOfImages;
+    this.width = width;
+    this.height = height;
+    this.currentIndex = 0;
+}
+
+Strip.prototype.update = function() {
+    if ((frameCount%9) === 0){
+      this.currentIndex = this.currentIndex+1;  
+    }  
+    
+    
+    
+    if (this.currentIndex >= this.images.length) {
+        this.currentIndex = 0;
+    };
+}
+
+Strip.prototype.draw = function() {
+    image(this.images[this.currentIndex],this.x, this.y, this.width, this.height);
+};
+
+//final animation
+var Final = function(x,y, arrayOfImages, width, height){
+    this.x = x;
+    this.y = y;
+    this.images = arrayOfImages;
+    this.width = width;
+    this.height = height;
+    this.currentIndex = 0;
+}
+
+Final.prototype.update = function() {
+    if ((frameCount%6) === 0){
+      this.currentIndex = this.currentIndex+1;  
+    }  
+    
+    
+    
+    if (this.currentIndex >= this.images.length) {
+        this.currentIndex = 0;
+    };
+}
+
+Final.prototype.draw = function() {
+    image(this.images[this.currentIndex],this.x, this.y, this.width, this.height);
+};
+
+
+
 
 //Doors
 var Door = function(x,y,year){
@@ -230,11 +300,17 @@ var drawScene4 = function() { // Scene 4
     textSize(32);
     textAlign(CENTER);
     textFont("Georgia");
-    text("Scene 4", width/2.1, height/6);
-    text("and", width/2.1, height/6+35);
-    text("the Time Machine", width/2.1, height/6+65);
-    machineBig.draw();
-    machineBig.update();
+    text("Year 1893", width/2.1, height/6);
+    noStroke();
+    fill(0,0,0);
+    textSize(15);
+    textAlign(LEFT);
+    text("Paris, Moulin Rouge.", width/9, height/6+35);
+    text("The first public strip-tease took place here, ", width/9, height/6+65);
+    text("followed by rather funny trial and not so funny riot ", width/9, height/6+85);
+    text("in protest from student strip-tease fans.", width/9, height/6+105);
+    strip1.draw();
+    strip1.update();
     button2.draw();
 };
 
@@ -246,7 +322,7 @@ var drawScene5 = function() { // Scene 5
     textSize(32);
     textAlign(CENTER);
     textFont("Georgia");
-    text("Scene 5", width/2.1, height/6);
+    text("Year 1893", width/2.1, height/6);
     text("and", width/2.1, height/6+35);
     text("the Time Machine", width/2.1, height/6+65);
     machineBig.draw();
@@ -262,7 +338,7 @@ var drawScene6 = function() { // Scene 6
     textSize(32);
     textAlign(CENTER);
     textFont("Georgia");
-    text("Scene 6", width/2.1, height/6);
+    text("1923", width/2.1, height/6);
     text("and", width/2.1, height/6+35);
     text("the Time Machine", width/2.1, height/6+65);
     machineBig.draw();
@@ -288,8 +364,8 @@ var drawScene7 = function() { // Scene 7
     text("without remembering a thing...", width/9, height/6+95);
     text("...but with a strange desire to get naked on a scene.", width/9, height/1.15);
     text("Weirdo.", width/9, height/1.15+20);
-    machineBig.draw();
-    machineBig.update();
+    home.draw();
+    home.update();
     //button2.draw();
 };
 
@@ -312,8 +388,8 @@ var drawScene8 = function() { // Scene 8
     text("...but with a strange desire to join YMCA ", width/9, height/1.15);
     text("and throw some ball over the tennis net.", width/9, height/1.15+20);
     text("Maybe not the best choice.", width/9, height/1.15+40);
-    machineBig.draw();
-    machineBig.update();
+    home.draw();
+    home.update();
 };
 
 var drawScene9 = function() { // Scene 9
@@ -334,8 +410,8 @@ var drawScene9 = function() { // Scene 9
     text("without remembering a thing...", width/9, height/6+95);
     text("...but with a strange desire to fly away, right now.", width/9, height/1.15);
     text("Good choice, Misha!", width/9, height/1.15+20);
-    machineBig.draw();
-    machineBig.update();
+    home.draw();
+    home.update();
 };
 
 
@@ -396,10 +472,10 @@ function draw(){
         machineSmall.checkForCollision(misha);
     }
 
-    // if (currentScene === 3) {
-    //     drawScene3();
+    if (currentScene === 3) {
+        drawScene3();
 
-    // }
+    }
     if (currentScene === 4) {
         drawScene4();
 
@@ -412,8 +488,19 @@ function draw(){
         drawScene6();
 
     }
-    machineSmall.checkForCollision(misha);
-}
+    if (currentScene === 7) {
+        drawScene7();
+
+    }
+    if (currentScene === 8) {
+        drawScene8();
+
+    }
+    if (currentScene === 9) {
+        drawScene9();
+
+    }
+};
 
 function setup() {
     createCanvas(400, 400);
@@ -426,6 +513,8 @@ function setup() {
     door3 = new Door(width/1.4, height/1.6, "1923");
     machineSmall = new Machine(width/1.3, height-125, machineImg, 100, 125);
     machineBig = new Machine(width/2-50, height/3+25, machineImg, 100, 125);
+    strip1 = new Strip(width/2-25, height/2, stripImg, 75, 125);
+    home = new Final(width/2-75, height/2, finalImg);
     drawScene1();
 }
 
