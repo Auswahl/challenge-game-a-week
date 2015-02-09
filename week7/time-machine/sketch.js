@@ -12,6 +12,11 @@ var machineSmall;
 var machineBig;
 var arrowImg;
 var finalImg;
+var planeImg;
+var plane1;
+var ymcaImg;
+var ymca1;
+var soundtrack;
 
 
 function preload() {
@@ -37,7 +42,20 @@ function preload() {
     loadImage("../assets/final1.png"),
     loadImage("../assets/final2.png")
     ];
+
+    planeImg = [
+    loadImage("../assets/plane1.png"),
+    loadImage("../assets/plane2.png")
+    ];
+
+    ymcaImg = [
+    loadImage("../assets/ymca1.png"),
+    loadImage("../assets/ymca2.png")
+    ];
+    
     arrowImg = loadImage("../assets/arrow.png");
+
+    soundtrack = loadSound('../assets/cabaret.mp3');
 }
 
 var currentScene = 0;
@@ -218,8 +236,62 @@ Door.prototype.isMouseInside = function(mouseX, mouseY) {
             mouseY <= (this.y+this.height));
 };
 
+//Plane
+var Plane = function(x,y, arrayOfImages){
+    this.x = x;
+    this.y = y;
+    this.images = arrayOfImages;
+    this.currentIndex = 0;
+};
+
+Plane.prototype.update = function() {
+    this.x++;
+    if ((frameCount%6) === 0){
+      this.currentIndex = this.currentIndex+1;  
+    }  
+    
+    
+    
+    if (this.currentIndex >= this.images.length) {
+        this.currentIndex = 0;
+    };
+}
+
+Plane.prototype.draw = function() {
+    image(this.images[this.currentIndex],this.x, height/2, 175, 88);
+};
+
+//Volleyball
+var Ymca = function(x,y, arrayOfImages, width, height){
+    this.x = x;
+    this.y = y;
+    this.images = arrayOfImages;
+    this.width = width;
+    this.height = height;
+    this.currentIndex = 0;
+}
+
+Ymca.prototype.update = function() {
+    if ((frameCount%3) === 0){
+      this.currentIndex = this.currentIndex+1;  
+    }  
+    
+    
+    
+    if (this.currentIndex >= this.images.length) {
+        this.currentIndex = 0;
+    };
+}
+
+Ymca.prototype.draw = function() {
+    image(this.images[this.currentIndex],this.x, this.y, this.width, this.height);
+};
+
+
+
 var drawScene1 = function() { // Scene 1
     currentScene = 1;
+
     background(255,255,255);
     stroke(1);
     fill(255,255,255);
@@ -237,6 +309,7 @@ var drawScene1 = function() { // Scene 1
 var drawScene2 = function() { // Scene 2
 
     currentScene = 2;
+
     background(255,255,255);
     noStroke();
     textSize(15);
@@ -249,14 +322,13 @@ var drawScene2 = function() { // Scene 2
     textSize(15);
     text("Press RIGHT ARROW on a keyboard to move", width/9, height/6+120);
     image(arrowImg,width/2-25, height/6+130);
-    //door1.draw();
+  
     misha.draw();
     machineSmall.draw();
     machineSmall.update();
-    //misha.update();
-    //button1.draw();
-    //door1.draw();
+    
 };
+    
 
 var drawScene3 = function() { // Scene 3
     currentScene = 3;
@@ -322,11 +394,20 @@ var drawScene5 = function() { // Scene 5
     textSize(32);
     textAlign(CENTER);
     textFont("Georgia");
-    text("Year 1893", width/2.1, height/6);
-    text("and", width/2.1, height/6+35);
-    text("the Time Machine", width/2.1, height/6+65);
-    machineBig.draw();
-    machineBig.update();
+    text("Year 1895", width/2.1, height/6);
+    noStroke();
+    fill(0,0,0);
+    textSize(12);
+    textAlign(LEFT);
+    text("Holyoke, Massachusetts.", width/10, height/6+35);
+    text("First time we've heard about popular game Mintonette.", width/10, height/6+65);
+    text("Cool YMCA physical director Morgan hung a tennis net", width/10, height/6+85);
+    text("in the room and volleyed ball over it.", width/10, height/6+105);
+    text("Thanks god we don't call this game Mintonette.", width/10, height/6+125);
+    textSize(18);
+    text("Happy Birthday, volleyball!", width/10, height/6+155);
+    ymca1.draw();
+    ymca1.update();
     button2.draw();
 };
 
@@ -338,11 +419,17 @@ var drawScene6 = function() { // Scene 6
     textSize(32);
     textAlign(CENTER);
     textFont("Georgia");
-    text("1923", width/2.1, height/6);
-    text("and", width/2.1, height/6+35);
-    text("the Time Machine", width/2.1, height/6+65);
-    machineBig.draw();
-    machineBig.update();
+    text("Year 1923", width/2.1, height/6);
+    noStroke();
+    fill(0,0,0);
+    textSize(15);
+    textAlign(LEFT);
+    text("USSR, Moscow (probably).", width/9, height/6+35);
+    text("That is the beginning of soviet commercial aviation! ", width/9, height/6+65);
+    text("Since then we have a great possibility", width/9, height/6+85);
+    text("to get away from here real fast.", width/9, height/6+105);
+    plane1.draw();
+    plane1.update();
     button2.draw();
 };
 
@@ -366,6 +453,7 @@ var drawScene7 = function() { // Scene 7
     text("Weirdo.", width/9, height/1.15+20);
     home.draw();
     home.update();
+    soundtrack.stop();
     //button2.draw();
 };
 
@@ -387,9 +475,11 @@ var drawScene8 = function() { // Scene 8
     text("without remembering a thing...", width/9, height/6+95);
     text("...but with a strange desire to join YMCA ", width/9, height/1.15);
     text("and throw some ball over the tennis net.", width/9, height/1.15+20);
-    text("Maybe not the best choice.", width/9, height/1.15+40);
+    textSize(18);
+    text("Maybe not the best choice.", width/9, height/1.15+50);
     home.draw();
     home.update();
+    soundtrack.stop();
 };
 
 var drawScene9 = function() { // Scene 9
@@ -412,6 +502,7 @@ var drawScene9 = function() { // Scene 9
     text("Good choice, Misha!", width/9, height/1.15+20);
     home.draw();
     home.update();
+    soundtrack.stop();
 };
 
 
@@ -424,6 +515,7 @@ function keyPressed(){
 
 mouseClicked = function() {
     if (button1.isMouseInside(mouseX, mouseY) === true && currentScene === 1) {
+        soundtrack.loop();
         drawScene2();
     }  else if (button2.isMouseInside(mouseX, mouseY) === true && currentScene === 4) {
         drawScene7();
@@ -440,28 +532,6 @@ mouseClicked = function() {
     } else if (door3.isMouseInside(mouseX, mouseY) === true && currentScene === 3) {
         drawScene6();
     };
-
-
-    // } else if (button2.isMouseInside(mouseX, mouseY) === true && currentScene === 2) {
-    //     drawScene3();
-    // } else if (button3.isMouseInside(mouseX, mouseY) === true && currentScene === 2) {
-    //     drawScene4();
-    // } else if (button3.isMouseInside(mouseX, mouseY) === true && currentScene === 3) {
-    //     drawScene4();
-    // } else if (button4.isMouseInside(mouseX, mouseY) === true && currentScene === 3) {
-    //     drawScene5();
-    // } else if (button5.isMouseInside(mouseX, mouseY) === true && currentScene === 4) {
-    //     drawScene9();
-    // } else if (button6.isMouseInside(mouseX, mouseY) === true && currentScene === 5) {
-    //     drawScene6();
-    // } else if (button7.isMouseInside(mouseX, mouseY) === true && currentScene === 5) {
-    //     drawScene7();
-    // } else if (button8.isMouseInside(mouseX, mouseY) === true && currentScene === 6) {
-    //     drawScene8();
-    // } else if (button9.isMouseInside(mouseX, mouseY) === true && currentScene === 7) {
-    //     drawScene9();
-    // };
-
 }
 function draw(){
     if (currentScene === 1) {
@@ -515,6 +585,8 @@ function setup() {
     machineBig = new Machine(width/2-50, height/3+25, machineImg, 100, 125);
     strip1 = new Strip(width/2-25, height/2, stripImg, 75, 125);
     home = new Final(width/2-75, height/2, finalImg);
+    plane1 = new Plane(-175, height/2, planeImg);
+    ymca1 = new Ymca(width/9, height/3+100, ymcaImg)
     drawScene1();
 }
 
