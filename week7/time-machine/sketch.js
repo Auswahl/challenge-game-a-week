@@ -1,11 +1,14 @@
 var button1;
+var button2;
 var misha;
 var door1;
 var door2;
 var door3;
 var positionImg;
+var machineImg;
 var machineSmall;
 var machineBig;
+var arrowImg;
 
 
 function preload() {
@@ -76,7 +79,7 @@ Player.prototype.update = function() {
 }
 
 Player.prototype.draw = function() {
-    image(this.images[this.currentIndex],this.x, height/1.2, 50, 100);
+    image(this.images[this.currentIndex],this.x, height/1.2, 65, 100);
 };
 
 //Machine
@@ -335,22 +338,33 @@ var drawScene9 = function() { // Scene 9
     machineBig.update();
 };
 
+
+
+function keyPressed(){
+    if(keyCode === RIGHT_ARROW){
+        misha.update();
+    }
+}
+
 mouseClicked = function() {
     if (button1.isMouseInside(mouseX, mouseY) === true && currentScene === 1) {
         drawScene2();
-    } else if (door1.isMouseInside(mouseX, mouseY) === true && currentScene === 3) {
-        drawScene4();
-    } else if (door2.isMouseInside(mouseX, mouseY) === true && currentScene === 3) {
-        drawScene5();
-    } else if (door3.isMouseInside(mouseX, mouseY) === true && currentScene === 3) {
-        drawScene6();
-    } else if (button2.isMouseInside(mouseX, mouseY) === true && currentScene === 4) {
+    }  else if (button2.isMouseInside(mouseX, mouseY) === true && currentScene === 4) {
         drawScene7();
     } else if (button2.isMouseInside(mouseX, mouseY) === true && currentScene === 5) {
         drawScene8();
     } else if (button2.isMouseInside(mouseX, mouseY) === true && currentScene === 6) {
         drawScene9();
     };
+
+    if (door1.isMouseInside(mouseX, mouseY) === true && currentScene === 3) {
+        drawScene4();
+    } else if (door2.isMouseInside(mouseX, mouseY) === true && currentScene === 3) {
+        drawScene5();
+    } else if (door3.isMouseInside(mouseX, mouseY) === true && currentScene === 3) {
+        drawScene6();
+    };
+
 
     // } else if (button2.isMouseInside(mouseX, mouseY) === true && currentScene === 2) {
     //     drawScene3();
@@ -373,13 +387,6 @@ mouseClicked = function() {
     // };
 
 }
-
-function keyPressed(){
-    if(keyCode === RIGHT_ARROW){
-        misha.update();
-    }
-}
-
 function draw(){
     if (currentScene === 1) {
         drawScene1();
@@ -389,10 +396,10 @@ function draw(){
         machineSmall.checkForCollision(misha);
     }
 
-    if (currentScene === 3) {
-        drawScene3();
+    // if (currentScene === 3) {
+    //     drawScene3();
 
-    }
+    // }
     if (currentScene === 4) {
         drawScene4();
 
