@@ -6,6 +6,9 @@ var playerImgHurt;
 var bg;
 var soundhop;
 var beaver;
+var loveImg;
+var apartImg;
+
 
 
 function preload() {
@@ -15,8 +18,12 @@ playerImgHop = loadImage("../assets/hoppylena.png");
 playerImgHurt = loadImage("../assets/happylenahurt.png");
 grassBlockImg = loadImage("../assets/GrassBlock.png");
 happyPoint = loadImage("../assets/heartImg.png");
+loveImg = loadImage("../assets/love.png");
+apartImg = loadImage("../assets/apart.png");
 soundhop = loadSound('../assets/hop.mp3');
 soundhurt = loadSound('../assets/heartbeat.mp3');
+soundairhorn = loadSound('../assets/airhorn.mp3');
+soundfanfare = loadSound('../assets/fanfare.mp3');
 }
 
 var Beaver = function(x,y) {
@@ -112,21 +119,60 @@ var sticks = [];
 //array of X positions for each grass block
 var grassXs = [];
 
-var drawFinalScene = function() { // Final Scene
+var drawSadFinalScene = function() { // Final Scene
     currentScene = 2;
-
+    soundairhorn.play();
+    noLoop();
     imageMode(CORNER);
     background(bg);
     rectMode(CORNER);
 
     //stroke(1);
     fill(255,255,255);
-    textSize(32);
+    textSize(25);
     textAlign(CENTER);
     textFont("Georgia");
-    text("Misha", width/2.1, height/6);
-    text("and Lena", width/2.1, height/6+35);
-    text("are now together!", width/2.1, height/6+65);
+    text("Lena failed, so now", width/2, height/6);
+    text("Misha and Lena", width/2, height/6+35);
+    text("are too far from each other", width/2, height/6+70);
+    image(apartImg, 0, height/6+90 )
+    imageMode(CORNER);
+    rectMode(CORNER);
+    fill(38, 26, 26);
+    rect(0, height*0.93, width, height*0.09);
+    fill(255, 255, 255);
+    textSize(13);
+    text("and I hate you for that :(", width/2, 395);
+    noLoop();
+}
+
+var drawHappyFinalScene = function() { // Final Scene
+    currentScene = 3;
+    soundfanfare.play();
+    noLoop();
+    imageMode(CORNER);
+    background(bg);
+    rectMode(CORNER);
+
+    //stroke(1);
+    fill(255,255,255);
+    textSize(28);
+    textAlign(CENTER);
+    textFont("Georgia");
+    text("You did it!", width/2, height/6);
+    text("Misha and Lena", width/2, height/6+35);
+    text("are finally together", width/2, height/6+70);
+    image(loveImg, 75, height/6+90)
+    imageMode(CORNER);
+    rectMode(CORNER);
+    fill(38, 26, 26);
+    rect(0, height*0.93, width, height*0.09);
+    fill(255, 255, 255);
+    textSize(13);
+    textAlign(CENTER);
+    text("Thank you, oh brave hero :)", 200, 390);
+    noLoop();
+
 }
 
 function mainScene(){
@@ -163,26 +209,29 @@ function mainScene(){
 
     textSize(20);
     fill(255, 255, 255);
+    textAlign(LEFT);
     text("Love damage: " + beaver.sticks, 20, 30);
     fill(255, 255, 255);
     textSize(13);
-    text("Bring me to my beloved Misha!", 100, 395);
+    textAlign(CENTER);
+    text("Bring me to my beloved Misha!", width/2, 395);
 
     if (beaver.sticks/sticks.length >= 0.85) {
         textSize(26); 
-         fill(41, 1, 52);       
-        text("Oh no!!!", 120, 150);
-        text("That was too much for my love", 95, 200);
-        text("We'll never be together...", 55, 250);
+        fill(41, 1, 52);
+        textAlign(CENTER);       
+        text("Oh no!!!", width/2, 150);
+        text("That was too much for my love", width/2, 200);
+        //text("We'll never be together...", 55, 250);
     } else if (beaver.sticks/sticks.length >= 0.70 && beaver.sticks/sticks.length < 0.85) {
          fill(41, 1, 52);
         textSize(20);        
-        text("My heart is almost broken!", width/4, 200);
+        text("My heart is almost broken!", width/2, 200);
         
     } else if (beaver.sticks/sticks.length >= 0.40 && beaver.sticks/sticks.length < 0.65) {
          fill(41, 1, 52);
         textSize(20);        
-        text("Oh, that totally hurts my feelings", width/4, 200);
+        text("Oh, that totally hurts my feelings", width/2, 200);
         
     } 
 
@@ -192,9 +241,11 @@ function mainScene(){
 
     beaver.draw();
     beaver.update();
-    if (sticks[sticks.length-1].x < 0){
+    if((sticks[sticks.length-1].x < 0)&&(beaver.sticks/sticks.length >= 0.85)){
         currentScene = 2;
-    }
+    } else if((sticks[sticks.length-1].x < 0)&&(beaver.sticks/sticks.length < 0.85)){
+        currentScene = 3;
+    } 
 
 }
 
@@ -219,7 +270,11 @@ function draw() {
         mainScene();
     }
     if (currentScene === 2) {
-        drawFinalScene();
+        drawSadFinalScene();
+        
+    }
+    if (currentScene === 3) {
+        drawHappyFinalScene();
         
     }
 
