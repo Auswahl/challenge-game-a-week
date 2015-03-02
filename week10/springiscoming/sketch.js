@@ -53,14 +53,6 @@ function preload() {
 
 var currentScene;
 
-mouseClicked = function() {
-	currentScene.clicked(mouseX, mouseY);
-	if (!soundtrack.isPlaying()) {
-		soundtrack.play();  	
-	}
-
-};
-
 touchEnded = function() {
 	currentScene.clicked(touchX, touchY);
 	if (!soundtrack.isPlaying()) {
@@ -109,7 +101,6 @@ function setup() {
     var scene6 = new AnimatedFinalScene(bgfinal1, fl2Img);
     scene6.text = txt6;
     scene6.subtext = txt61;
-    scene6.btn1.action
 
     var scene5 = new ChoiceScene(bg5, scene6);
     scene5.text = txt5;
