@@ -53,13 +53,12 @@ function preload() {
 
 var currentScene;
 
-touchEnded = function() {
-	currentScene.clicked(touchX, touchY);
+mouseClicked = function() {
+	currentScene.clicked(mouseX, mouseY);
 	if (!soundtrack.isPlaying()) {
 		soundtrack.play();  	
 	}
-
-	return false;
+	return
 };
 
 function draw(){
