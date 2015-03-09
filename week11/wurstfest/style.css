@@ -1,0 +1,9 @@
+body {
+	background-image: url("../assets/backsepia.jpg");
+	background-size: cover;
+}
+
+canvas {
+	display: block;
+	margin: auto;
+}

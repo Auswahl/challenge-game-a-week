@@ -137,15 +137,6 @@ StoryScene.prototype.clicked = function(x, y) {
 	this.btn1.clicked(x, y);
 }
 
-
-
-
-
-
-
-
-
-
 //Choice scenes
 var ChoiceScene = function(background){
 	ProtoScene.call(this, background);
@@ -176,8 +167,6 @@ ChoiceScene.prototype.clicked = function(x, y) {
 	this.btn3.clicked(x, y);
 
 }
-
-
 
 //Story scenes
 var AnimatedFinalScene = function(background, animation){

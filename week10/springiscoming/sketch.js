@@ -58,7 +58,7 @@ mouseClicked = function() {
 	if (!soundtrack.isPlaying()) {
 		soundtrack.play();  	
 	}
-	return
+	return;
 };
 
 function draw(){
