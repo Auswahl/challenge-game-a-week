@@ -13,7 +13,7 @@ function preload() {
     food = loadImage('../assets/apple.png');
     water = loadImage('../assets/raindrop.png');
     broom = loadImage('../assets/broom.png');
-    soundtrack = loadSound('../assets/soundtrack.wav');
+    soundtrack = loadSound('../assets/sound/drum_rythm1.mp3');
     soundfinal = loadSound('../assets/fanfare.mp3');
 }
 
@@ -27,14 +27,16 @@ function draw() {
     //this.scenefinalgood.draw();
 };
 
-function mouseClicked() {
+function mouseClicked(event) {
     this.currentScene.clicked(mouseX, mouseY);
+    event.preventDefault();
     return false;
 
 }
 
-function touchEnded() {
+function touchEnded(e) {
     this.currentScene.clicked(touchX, touchY);
+    event.preventDefault();
     return false;
 }
 
