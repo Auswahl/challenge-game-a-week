@@ -1,0 +1,11 @@
+body {
+	background-image: url("../assets/backsepia.png");
+	background-size: cover;
+}
+
+canvas {
+	display: block;
+	margin: auto;
+	cursor: url("../assets/cursor1.png"), auto;
+}
+
