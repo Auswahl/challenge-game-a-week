@@ -2,7 +2,7 @@
 var score = 0;
 var dudu = 1200;
 var necroWin = 0;
-
+ 
 function preload() {
     bg1 = loadImage('../assets/scene1.jpg');
     bg2 = loadImage('../assets/scene2.jpg');
@@ -32,7 +32,7 @@ function draw() {
     if (frameCount%30 === 0) {
         dudu -= 12;
     }
-};
+}
 
 function mouseClicked(event) {
     this.currentScene.clicked(mouseX, mouseY);
@@ -48,11 +48,12 @@ function touchEnded(e) {
 }
 
 function setup() {
+    var screenSize;
     if(window.innerWidth > window.innerHeight){
-        var screenSize = window.innerHeight/3;
+        screenSize = window.innerHeight/3;
         createCanvas(screenSize*4, screenSize*3);
     } else {
-        var screenSize = window.innerWidth/4;
+        screenSize = window.innerWidth/4;
         createCanvas(screenSize*4, screenSize*3);
     }
 
@@ -64,7 +65,7 @@ function setup() {
 
     var btn1 = new Button("Start It", function() {
         that.currentScene = that.scene2;
-    })
+    });
     this.scene1.widgets.push(btn1);
     this.currentScene = this.scene1;
 
@@ -75,7 +76,7 @@ function setup() {
         that.currentScene = that.scene3;
         that.scene3.start();
         soundtrack.loop();
-    })
+    });
     this.scene2.widgets.push(btn2);
 
     this.scene3 = new Scene(bg3);
@@ -108,11 +109,11 @@ function setup() {
         that.scene3.start();
         score = 0;
         //soundtrack.loop();
-    })
+    });
     this.scenefinalbad.widgets.push(btnfinal);
 
     this.scenefinalgood = new Scene(bgfinalgood);
-    var btnfinal = new Button("Restart", function() { 
+    btnfinal = new Button("Restart", function() { 
         clear();      
         that.currentScene = that.scene3;
         that.scene3.start();
@@ -121,13 +122,13 @@ function setup() {
         soundfinal.stop();
 
         soundtrack.loop();
-    })
+    });
 
     var finalScore = new FinalScreen();
     this.scenefinalgood.widgets.push(finalScore);
 
     this.scenefinalgood.widgets.push(btnfinal);
-};    
+}   
 
 function gameOver() {
     if (necroWin >= 5) {

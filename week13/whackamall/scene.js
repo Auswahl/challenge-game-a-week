@@ -133,7 +133,7 @@ Scene.prototype.clicked = function(x, y) {
 		}
 
 	}
-}
+};
 
 Scene.prototype.start = function() {
 	console.log("ProtoScene started!");
@@ -143,7 +143,7 @@ Scene.prototype.start = function() {
 		}
 
 	}
-}
+};
 
 Scene.prototype.update = function() {
 	for (var objectId in this.widgets) {
@@ -157,8 +157,7 @@ Scene.prototype.update = function() {
 	// 		this.widgets[objectId].update();
 	// 	}
 	// }
-}
-
+};
 
 //Malls
 var Mall = function(x, y) {
@@ -175,14 +174,13 @@ Mall.prototype.start = function() {
 	this.startTime = frameCount;
 	this.state = 0;
 	this.necro = false;
-}
-
+};
 
 Mall.prototype.update = function() {
 
 	if (this.state === 4) {
 		return;
-	};
+	}
 
 	var realTime = (frameCount - this.startTime) / 30;
 	var randomTime = random(dudu);
@@ -194,7 +192,7 @@ Mall.prototype.update = function() {
 			necroWin++;
 		}
 		this.startTime = frameCount;
-	};
+	}
 
 	return;
 };
@@ -207,7 +205,7 @@ Mall.prototype.draw = function() {
 
 Mall.prototype.clicked = function(x, y) {
 
-	if (this.state != 4 && this.state != 0 && this.isMouseInside(x, y)) {
+	if (this.state != 4 && this.state !== 0 && this.isMouseInside(x, y)) {
 		score++;
 		this.state = 0;
 		this.startTime = frameCount;
