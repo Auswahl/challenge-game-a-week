@@ -81,6 +81,7 @@ Mess.prototype.update = function() {
 	if (this.y < 0) {
 		this.y = random(height+250, height+400);
 		this.x = random(Math.max(0, this.x - 300), Math.min(width, this.x + 300));
+		this.img = drinkImages[Math.floor(random(0, drinkImages.length))];
 	}
 	if (misha.checkForCollision(this)) {
 		this.act();
@@ -91,6 +92,7 @@ Mess.prototype.act = function() {
 	this.y = height+400;
 	// score++;
 	drinks+=1;
+	this.img = drinkImages[Math.floor(random(0, drinkImages.length))];
 };
 
 
