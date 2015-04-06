@@ -5,14 +5,14 @@ var drinks = 0;
 function preload() {
     //background img
     bg = loadImage('../assets/pavementdark.jpg');
-    bg1 = loadImage('../assets/scene1.jpg');
-    bg2 = loadImage('../assets/scene2.jpg');
+    bg1 = loadImage('../assets/intro1.jpg');
+    bg2 = loadImage('../assets/rules.jpg');
     bg3 = loadImage('../assets/scene3.jpg');
-    bgfinalgood = loadImage('../assets/finalgood.jpg');
+    bgfinalgood = loadImage('../assets/win.jpg');
     bgfinalbad = loadImage('../assets/finalbad.jpg');
 
     //objects img
-    mishaImg = loadImage('../assets/skater1.png');
+    mishaImg = loadImage('../assets/misha1.png');
     oldladyImg = loadImage('../assets/oldy.png');
 
     //sounds
@@ -22,12 +22,15 @@ function preload() {
     soundtrack130 = loadSound('../assets/sound/sound130.wav');
 
     soundfinal = loadSound('../assets/sound/fanfare.mp3');
-    soundloose = loadSound('../assets/sound/cabaret.mp3');
+    soundloose = loadSound('../assets/sound/airhorn.mp3');
     soundclick = loadSound('../assets/sound/drum.mp3');
 
     drinkImages = [
-        loadImage('../assets/coffeelight.png'),
-        loadImage('../assets/oldy.png')
+        loadImage('../assets/cocktail1.png'),
+        loadImage('../assets/cocktail2.png'),
+        loadImage('../assets/cocktail3.png'),
+        loadImage('../assets/cocktail4.png'),
+        loadImage('../assets/cocktail5.png')
     ];
 }
 

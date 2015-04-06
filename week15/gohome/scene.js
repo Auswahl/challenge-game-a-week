@@ -1,7 +1,7 @@
 //Player
 
 var Player = function() {
-	this.width = width / 10;
+	this.width = width / 16;
 	this.height = height / 8;
 	this.x = width / 20 * 9;
 	this.y = 0;
@@ -117,7 +117,7 @@ HeaderTxt.prototype.draw = function() {
 
 
 var ScoreScreen = function() {
-	this.x = width / 20 * 3;
+	this.x = width / 20;
 	this.y = height*0.95;
 };
 
@@ -160,8 +160,8 @@ DrunkScreen.prototype.update = function(){
 
 
 var FinalScreen = function() {
-	this.x = width / 20;
-	this.y = 8 * height / 20;
+	this.x = 6*width / 20;
+	this.y = 12 * height / 20;
 
 };
 
