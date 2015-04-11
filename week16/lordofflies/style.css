@@ -1,0 +1,13 @@
+body {
+   /* background-image: url("../assets/backsepia.jpg");*/
+    background-size: cover;
+    background: radial-gradient(black, white);
+}
+
+canvas {
+    display: block;
+    margin: auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
