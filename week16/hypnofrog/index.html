@@ -1,0 +1,90 @@
+<html>
+
+<head>
+	<meta name="viewport" content="user-scalable=0" />
+	<title>From Hypnotoad with love</title>
+	<script language="javascript" type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+
+	<!-- uncomment lines below to include extra p5 libraries -->
+	<!--<script language="javascript" src="../addons/p5.dom.js"></script>-->
+	<link rel="stylesheet" href="style.css"></link>
+	<!-- this line removes any default padding and style. you might only need one of these values set. -->
+	<style>
+	body {
+		padding: 0;
+		margin: 0;
+	}
+	</style>
+	<link rel="prefetch" href="../assets/giphy.gif" />
+	<link rel="prefetch" href="../assets/sound/getout.mp3"/>
+	<link rel="prefetch" href="../assets/hypno0.png" />
+
+	<script type="text/javascript">
+		function play() {
+			document.getElementById("gif").src = "../assets/giphy.gif";
+			document.getElementById("audio").play();
+		}
+	</script>
+</head>
+
+<body>
+	<h1>CLICK ME</h1>
+	<img id="gif" src="../assets/hypno0.png" onclick="play()">
+	<audio id="audio" src="../assets/sound/getout.mp3"></audio>
+	<h4>'Cause everybody loves Hypnotoad</h4>
+
+	<!-- <canvas id = "mycanvas"></canvas> -->
+	<script>
+	(function(i, s, o, g, r, a, m) {
+		i['GoogleAnalyticsObject'] = r;
+		i[r] = i[r] || function() {
+			(i[r].q = i[r].q || []).push(arguments)
+		}, i[r].l = 1 * new Date();
+		a = s.createElement(o),
+			m = s.getElementsByTagName(o)[0];
+		a.async = 1;
+		a.src = g;
+		m.parentNode.insertBefore(a, m)
+	})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+	ga('create', 'UA-39520648-2', 'auto');
+	ga('send', 'pageview');
+	</script>
+	<!-- Yandex.Metrika counter -->
+	<script type="text/javascript">
+	(function(d, w, c) {
+		(w[c] = w[c] || []).push(function() {
+			try {
+				w.yaCounter29388685 = new Ya.Metrika({
+					id: 29388685,
+					webvisor: true,
+					clickmap: true,
+					trackLinks: true,
+					accurateTrackBounce: true
+				});
+			} catch (e) {}
+		});
+
+		var n = d.getElementsByTagName("script")[0],
+			s = d.createElement("script"),
+			f = function() {
+				n.parentNode.insertBefore(s, n);
+			};
+		s.type = "text/javascript";
+		s.async = true;
+		s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+		if (w.opera == "[object Opera]") {
+			d.addEventListener("DOMContentLoaded", f, false);
+		} else {
+			f();
+		}
+	})(document, window, "yandex_metrika_callbacks");
+	</script>
+	<noscript>
+		<div><img src="//mc.yandex.ru/watch/29388685" style="position:absolute; left:-9999px;" alt="" /></div>
+	</noscript>
+	<!-- /Yandex.Metrika counter -->
+</body>
+
+</html>
