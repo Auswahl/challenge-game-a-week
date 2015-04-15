@@ -1,4 +1,4 @@
-var score = 20000;
+var score = 30;
 var speed = 2;
 var drinks = 0;
 

@@ -3,8 +3,8 @@
 var Player = function() {
 	this.width = width / 16;
 	this.height = height / 8;
-	this.x = width / 20 * 9;
-	this.y = 0;
+	this.x = 3*width/20;
+	this.y = height/2;
 	this.velocity = 0;
 };
 
@@ -15,7 +15,7 @@ Player.prototype.draw = function() {
 };
 
 Player.prototype.start = function() {
-	this.x = width/2;
+	this.x = 3*width/20;
 	this.velocity = 0;
 };
 
@@ -24,21 +24,37 @@ Player.prototype.pressed = function(value) {};
 
 Player.prototype.update = function() {
 
+	
+
 	if (keyIsDown(LEFT_ARROW)) {
-		this.velocity -= drinks/10 + 1;
+		this.velocity -= 4/10 + 1;
+		this.x += this.velocity;
 	} else if (keyIsDown(RIGHT_ARROW)) {
-		this.velocity += drinks/10 + 1;
+		this.velocity += 4/10 + 1;
+		this.x += this.velocity;
+	} 
+
+	
+
+
+	if (keyIsDown(UP_ARROW)) {
+		this.velocity -= 4/10 + 1;
+		this.y += this.velocity;
+	
+	} else if (keyIsDown(DOWN_ARROW)) {
+		this.velocity += 4/10 + 1;
+		this.y += this.velocity;
 	}
 
-	this.x += this.velocity;
+	
 
 	if (Math.abs(this.velocity) >= 1) {
 		this.velocity *= 0.95;	
 	} else {
-		this.velocity = Math.sign(random(-1, 1)) * drinks/2;
+		this.velocity = Math.sign(random(-1, 1)) * 4/2;
 	}
 
-	if (this.x <= -50 || this.x >= width+50) {
+	if (this.x <= -50 || this.x >= width+50 || this.y <= -50 || this.y >= height+50) {
 		loose();
 	}
 
@@ -64,11 +80,11 @@ Player.prototype.checkForCollision = function(mess) {
 };
 
 //Mess
-var Wall = function(x) {
+var Wall = function(x,y) {
 	this.x = x;
-	this.y = 0;
-	this.width = width/20;
-	this.height = random(3*height/20, 17*height/20);
+	this.y = y;
+	this.width = width/12;
+	this.height = random(3*height/20, 14*height/20);
 };
 
 Wall.prototype.draw = function() {
@@ -99,8 +115,9 @@ var Walls = function(){
 };
 
 Walls.prototype.addWall = function() {
-	var x = this.walls[this.walls.length-1].x + 3*width/20;
-   this.walls.push(new Wall(x)); 
+	var x = this.walls[this.walls.length-1].x + 5*width/20;
+	var y = random(25,250);
+   this.walls.push(new Wall(x,y)); 
 };
 
 
@@ -148,7 +165,17 @@ HeaderTxt.prototype.draw = function() {
 var ScoreScreen = function() {
 	this.x = width / 20;
 	this.y = height*0.95;
+
 };
+
+ScoreScreen.prototype.start = function(){
+	var countdownTimer = setInterval(this.secondPassed, 1000);
+}
+
+ScoreScreen.prototype.secondPassed = function(){
+	score--;
+}
+
 
 ScoreScreen.prototype.draw = function() {
 	noStroke();
@@ -156,11 +183,11 @@ ScoreScreen.prototype.draw = function() {
 	fill(255, 255, 255);
 	textSize(30);
 	textAlign(LEFT);
-	text("Left: " + Math.ceil(score/1000) + " km " + Math.ceil(score%1000) + " m", this.x, this.y);
+	text("Left: " + score + " sec ", this.x, this.y);
 };
 
 ScoreScreen.prototype.update = function() {
-	score -= speed;
+	// score -= speed;
 	if (score <= 0) {
 		gameOver();
 	}
