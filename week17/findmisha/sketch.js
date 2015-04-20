@@ -1,38 +1,26 @@
-var score = 30;
-var speed = 2;
-var drinks = 0;
+var score = 0;
+var countdownTimer;
 
 function preload() {
     //background img
-    bg = loadImage('../assets/pavementdark.jpg');
+    bg = loadImage('../assets/canvas3.jpg');
     bg1 = loadImage('../assets/intro1.jpg');
     bg2 = loadImage('../assets/rules.jpg');
-    //bg3 = loadImage('../assets/scene3.jpg');
+    
     bgfinalgood = loadImage('../assets/win.jpg');
-    bgfinalbad = loadImage('../assets/finalbad.jpg');
-
+    
     //objects img
     
-    mishaImg = loadImage('../assets/misha1.png');
-    //oldladyImg = loadImage('../assets/oldy.png');
+    
 
     //sounds
-    soundtrack100 = loadSound('../assets/sound/sound100.wav');
-    soundtrack110 = loadSound('../assets/sound/sound110.wav');
-    soundtrack120 = loadSound('../assets/sound/sound120.wav');
-    soundtrack130 = loadSound('../assets/sound/sound130.wav');
+    soundtrack100 = loadSound('../assets/sound/cabaret.mp3');
+   
 
     soundfinal = loadSound('../assets/sound/fanfare.mp3');
-    soundloose = loadSound('../assets/sound/airhorn.mp3');
-    soundclick = loadSound('../assets/sound/drum.mp3');
 
-    drinkImages = [
-        loadImage('../assets/cocktail1.png'),
-        loadImage('../assets/cocktail2.png'),
-        loadImage('../assets/cocktail3.png'),
-        loadImage('../assets/cocktail4.png'),
-        loadImage('../assets/cocktail5.png')
-    ];
+
+    
 }
 
 
@@ -43,6 +31,9 @@ function draw() {
     this.currentScene.update();
     //this.scenefinalbad.draw();
     //this.scenefinalgood.draw();
+
+	
+
 
 }
 
@@ -72,6 +63,7 @@ function touchEnded(event) {
 
 function setup() {
     var screenSize;
+    viewPosition = createVector(0,0);
 
     if (window.innerWidth > window.innerHeight) {
         screenSize = Math.min(200, window.innerHeight / 3);
@@ -89,36 +81,25 @@ function setup() {
     this.ruleScene = createRuleScene(this);
     this.gameScene = createGameScene(this);
     this.finalScene = createFinalScene(this);
-    this.looseScene = createLooseScene(this);
-    
+  
 }
 
 function gameOver() {
+	if (countdownTimer) {
+		clearInterval(countdownTimer);
+	}
     this.currentScene = this.finalScene;
     this.soundtrack.stop();
     this.soundfinal.play();
 }
 
 
-function loose() {
-    this.currentScene = this.looseScene;
-    this.soundtrack.stop();
-    this.soundloose.play();
-}
-
-
-
-
 function createGameScene(game) {
     var scene = new SceneSub(bg);
 
-    game.misha = new Player();
-    scene.widgets.push(misha);
-    scene.widgets.push(new Walls());
-    
     
     scene.widgets.push(new ScoreScreen());
-    scene.widgets.push(new DrunkScreen());
+  
 
 
     return scene;
@@ -140,33 +121,23 @@ var restartFunction = function(game) {
 };
 function createFinalScene(game) {
     var scene = new Scene(bgfinalgood);
-    var btnfinal = new Button("Restart", restartFunction(game));
+    //var btnfinal = new Button("Restart", restartFunction(game));
 
     var finalScore = new FinalScreen();
 
     scene.widgets.push(finalScore);
-    scene.widgets.push(btnfinal);
+    //scene.widgets.push(btnfinal);
 
     return scene;
 }
 
-function createLooseScene(game) {
-    var scene = new Scene(bgfinalbad);
-    var btnfinal = new Button("Restart", restartFunction(game));
 
-    var finalScore = new FinalScreen();
-
-    scene.widgets.push(finalScore);
-    scene.widgets.push(btnfinal);
-
-    return scene;
-}
 
 function createRuleScene(game) {
 
     var scene = new Scene(bg2);
 
-    var btn2 = new Button("Go,go,go!", function() {
+    var btn2 = new Button("Click to start!", function() {
         clear();
         game.currentScene = game.gameScene;  
         game.soundtrack = soundtrack100;          
