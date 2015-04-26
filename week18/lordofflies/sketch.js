@@ -1,4 +1,4 @@
-var score = 30;
+var score = 1000;
 var viewPosition;
 var drinks = 0;
 
@@ -12,7 +12,7 @@ function preload() {
     bgfinalbad = loadImage('../assets/finalbad.jpg');
 
     //objects img
-    
+
     mishaImg = loadImage('../assets/misha1.png');
     //oldladyImg = loadImage('../assets/oldy.png');
 
@@ -37,20 +37,8 @@ function preload() {
 
 
 function draw() {
-    //this.scene1.draw();
-    //this.scene2.draw();
     this.currentScene.draw();
     this.currentScene.update();
-    //this.scenefinalbad.draw();
-    //this.scenefinalgood.draw();
-
-	if (keyIsDown(UP_ARROW)) {
-		viewPosition.y -= 1;
-	} else if (keyIsDown(DOWN_ARROW)) {
-		viewPosition.y += 1;
-	}
-
-
 }
 
 function mouseClicked(event) {
@@ -98,10 +86,10 @@ function setup() {
     this.gameScene = createGameScene(this);
     this.finalScene = createFinalScene(this);
     this.looseScene = createLooseScene(this);
-    
+
 }
 
-function gameOver() {
+function win() {
     this.currentScene = this.finalScene;
     this.soundtrack.stop();
     this.soundfinal.play();
@@ -117,16 +105,16 @@ function loose() {
 function createGameScene(game) {
     var scene = new SceneSub(bg);
 
-    var walls = new Walls();
+    game.walls = new Walls();
     scene.widgets.push(walls);
 
-    game.misha = new Player(walls);
-    scene.widgets.push(misha);
-    
-    
-    scene.widgets.push(new ScoreScreen());
-    scene.widgets.push(new DrunkScreen());
+    game.misha = new Player(game.walls);
+    game.swarm = new Swarm(game.misha, game.walls);
 
+    scene.widgets.push(misha);
+    scene.widgets.push(swarm);
+
+    scene.widgets.push(new ScoreScreen());
 
     return scene;
 }
@@ -142,7 +130,7 @@ var restartFunction = function(game) {
         soundloose.stop();
 
         game.soundtrack = soundtrack100;
-        game.soundtrack.loop();  
+        game.soundtrack.loop();
     };
 };
 function createFinalScene(game) {
@@ -175,8 +163,8 @@ function createRuleScene(game) {
 
     var btn2 = new Button("Go,go,go!", function() {
         clear();
-        game.currentScene = game.gameScene;  
-        game.soundtrack = soundtrack100;          
+        game.currentScene = game.gameScene;
+        game.soundtrack = soundtrack100;
         game.soundtrack.loop();
 
         game.gameScene.start();
