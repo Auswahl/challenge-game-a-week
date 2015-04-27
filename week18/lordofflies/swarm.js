@@ -5,7 +5,7 @@ Swarmlette = function(target, swarm) {
 	this.wobbler = setupWobble();
 	this.acceleration = createVector(0, 0);
 	this.velocity = createVector(random(-1, 1), random(-1, 1));
-	this.position = createVector(width / 2, height / 2);
+	this.position = createVector(width/2, height/2);
 
 	this.r = 2.0;
 	this.height = this.r;
@@ -35,6 +35,11 @@ function setupWobble() {
 		}
 	};
 }
+Swarmlette.prototype.start = function() {
+	this.acceleration = createVector(0, 0);
+	this.velocity = createVector(random(-1, 1), random(-1, 1));
+	this.position = createVector(width/2, height/2);
+};
 
 Swarmlette.prototype.update = function() {
 
@@ -214,8 +219,14 @@ Swarmlette.prototype.draw = function() {
 // Wraparound
 Swarm = function(target, walls) {
 	this.swarm = [];
-	for (var i = 0; i < 30; i++) {
+	for (var i = 0; i < 15; i++) {
 		this.swarm.push(new Swarmlette(target, this.swarm, walls));
+	}
+};
+
+Swarm.prototype.draw = function() {
+	for (var i in this.swarm) {
+		this.swarm[i].draw();
 	}
 };
 
@@ -227,8 +238,8 @@ Swarm.prototype.update = function() {
 };
 
 
-Swarm.prototype.draw = function() {
+Swarm.prototype.start = function() {
 	for (var i in this.swarm) {
-		this.swarm[i].draw();
+		this.swarm[i].start();
 	}
 };

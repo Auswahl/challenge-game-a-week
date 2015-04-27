@@ -4,7 +4,7 @@ var Player = function(walls) {
 	Mover.call(this, walls);
 
 	this.width = width / 16;
-	this.height = height / 8;
+	this.height = this.width*3/4;
 
 	this.start();
 	this.MAX_VELOCITY = 6;
@@ -46,6 +46,11 @@ Player.prototype.pressed = function(value) {};
 Player.prototype.update = function() {
 
 	var mousePosition = createVector(mouseX, mouseY);
+
+	if (mousePosition.mag() === 0) {
+		mousePosition = createVector(touchX, touchY);
+	}
+
 	this.acceleration = mousePosition.sub(p5.Vector.sub(this.position, viewPosition)); //mx - x, my - y
 	this.acceleration.limit(this.MAX_ACCELERATION);
 

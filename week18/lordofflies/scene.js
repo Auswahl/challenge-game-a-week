@@ -181,16 +181,6 @@ var FinalScreen = function() {
 
 };
 
-FinalScreen.prototype.draw = function() {
-	noStroke();
-
-	fill(255, 255, 255);
-	textSize(36);
-	textAlign(LEFT);
-	text("Drunk Score: " + drinks/100 + "%", this.x, this.y);
-};
-
-
 //Buttons
 var Button = function(labelText, action) {
 	this.width = width * 0.33;
@@ -285,8 +275,8 @@ Scene.prototype.update = function() {
 	}
 };
 
-var SceneSub = function(x, y) {
-	Scene.call(this, x, y);
+var SceneSub = function() {
+	Scene.call(this);
 	this.backgroundX = 0;
 	this.drawBg = false;
 };
