@@ -2,12 +2,14 @@ body {
    /* background-image: url("../assets/backsepia.jpg");*/
     background-size: cover;
     background: radial-gradient(black, white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
 
 canvas {
     display: block;
     margin: auto;
     position: relative;
-    top: 50%;
-    transform: translateY(-50%);
 }
