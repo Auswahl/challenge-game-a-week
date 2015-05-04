@@ -1,0 +1,14 @@
+body {
+   /* background-image: url("../assets/backsepia.jpg");*/
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+canvas {
+    display: block;
+    margin: auto;
+    position: relative;
+}

@@ -8,6 +8,10 @@ var jumpTimer = 0;
 
 theGame.prototype = {
 
+	init: function(){
+		score = 0;
+		
+	},
 
 	preload: function() {
 		game.load.atlasJSONHash('dude', 'assets/jumping_dude.png', 'assets/jumping_dude.json');
@@ -42,8 +46,8 @@ theGame.prototype = {
 		// layer.debug = true;
 		layer.resizeWorld();
 
-		// dude = game.add.sprite(0*16, 498*16, 'dude');
-		dude = game.add.sprite(39 * 16, 8 * 16, 'dude');
+		dude = game.add.sprite(0*16, 498*16, 'dude');
+		//dude = game.add.sprite(39 * 16, 8 * 16, 'dude');
 		game.physics.enable(dude);
 
 		dude.body.collideWorldBounds = true;
@@ -66,21 +70,29 @@ theGame.prototype = {
 
 		scoreScreen = game.add.text(0, 0, "Score: 0", {
 			font: "30pt Courier",
-			fill: "#19cb65",
-			stroke: "#119f4e",
+			fill: "#ffffff",
+			stroke: "#ffffff",
 			strokeThickness: 2
 		});
 		scoreScreen.fixedToCamera = true;
+
+		soundtrack = game.add.audio('soundtrack');
+		coin = game.add.audio('coin');
+		jump = game.add.audio('jump');
+		soundtrack.play("", 0, 0.6, true);
 
 	},
 
 
 	hitShroom: function(sprite, tile) {
+		coin.play();
+		soundtrack.stop();
 		this.game.state.start("GameOver", true, false, score);
 		return false;
 	},
 
 	hitCoin: function(sprite, tile) {
+		coin.play();
 		tile.index = 1;
 		score++;
 		tile.layer.dirty = true;
@@ -114,6 +126,7 @@ theGame.prototype = {
 		}
 
 		if (jumpButton.isDown && dude.body.onFloor() && game.time.now > jumpTimer) {
+			jump.play();
 			dude.animations.play('jump');
 			dude.body.velocity.y = -500;
 			jumpTimer = game.time.now + 750;
