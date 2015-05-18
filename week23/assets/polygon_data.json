@@ -1,0 +1,22 @@
+	{ 
+		
+		"cow": [
+			
+				{
+					"density": 2, "friction": 0, "bounce": 0, 
+					"filter": { "categoryBits": 1, "maskBits": 65535 },
+					"shape": [   179, 88  ,  174, 0  ,  228, 34  ,  258, 77  ,  254, 173  ]
+				}  ,
+				{
+					"density": 2, "friction": 0, "bounce": 0, 
+					"filter": { "categoryBits": 1, "maskBits": 65535 },
+					"shape": [   69, 89  ,  13, 45  ,  77, 2  ,  122, 0  ,  174, 0  ,  179, 88  ]
+				}  ,
+				{
+					"density": 2, "friction": 0, "bounce": 0, 
+					"filter": { "categoryBits": 1, "maskBits": 65535 },
+					"shape": [   4, 82  ,  13, 45  ,  69, 89  ,  4, 175  ]
+				}  
+		]
+		
+	}
