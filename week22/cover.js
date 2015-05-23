@@ -11,7 +11,6 @@ cover.prototype.preload = function() {
 
 var startGame = function() {
 	this.game.state.start("Intro");
-
 };
 
 cover.prototype.create = function() {
