@@ -1,0 +1,35 @@
+canvas {
+	margin: auto;
+}
+
+#game-area {
+	display: none;
+	position: absolute;
+	top: 20%;
+	background-color: #8e44ad;
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	-ms-transform: translateX(-50%);
+	transform: translateX(-50%);
+	padding: 2em;
+	font-size: 1.2em;
+	opacity: 0.8;
+	z-index: 2;
+}
+
+form {
+	display: none;
+}
+
+ol	{
+	display: none;
+}
+
+li {
+	/*list-style-type: none;*/
+	clear: both;
+}
+
+.score {
+	float: right;
+}

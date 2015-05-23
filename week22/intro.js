@@ -23,17 +23,6 @@ intro.prototype.preload = function() {
 
 	this.nextLine();
 
-	this.game.load.image('alien', 'assets/ISS.png');
-	this.game.load.image('ship', 'assets/regress.png');
-
-	this.game.load.physics('physicsData', 'assets/polygon_data.json');
-	this.game.load.tilemap('map', 'assets/space.json', null, Phaser.Tilemap.TILED_JSON);
-	this.game.load.image('space_tilesets', 'assets/space_tilesets.png');
-
-	this.game.load.audio('hit', 'assets/hit.mp3');
-	this.game.load.audio('final', 'assets/final.wav');
-	this.game.load.audio('soundtrack', 'assets/Sunrise.mp3');
-
 	this.game.load.image('bg1', 'assets/back1.jpg');
 	this.game.load.image('winBg', 'assets/finalwin.jpg');
 	this.game.load.image('looseBg', 'assets/finalloose.jpg');
@@ -75,5 +64,5 @@ intro.prototype.nextLine = function() {
 	if (this.index < intro.content.length) {
 		this.line = '';
 		game.time.events.repeat(40, intro.content[this.index].length + 1, this.updateLine, this);
-	} 
+	}
 };

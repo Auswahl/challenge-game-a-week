@@ -12,10 +12,16 @@ var mouseBody;
 var mouseSpring;
 var alien;
 var drawLine = false;
-var hitpoints = 100;
+
 var result;
 var distance, info;
 var currentTool;
+
+var hitpoints = 100;
+var score = 0;
+var FRAMES_NUMBER = 44;
+
+var liveness = FRAMES_NUMBER/hitpoints;
 
 theGame.prototype.create = function() {
 	var bg = game.add.tileSprite(0, 0, 800, 600, 'background');
@@ -27,10 +33,9 @@ theGame.prototype.create = function() {
 	game.physics.p2.restitution = 0;
 
 	this.createSpaceship(game);
-	this.createMorgen(game);
-	this.createAxe(game);
-	this.createWhip(game);
-	this.createDyno(game);
+
+	createWeapons();
+
 	this.soundtrack = game.add.audio('soundtrack');
 
 	this.hit = game.add.audio('hit');
@@ -40,11 +45,9 @@ theGame.prototype.create = function() {
 
 theGame.prototype.createSpaceship = function(game) {
 	ship = game.add.sprite(400, game.world.height - 300, 'ship');
-	ship.animations.add('bum');
-	ship.animations.play('bum', 60, true);
+
 	game.physics.p2.enable(ship);
 	ship.body.setRectangle(50, 50);
-	// ship.scale.setTo(0.2, 0.2);
 	game.camera.follow(ship, Phaser.Camera.FOLLOW_PLATFORMER);
 	ship.body.onBeginContact.add(blockHit, this);
 	ship.inputEnabled = true;
@@ -53,66 +56,18 @@ theGame.prototype.createSpaceship = function(game) {
 	ship.events.onInputDown.add(this.click, this);
 };
 
-theGame.prototype.createAxe = function(game) {
-	toolbelt = game.add.sprite(200, 0, "axe");
-	toolbelt.inputEnabled = true;
-
-	toolbelt.events.onInputDown.add(this.axeClicked, this);
-};
-
-
-theGame.prototype.createMorgen = function(game) {
-	toolbelt = game.add.sprite(300, 0, "morgen");
-	toolbelt.inputEnabled = true;
-
-	toolbelt.events.onInputDown.add(this.arrowClicked, this);
-};
-
-theGame.prototype.createWhip = function(game) {
-	toolbelt = game.add.sprite(400, 0, "whip");
-	toolbelt.inputEnabled = true;
-
-	toolbelt.events.onInputDown.add(this.whipClicked, this);
-};
-
-theGame.prototype.createDyno = function(game) {
-	toolbelt = game.add.sprite(500, 0, "dynamite");
-	toolbelt.inputEnabled = true;
-
-	toolbelt.events.onInputDown.add(this.dynamiteClicked, this);
-};
-
-
-
 theGame.prototype.click = function(pointer) {
-	hitpoints--;
 	info = currentTool + ' hit';
-};
+	var hit = currentTool.hitForce();
+	hitpoints -= hit;
 
-theGame.prototype.axeClicked = function(pointer) {
-	document.getElementsByTagName("canvas")[0].style.cursor = "url('assets/ellipse.png'), auto";
-	info = 'Axe selected';
-	currentTool = 'Axe';
+	ship.frame = 44 - Math.round(liveness*hitpoints);
+	if (hitpoints <= 0 ) {
+		this.game.state.start("Win");
+		askForName();
+	}
+	score++;
 };
-
-theGame.prototype.whipClicked = function(pointer) {
-	document.getElementsByTagName("canvas")[0].style.cursor = "url('assets/ellipse.png'), auto";
-	info = 'Whip selected';
-	currentTool = 'Whip';
-};
-
-theGame.prototype.arrowClicked = function(pointer) {
-	document.getElementsByTagName("canvas")[0].style.cursor = "url('assets/ellipse.png'), auto";
-	info = 'Arrow selected';
-	currentTool = 'Arrow';
-};
-
-theGame.prototype.dynamiteClicked = function(pointer) {
-	document.getElementsByTagName("canvas")[0].style.cursor = "url('assets/ellipse.png'), auto";
-	info = 'Arrow selected';
-	currentTool = 'Arrow';
-};
-
 
 theGame.prototype.release = function() {
 	game.physics.p2.removeSpring(mouseSpring);
@@ -146,8 +101,6 @@ function blockHit(body, shapeA, shapeB, equation) {
 
 }
 
-
-
 theGame.prototype.preRender = function() {
 	if (line) {
 		line.setTo(ship.x, ship.y, mouseBody.x, mouseBody.y);
@@ -161,7 +114,4 @@ theGame.prototype.render = function() {
 	}
 	game.debug.text("Hitpoints left: " + hitpoints, 32, 32);
 	game.debug.text("Info: " + info + " m/s", 32, 64);
-
-	game.debug.text("Distance to ISS: " + distance + " m", 500, 32);
-
 };
