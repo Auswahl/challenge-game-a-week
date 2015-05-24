@@ -3,6 +3,13 @@ var intro = function(game) {
 };
 intro.content = [
 	"",
+	"Рады видеть вас снова!",
+	"В Руськосмосе настало\nВремя перемен\nи оптимизации расходов.",
+	"Запускать корабли и наблюдать\nза их падением -\nслишком дорого.\nМы избрали Новый Путь",
+	"Мы станем госкорпорацией\nи начнём ломать корабли и ракеты\nещё на земле.",
+	"Оставайтесь профессионалом!\nКрушите их быстро и эффективно\nНе посрамите нас.",
+	"У каждого вида оружия\nесть свои плюсы и минусы\nНайдите оптимальную тактику.",
+	"Время - деньги!",
 ];
 
 
@@ -24,7 +31,7 @@ intro.prototype.preload = function() {
 	this.nextLine();
 
 	this.game.load.image('bg1', 'assets/back1.jpg');
-	this.game.load.image('winBg', 'assets/finalwin.jpg');
+	this.game.load.image('winBg', 'assets/bg/finalbg1.jpg');
 	this.game.load.image('looseBg', 'assets/finalloose.jpg');
 
 	this.game.load.image('ellipseSprite', 'assets/ellipse.png');
