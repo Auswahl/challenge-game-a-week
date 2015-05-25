@@ -18,7 +18,7 @@ var Weapon = function(frame, cursorIcon, tooltipText) {
 
 	this.cursorIcon = cursorIcon;
 
-	this.tooltip = game.add.text(game.world.width - 20, y + 20, 'Phaser & Pixi rocking!');
+	this.tooltip = game.add.text(game.world.width - 20, y + 20, tooltipText);
 	this.tooltip.anchor.set(1, 0);
 
 	//	Center align
@@ -65,24 +65,24 @@ Weapon.prototype.hitForce = function() {
 };
 
 function createWeapons() {
-	var axe = new Weapon("axe", "assets/axecurs.png");
+	var axe = new Weapon("axe", "assets/axecurs1.png", "Медленно, но верно");
 	axe.hitForce = function() {
 		return 5;
 	};
-	var whip = new Weapon("whip", "assets/whipcurs.png");
+	var whip = new Weapon("whip", "assets/whipcurs1.png", "То так, то эдак");
 	whip.hitForce = function() {
 		return (Math.random() >= 0.9) ? 32 : 2;
 	};
 
-	var morgen = new Weapon("morgen", "assets/Morgensterncurs.png");
+	var morgen = new Weapon("morgen", "assets/Morgensterncurs1.png", "Мощно, но мимо");
 
 	morgen.hitForce = function() {
 		return (Math.random() >= 0.7) ? 0 : 7;
 	};
-	var dynamite = new Weapon("dynamite", "assets/Dynamitecurs.png");
+	var dynamite = new Weapon("dynamite", "assets/Dynamitecurs1.png", "Неизестно");
 
 	dynamite.hitForce = function() {
-		// blow();
-		return 1000;
+		blow();
+		return 0;
 	};
 }

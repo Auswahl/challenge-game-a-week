@@ -27,7 +27,9 @@ var FRAMES_NUMBER = 44;
 var liveness = FRAMES_NUMBER/hitpoints;
 var time = 0, timer, timerText;
 
-
+function blow() {
+	game.state.start("Loose");
+}
 theGame.prototype.create = function() {
 	var bg = game.add.tileSprite(0, 0, 800, 600, 'background');
 	bg.fixedToCamera = true;
@@ -47,11 +49,11 @@ theGame.prototype.create = function() {
 	this.soundtrack.play("", 0, 0.6, true);
 
 	timer = game.time.events.loop(1000, this.updateTimer, this);
-	timerText = game.add.text(32, 32, '', {
-		font: "30pt Courier",
-		fill: "#00ff00",
-		stroke: "#119f4e",
-		strokeThickness: 2
+	timerText = game.add.text(32, 48, '', {
+		font: "16px Courier",
+		fill: "#ffffff",
+		// stroke: "#119f4e",
+		// strokeThickness: 2
 	});
 };
 
@@ -132,6 +134,6 @@ theGame.prototype.render = function() {
 	if (drawLine) {
 		game.debug.geom(line);
 	}
-	game.debug.text("Hitpoints left: " + hitpoints, 32, 32);
-	game.debug.text("Info: " + info + " m/s", 32, 64);
+	game.debug.text("Целостность: " + hitpoints, 32, 32);
+	// game.debug.text("Info: " + info + " m/s", 32, 64);
 };

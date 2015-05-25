@@ -3,11 +3,8 @@ var win = function(game) {
 };
 win.content = [
 	"",
-	"Oops!",
-	"Looks like that's not ISS!\nBut some random alien ship",
-	"You have failed your mission",
-	'But who cares.',
-	"We don't.\nSincerely yours,\nRoscosmos",
+	"ТАДА!"
+
 ];
 
 

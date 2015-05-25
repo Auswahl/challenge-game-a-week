@@ -3,14 +3,13 @@ var loose = function(game) {
 };
 loose.content = [
 	"",
-	"You've broken the ship\nAnd failed your mission",
-	"Well, Roscomos\ncouldn't do that either",
-	"So, don't be too sad",
+	"Вы немного перестарались",
 ];
 
 
 loose.prototype.init = function() {};
 loose.prototype.preload = function() {
+	this.game.load.image('restart', 'assets/btnrestartrus.jpg');
 
 	this.index = 0;
 	this.line = '';
@@ -26,8 +25,14 @@ loose.prototype.preload = function() {
 
 	this.nextLine();
 };
-loose.prototype.create = function() {
 
+function restart() {
+	window.location.reload();
+}
+loose.prototype.create = function() {
+	button = this.game.add.button(game.world.centerX, game.world.centerY + game.world.height / 3, 'restart', restart, this);
+	button.anchor.setTo(0.5, 0.5);
+	button.input.useHandCursor = true;
 };
 
 loose.prototype.updateLine = function() {
