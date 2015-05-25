@@ -5,7 +5,7 @@ var leaderboard;
 function askForName() {
 	document.getElementById('input-form').style.display = 'block';
 	document.getElementById('game-area').style.display = 'block';
-	document.getElementById('score-title').textContent = "Your score: " + score;
+	document.getElementById('score-title').textContent = "Your score: " + score.text;
 }
 
 function drawLeaderboard() {
@@ -17,11 +17,20 @@ function drawLeaderboard() {
 		}
 
 		for(var i in scores) {
-			leaderboard.insertAdjacentHTML('beforeend',
-				'<li>' +
-					'<span class="gamer">' + scores[i]._id + '&nbsp;</span>' +
-					'<span class="score">' + scores[i].value + '</span>' +
-				'</li>');
+			if (scores[i].value) {
+				try {
+					var value = JSON.parse(scores[i].value);
+					if (value.text) {
+						leaderboard.insertAdjacentHTML('beforeend',
+							'<li>' +
+								'<span class="gamer">' + scores[i]._id + '&nbsp;</span>' +
+								'<span class="score">' + value.text + '</span>' +
+							'</li>');
+					}
+				} catch (e) {
+					console.log(value);
+				}
+			}
 		}
 		document.getElementById('input-form').style.display = 'none';
 	});
@@ -36,9 +45,7 @@ function loadLeaderboard(callback) {
 		} else {
 			alert('Request failed.  Returned status of ' + xhr.status);
 		}
-
 		document.getElementById("game-area").style.cursor = "default";
-
 	};
 	xhr.send();
 

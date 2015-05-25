@@ -18,10 +18,15 @@ var distance, info;
 var currentTool;
 
 var hitpoints = 100;
-var score = 0;
+var score = {
+	text: "0:00",
+	number: 0
+};
 var FRAMES_NUMBER = 44;
 
 var liveness = FRAMES_NUMBER/hitpoints;
+var time = 0, timer, timerText;
+
 
 theGame.prototype.create = function() {
 	var bg = game.add.tileSprite(0, 0, 800, 600, 'background');
@@ -41,6 +46,30 @@ theGame.prototype.create = function() {
 	this.hit = game.add.audio('hit');
 	this.soundtrack.play("", 0, 0.6, true);
 
+	timer = game.time.events.loop(1000, this.updateTimer, this);
+	timerText = game.add.text(32, 32, '', {
+		font: "30pt Courier",
+		fill: "#00ff00",
+		stroke: "#119f4e",
+		strokeThickness: 2
+	});
+};
+
+theGame.prototype.updateTimer = function(game) {
+	time++;
+	var date = new Date(time * 1000);
+	var hh = date.getUTCHours();
+	var mm = date.getUTCMinutes();
+	var ss = date.getSeconds();
+	if (hh < 10) {hh = "0"+hh;}
+	if (mm < 10) {mm = "0"+mm;}
+	if (ss < 10) {ss = "0"+ss;}
+	var t = hh+":"+mm+":"+ss;
+	score = {
+		"text" : t,
+		'number': time
+	};
+	timerText.setText(t);
 };
 
 theGame.prototype.createSpaceship = function(game) {
@@ -54,6 +83,9 @@ theGame.prototype.createSpaceship = function(game) {
 	game.physics.enable(game.camera);
 
 	ship.events.onInputDown.add(this.click, this);
+
+
+
 };
 
 theGame.prototype.click = function(pointer) {
@@ -66,17 +98,6 @@ theGame.prototype.click = function(pointer) {
 		this.game.state.start("Win");
 		askForName();
 	}
-	score++;
-};
-
-theGame.prototype.release = function() {
-	game.physics.p2.removeSpring(mouseSpring);
-
-	drawLine = false;
-	game.camera.follow(ship, Phaser.Camera.FOLLOW_PLATFORMER);
-	console.log("Release");
-
-
 };
 
 theGame.prototype.update = function() {
@@ -98,7 +119,6 @@ function blockHit(body, shapeA, shapeB, equation) {
 			this.soundtrack.stop();
 		}
 	}
-
 }
 
 theGame.prototype.preRender = function() {

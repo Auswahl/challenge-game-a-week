@@ -1,6 +1,6 @@
 var weapons = [];
 var margin = 20;
-var Weapon = function(frame, cursorIcon) {
+var Weapon = function(frame, cursorIcon, tooltipText) {
 	var previousWeapon = weapons[weapons.length - 1];
 	var y;
 	if (previousWeapon) {
@@ -13,8 +13,35 @@ var Weapon = function(frame, cursorIcon) {
 	this.sprite.inputEnabled = true;
 
 	this.sprite.events.onInputDown.add(this.clicked, this);
+	this.sprite.events.onInputOver.add(this.over, this);
+	this.sprite.events.onInputOut.add(this.out, this);
+
 	this.cursorIcon = cursorIcon;
+
+	this.tooltip = game.add.text(game.world.width - 20, y + 20, 'Phaser & Pixi rocking!');
+	this.tooltip.anchor.set(1, 0);
+
+	//	Center align
+	this.tooltip.align = 'center';
+
+	//	Font style
+	this.tooltip.fontSize = 14;
+
+	//	Stroke color and thickness
+	this.tooltip.stroke = '#000000';
+	this.tooltip.strokeThickness = 6;
+	this.tooltip.fill = '#43d637';
+	this.tooltip.visible = false;
+
 	weapons.push(this);
+};
+
+Weapon.prototype.over = function() {
+	this.tooltip.visible = true;
+};
+
+Weapon.prototype.out = function() {
+	this.tooltip.visible = false;
 };
 
 Weapon.prototype.clicked = function() {
@@ -25,6 +52,12 @@ Weapon.prototype.clicked = function() {
 
 	currentTool = this;
 	currentTool.sprite.visible = false;
+
+	for (var i in weapons) {
+		if (this !== weapons[i]) {
+			weapons[i].tooltip.visible = false;
+		}
+	}
 };
 
 Weapon.prototype.hitForce = function() {
