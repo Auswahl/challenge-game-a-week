@@ -30,19 +30,17 @@ intro.prototype.preload = function() {
 
 	this.nextLine();
 
-	this.game.load.image('bg1', 'assets/back1.jpg');
 	this.game.load.image('winBg', 'assets/bg/finalbg1.jpg');
 	this.game.load.image('looseBg', 'assets/finalloose.jpg');
 
 	this.game.load.image('ellipseSprite', 'assets/ellipse.png');
 
 	this.game.load.atlasJSONHash('ship', 'assets/sprites/spritesheet.png', 'assets/sprites/sprites.json');
-
-	this.game.load.atlasJSONHash('ship', 'assets/sprites/spritesheet.png', 'assets/sprites/sprites.json');
 	this.game.load.atlasJSONHash('axe', 'assets/sprites/axe.png', 'assets/sprites/axe.json');
 	this.game.load.atlasJSONHash('morgen', 'assets/sprites/morgen.png', 'assets/sprites/morgen.json');
 	this.game.load.atlasJSONHash('whip', 'assets/sprites/whip.png', 'assets/sprites/whip.json');
 	this.game.load.atlasJSONHash('dynamite', 'assets/sprites/dynamite.png', 'assets/sprites/dynamite.json');
+	this.game.load.atlasJSONHash('explosion', 'assets/sprites/explosion.png', 'assets/sprites/explosion.json');
 
 	this.game.load.image('background', 'assets/backgrey.jpg');
 
@@ -54,6 +52,7 @@ intro.prototype.preload = function() {
 	this.game.load.audio('morgenSound', 'assets/sounds/morgen.mp3');
 	this.game.load.audio('whipBigSound', 'assets/sounds/whip-big.mp3');
 	this.game.load.audio('whipSound', 'assets/sounds/whip.mp3');
+	this.game.load.audio('soundtrack', 'assets/sounds/main.mp3');
 
 
 };

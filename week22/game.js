@@ -27,28 +27,38 @@ var FRAMES_NUMBER = 44;
 var liveness = FRAMES_NUMBER/hitpoints;
 var time = 0, timer, timerText;
 
-function blow() {
-	this.fireSound.volume = 0.3;
+var fireSound, soundtrack, explosion, explosionSprite, explosionSound;
 
-	game.state.start("Loose");
-}
+var gameStop = false;
+
+var blow = function(callback) {
+	gameStop = true;
+	fireSound.volume = 0.3;
+	soundtrack.stop();
+	explosionSprite.visible = true;
+	explosion.play(7, false, true);
+	explosionSound.play();
+	explosion.onComplete.add(callback, this);
+};
+
 theGame.prototype.create = function() {
 	var bg = game.add.tileSprite(0, 0, 800, 600, 'background');
 	bg.fixedToCamera = true;
 
-
-	game.physics.startSystem(Phaser.Physics.P2JS);
-	game.physics.p2.gravity.y = 0;
-	game.physics.p2.restitution = 0;
-
 	this.createSpaceship(game);
-
 	createWeapons();
 
-	this.soundtrack = game.add.audio('soundtrack');
-	this.soundtrack.play("", 0, 0.6, true);
+	soundtrack = game.add.audio('soundtrack');
+	soundtrack.play("", 0, 0.6, true);
 
-	this.fireSound = game.add.audio('fireSound');
+	fireSound = game.add.audio('fireSound');
+	explosionSound = game.add.audio('blowSound');
+
+	explosionSprite = game.add.sprite(game.world.centerX, game.world.centerY, 'explosion');
+	explosionSprite.scale.set(6);
+	explosionSprite.anchor.set(0.5, 0.5);
+	explosionSprite.visible = false;
+	explosion = explosionSprite.animations.add("bum");
 
 	timer = game.time.events.loop(1000, this.updateTimer, this);
 	timerText = game.add.text(32, 48, '', {
@@ -82,19 +92,22 @@ theGame.prototype.createSpaceship = function(game) {
 };
 
 theGame.prototype.click = function(pointer) {
+	if (gameStop) return;
+
 	info = currentTool + ' hit';
 	var hit = currentTool.hitForce();
 	hitpoints -= hit;
 
 	ship.frame = 44 - Math.round(liveness*hitpoints);
-	if (!this.fireSound.isPlaying) {
-		this.fireSound.play("", 0, 0, true);
+	if (!fireSound.isPlaying) {
+		fireSound.play("", 0, 0, true);
 	}
-	this.fireSound.volume = (FULL_HITPOINTS - hitpoints)/FULL_HITPOINTS;
+	fireSound.volume = (FULL_HITPOINTS - hitpoints)/FULL_HITPOINTS;
 	if (hitpoints <= 0 ) {
-		this.fireSound.volume = 0.3;
-		this.game.state.start("Win");
-		askForName();
+		blow(function() {
+			this.game.state.start("Win");
+			askForName();
+		});
 	}
 };
 

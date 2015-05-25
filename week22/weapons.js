@@ -98,10 +98,10 @@ function createWeapons() {
 			return 7;
 		}
 	};
-	var dynamite = new Weapon("dynamite", "assets/Dynamitecurs1.png", "Неизестно");
+	var dynamite = new Weapon("dynamite", "assets/Dynamitecurs.png", "Неизестно");
 
 	dynamite.hitForce = function() {
-		blow();
+		blow(function() {game.state.start("Loose");});
 		return 0;
 	};
 }
