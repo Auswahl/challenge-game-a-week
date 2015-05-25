@@ -46,6 +46,15 @@ intro.prototype.preload = function() {
 
 	this.game.load.image('background', 'assets/backgrey.jpg');
 
+	this.game.load.audio('axeSound', 'assets/sounds/axe.mp3');
+	this.game.load.audio('blowSound', 'assets/sounds/blow.mp3');
+	this.game.load.audio('creditsSound', 'assets/sounds/credits.mp3');
+	this.game.load.audio('fireSound', 'assets/sounds/fire.mp3');
+	this.game.load.audio('missSound', 'assets/sounds/miss.mp3');
+	this.game.load.audio('morgenSound', 'assets/sounds/morgen.mp3');
+	this.game.load.audio('whipBigSound', 'assets/sounds/whip-big.mp3');
+	this.game.load.audio('whipSound', 'assets/sounds/whip.mp3');
+
 
 };
 intro.prototype.create = function() {

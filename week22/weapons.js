@@ -65,19 +65,38 @@ Weapon.prototype.hitForce = function() {
 };
 
 function createWeapons() {
+	var whipSound = game.add.audio("whipSound");
+	var whipBigSound = game.add.audio("whipBigSound");
+	var morgenSound = game.add.audio("morgenSound");
+	var axeSound = game.add.audio("axeSound");
+	var missSound = game.add.audio("missSound");
+
 	var axe = new Weapon("axe", "assets/axecurs1.png", "Медленно, но верно");
 	axe.hitForce = function() {
+		axeSound.play();
 		return 5;
 	};
 	var whip = new Weapon("whip", "assets/whipcurs1.png", "То так, то эдак");
 	whip.hitForce = function() {
-		return (Math.random() >= 0.9) ? 32 : 2;
+		if (Math.random() >= 0.9) {
+			whipBigSound.play();
+			return 32;
+		} else {
+			whipSound.play();
+			return 2;
+		}
 	};
 
 	var morgen = new Weapon("morgen", "assets/Morgensterncurs1.png", "Мощно, но мимо");
 
 	morgen.hitForce = function() {
-		return (Math.random() >= 0.7) ? 0 : 7;
+		if (Math.random() >= 0.7) {
+			missSound.play();
+			return 0;
+		} else {
+			morgenSound.play();
+			return 7;
+		}
 	};
 	var dynamite = new Weapon("dynamite", "assets/Dynamitecurs1.png", "Неизестно");
 

@@ -26,7 +26,8 @@ win.prototype.preload = function() {
 	this.nextLine();
 };
 win.prototype.create = function() {
-
+	var soundtrack = game.add.audio("creditsSound");
+	soundtrack.play("", 0, 1, true);
 };
 
 win.prototype.updateLine = function() {

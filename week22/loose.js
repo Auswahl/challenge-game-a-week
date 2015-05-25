@@ -33,6 +33,8 @@ loose.prototype.create = function() {
 	button = this.game.add.button(game.world.centerX, game.world.centerY + game.world.height / 3, 'restart', restart, this);
 	button.anchor.setTo(0.5, 0.5);
 	button.input.useHandCursor = true;
+	var soundtrack = game.add.audio("creditsSound");
+	soundtrack.play("", 0, 1, true);
 };
 
 loose.prototype.updateLine = function() {

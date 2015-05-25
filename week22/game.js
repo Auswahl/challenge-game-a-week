@@ -3,7 +3,7 @@ var theGame = function(game) {
 };
 
 theGame.prototype.preload = function() {
-
+	this.game.load.audio('creditsSound', 'assets/sounds/credits.mp3');
 };
 
 var ship;
@@ -17,7 +17,7 @@ var result;
 var distance, info;
 var currentTool;
 
-var hitpoints = 100;
+var FULL_HITPOINTS = 100, hitpoints = 100;
 var score = {
 	text: "0:00",
 	number: 0
@@ -28,6 +28,8 @@ var liveness = FRAMES_NUMBER/hitpoints;
 var time = 0, timer, timerText;
 
 function blow() {
+	this.fireSound.volume = 0.3;
+
 	game.state.start("Loose");
 }
 theGame.prototype.create = function() {
@@ -44,16 +46,14 @@ theGame.prototype.create = function() {
 	createWeapons();
 
 	this.soundtrack = game.add.audio('soundtrack');
-
-	this.hit = game.add.audio('hit');
 	this.soundtrack.play("", 0, 0.6, true);
+
+	this.fireSound = game.add.audio('fireSound');
 
 	timer = game.time.events.loop(1000, this.updateTimer, this);
 	timerText = game.add.text(32, 48, '', {
 		font: "16px Courier",
-		fill: "#ffffff",
-		// stroke: "#119f4e",
-		// strokeThickness: 2
+		fill: "#ffffff"
 	});
 };
 
@@ -75,19 +75,10 @@ theGame.prototype.updateTimer = function(game) {
 };
 
 theGame.prototype.createSpaceship = function(game) {
-	ship = game.add.sprite(400, game.world.height - 300, 'ship');
-
-	game.physics.p2.enable(ship);
-	ship.body.setRectangle(50, 50);
-	game.camera.follow(ship, Phaser.Camera.FOLLOW_PLATFORMER);
-	ship.body.onBeginContact.add(blockHit, this);
+	ship = game.add.sprite(game.world.centerX, game.world.height, 'ship');
+	ship.anchor.set(0.5, 1);
 	ship.inputEnabled = true;
-	game.physics.enable(game.camera);
-
 	ship.events.onInputDown.add(this.click, this);
-
-
-
 };
 
 theGame.prototype.click = function(pointer) {
@@ -96,32 +87,16 @@ theGame.prototype.click = function(pointer) {
 	hitpoints -= hit;
 
 	ship.frame = 44 - Math.round(liveness*hitpoints);
+	if (!this.fireSound.isPlaying) {
+		this.fireSound.play("", 0, 0, true);
+	}
+	this.fireSound.volume = (FULL_HITPOINTS - hitpoints)/FULL_HITPOINTS;
 	if (hitpoints <= 0 ) {
+		this.fireSound.volume = 0.3;
 		this.game.state.start("Win");
 		askForName();
 	}
 };
-
-theGame.prototype.update = function() {
-	velocity = Phaser.Math.roundTo(new Phaser.Point(ship.body.velocity.x, ship.body.velocity.y).getMagnitude(), -3);
-};
-
-function blockHit(body, shapeA, shapeB, equation) {
-	var velocity = new Phaser.Point(ship.body.velocity.x, ship.body.velocity.y);
-	var hitForce = Math.floor(velocity.getMagnitude() / 1000);
-
-	if (body && body.sprite) {
-		game.state.start("Win");
-		this.soundtrack.stop();
-	} else {
-		hitpoints -= hitForce;
-		this.hit.play();
-		if (hitpoints <= 0) {
-			game.state.start("Loose");
-			this.soundtrack.stop();
-		}
-	}
-}
 
 theGame.prototype.preRender = function() {
 	if (line) {
