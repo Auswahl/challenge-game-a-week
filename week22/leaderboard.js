@@ -5,13 +5,14 @@ var leaderboard;
 function askForName() {
 	document.getElementById('input-form').style.display = 'block';
 	document.getElementById('game-area').style.display = 'block';
-	document.getElementById('score-title').textContent = "Your score: " + score.text;
+	document.getElementById('score-title').textContent = "Your time: " + score.text;
 }
 
 function drawLeaderboard() {
 	loadLeaderboard(function(scores) {
-		var leaderboard = document.getElementById('leaderboard');
-		leaderboard.style.display = 'block';
+		document.getElementById('leaderboard').style.display = 'block';
+		var leaderboard = document.getElementById('leaderboard-list');
+
 		while (leaderboard.hasChildNodes()) {
 		    leaderboard.removeChild(leaderboard.firstChild);
 		}
@@ -43,7 +44,7 @@ function loadLeaderboard(callback) {
 		if (xhr.status === 200) {
 			callback(JSON.parse(xhr.responseText));
 		} else {
-			alert('Request failed.  Returned status of ' + xhr.status);
+			alert('Не выходит ' + xhr.status);
 		}
 		document.getElementById("game-area").style.cursor = "default";
 	};
@@ -63,7 +64,7 @@ function handleClick() {
 		if (xhr.status === 200) {
 			drawLeaderboard();
 		} else if (xhr.status !== 200) {
-			alert('Request failed.  Returned status of ' + xhr.status);
+			alert('Мне тяжело ' + xhr.status);
 			document.getElementById("game-area").style.cursor = "default";
 		}
 

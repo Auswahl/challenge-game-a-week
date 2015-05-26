@@ -23,7 +23,6 @@ button {
 	padding: 8px 20px;
 	width: 10em;
 	background-color: black;
-	float: right;
 	margin-top: 0.8em;}
 
 
@@ -33,7 +32,6 @@ input[type="submit"] {
 	padding: 8px 20px;
 	width: 10em;
 	background-color: black;
-	float: left;
 	margin-top: 0.8em;}
 
 input[type="text"] {
@@ -51,7 +49,7 @@ form {
 	min-width: 270px;
 }
 
-ol	{
+#leaderboard	{
 	display: none;
 }
 

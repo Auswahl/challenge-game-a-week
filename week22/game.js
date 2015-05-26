@@ -17,7 +17,7 @@ var result;
 var distance, info;
 var currentTool;
 
-var FULL_HITPOINTS = 100, hitpoints = 100;
+var FULL_HITPOINTS = 773, hitpoints = 773;
 var score = {
 	text: "0:00",
 	number: 0
@@ -62,7 +62,7 @@ theGame.prototype.create = function() {
 
 	timer = game.time.events.loop(1000, this.updateTimer, this);
 	timerText = game.add.text(32, 48, '', {
-		font: "16px Courier",
+		font: "16px Arial",
 		fill: "#ffffff"
 	});
 };
@@ -122,6 +122,5 @@ theGame.prototype.render = function() {
 	if (drawLine) {
 		game.debug.geom(line);
 	}
-	game.debug.text("Целостность: " + hitpoints, 32, 32);
-	// game.debug.text("Info: " + info + " m/s", 32, 64);
+	game.debug.text("Hitpoints: " + hitpoints, 32, 32);
 };

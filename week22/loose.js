@@ -3,23 +3,25 @@ var loose = function(game) {
 };
 loose.content = [
 	"",
-	"Вы немного перестарались",
+	'We said - "accurate"!\nYou\'ve just blown everything.',
+	"Maybe it's for the best",
+	"Still try it one more time"
 ];
 
 
 loose.prototype.init = function() {};
 loose.prototype.preload = function() {
-	this.game.load.image('restart', 'assets/btnrestartrus.jpg');
+	this.game.load.image('restart', 'assets/btnrestart.jpg');
 
 	this.index = 0;
 	this.line = '';
 
-	var bg = game.add.tileSprite(0, 0, 800, 600, 'looseBg');
+	var bg = game.add.tileSprite(0, 0, 800, 600, 'winBg');
 
-	this.text = game.add.text(32, 380, '', {
-		font: "30pt Courier",
-		fill: "#00ff00",
-		stroke: "#119f4e",
+	this.text = game.add.text(32, 330, '', {
+		font: "30pt Arial",
+		fill: "#dddddd",
+		stroke: "#112f4e",
 		strokeThickness: 2
 	});
 

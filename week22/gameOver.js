@@ -10,7 +10,7 @@ gameOver.prototype.create = function(){
 	bg = game.add.tileSprite(0, 0, 800, 600, 'backgroundfinal');
 	bg.fixedToCamera = true;
 	var gameOverTitle = game.add.text(game.world.centerX, game.world.centerY + game.world.height/8, " Your Final Score: DEAD", {
-		font: "34pt Courier",
+		font: "34pt Arial",
 		fill: "#ffffff",
 		stroke: "#ffffff",
 		strokeThickness: 3,

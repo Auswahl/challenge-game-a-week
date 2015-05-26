@@ -3,8 +3,8 @@ var win = function(game) {
 };
 win.content = [
 	"",
-	"ТАДА!"
-
+	"Quick and accurate:\nGreat job!\nNo more lousy rockets",
+	"Try to bit your result"
 ];
 
 
@@ -17,9 +17,9 @@ win.prototype.preload = function() {
 	var bg = game.add.tileSprite(0, 0, 800, 600, 'winBg');
 
 	this.text = game.add.text(32, 380, '', {
-		font: "30pt Courier",
-		fill: "#00ff00",
-		stroke: "#119f4e",
+		font: "30pt Arial",
+		fill: "#dddddd",
+		stroke: "#112f4e",
 		strokeThickness: 2
 	});
 

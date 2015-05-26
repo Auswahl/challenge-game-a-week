@@ -3,8 +3,8 @@ var cover = function(game) {
 };
 
 cover.prototype.preload = function() {
-	this.game.load.image("loading", "assets/bg/coverrusbg.jpg");
-	this.game.load.image('buttonStart', 'assets/button1.jpg');
+	this.game.load.image("loading", "assets/bg/coverengbg.jpg");
+	this.game.load.image('buttonStart', 'assets/btneng.jpg');
 	this.game.load.image('introBg', 'assets/bg/introbg.jpg');
 
 };

@@ -3,16 +3,13 @@ var intro = function(game) {
 };
 intro.content = [
 	"",
-	"Рады видеть вас снова!",
-	// "В Руськосмосе настало\nВремя перемен\nи оптимизации расходов.",
-	// "Запускать корабли и наблюдать\nза их падением -\nслишком дорого.\nМы избрали Новый Путь",
-	// "Мы станем госкорпорацией\nи начнём ломать корабли и ракеты\nещё на земле.",
-	// "Оставайтесь профессионалом!\nКрушите их быстро и эффективно\nНе посрамите нас.",
-	// "У каждого вида оружия\nесть свои плюсы и минусы\nНайдите оптимальную тактику.",
-	// "Время - деньги!",
+	"Nice to see you again!",
+	"Let's talk about optimization\nLaunching spaceships is\ntoo damn expensive",
+	"So now we just crash them",
+	"Every weapon has its own advantages!\nDo it quick and accurate",
 ];
 
-
+var loaded = false, introFinished = false;
 intro.prototype.init = function() {};
 intro.prototype.preload = function() {
 
@@ -22,9 +19,9 @@ intro.prototype.preload = function() {
 	var bg = game.add.tileSprite(0, 0, 800, 600, 'introBg');
 
 	this.text = game.add.text(32, 380, '', {
-		font: "30pt Courier",
-		fill: "#00ff00",
-		stroke: "#119f4e",
+		font: "30pt Arial",
+		fill: "#dddddd",
+		stroke: "#112f4e",
 		strokeThickness: 2
 	});
 
@@ -57,7 +54,9 @@ intro.prototype.preload = function() {
 
 };
 intro.prototype.create = function() {
-	// this.game.state.start("TheGame");
+	loaded = true;
+	if (introFinished) this.game.state.start("TheGame");
+
 };
 
 intro.prototype.updateLine = function() {
@@ -80,6 +79,7 @@ intro.prototype.nextLine = function() {
 		this.line = '';
 		game.time.events.repeat(40, intro.content[this.index].length + 1, this.updateLine, this);
 	} else {
-		this.game.state.start("TheGame");
+		introFinished = true;
+		if (loaded)	this.game.state.start("TheGame");
 	}
 };

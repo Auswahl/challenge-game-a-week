@@ -28,9 +28,9 @@ var Weapon = function(frame, cursorIcon, tooltipText) {
 	this.tooltip.fontSize = 14;
 
 	//	Stroke color and thickness
-	this.tooltip.stroke = '#000000';
-	this.tooltip.strokeThickness = 6;
-	this.tooltip.fill = '#43d637';
+	this.tooltip.stroke = '#3f2f9f';
+	this.tooltip.strokeThickness = 2;
+	this.tooltip.fill = '#dddddd';
 	this.tooltip.visible = false;
 
 	weapons.push(this);
@@ -71,12 +71,12 @@ function createWeapons() {
 	var axeSound = game.add.audio("axeSound");
 	var missSound = game.add.audio("missSound");
 
-	var axe = new Weapon("axe", "assets/axecurs1.png", "Медленно, но верно");
+	var axe = new Weapon("axe", "assets/axecurs1.png", "Slow and certain");
 	axe.hitForce = function() {
 		axeSound.play();
 		return 5;
 	};
-	var whip = new Weapon("whip", "assets/whipcurs1.png", "То так, то эдак");
+	var whip = new Weapon("whip", "assets/whipcurs1.png", "Chance of critical hit");
 	whip.hitForce = function() {
 		if (Math.random() >= 0.9) {
 			whipBigSound.play();
@@ -87,7 +87,7 @@ function createWeapons() {
 		}
 	};
 
-	var morgen = new Weapon("morgen", "assets/Morgensterncurs1.png", "Мощно, но мимо");
+	var morgen = new Weapon("morgen", "assets/Morgensterncurs1.png", "Brutal but shaky");
 
 	morgen.hitForce = function() {
 		if (Math.random() >= 0.7) {
@@ -98,7 +98,7 @@ function createWeapons() {
 			return 7;
 		}
 	};
-	var dynamite = new Weapon("dynamite", "assets/Dynamitecurs.png", "Неизестно");
+	var dynamite = new Weapon("dynamite", "assets/Dynamitecurs.png", "Not sure...");
 
 	dynamite.hitForce = function() {
 		blow(function() {game.state.start("Loose");});

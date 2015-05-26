@@ -4,6 +4,7 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>Hello Chaos!</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
 
 	<script src="phaser.js"></script>
 	<script src="weapons.js"></script>
@@ -24,13 +25,16 @@
 <body>
 	<div id="game-area">
 		<form id = "input-form" name="aye" onSubmit="return handleClick()">
-			<div id="score-title">Ваше время: </div>
-			<div>Пожалуйста, укажите ваше имя</div>
-			<input type="text" maxlength="12" id="name" name="username" />
-			<input name="Submit" type="submit" value="Отправить" action="handleClick()" />
+			<div id="score-title">Your time: </div>
+			<div>Your name, hero?</div>
+			<input type="text" maxlength="12" id="name" name="username" required/>
+			<input name="Submit" type="submit" value="Send" action="handleClick()" />
 		</form>
-		<ol id="leaderboard"> </ol>
-		<button name="Restart" type="submit" value="Restart" onclick="window.location.reload();" />Заново</button>
+		<div id="leaderboard">
+			Roscosmos all stars:
+			<ol  id="leaderboard-list"> </ol>
+			<button name="Restart" type="submit" value="Restart" onclick="window.location.reload();" />Restart</button>
+		</div>
 	</div>
 
 
