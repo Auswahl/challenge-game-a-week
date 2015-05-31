@@ -1,0 +1,735 @@
+
+;sp07
+[Statedef 1700]
+type    = S
+movetype= A
+physics = S
+poweradd= -1000
+ctrl = 0
+velset = 0
+anim = 1700
+
+[State 1700, 1]
+type = playsnd
+trigger1 = animelem = 1
+value = 0,39
+persistent = 0
+ignorehitpause = 1
+
+[State 1700, 1]
+type = playsnd
+trigger1 = animelem = 2
+value = 0,36
+persistent = 0
+ignorehitpause = 1
+
+[State 1700, 1]
+type = playsnd
+trigger1 = movehit = 1
+value = 0,32
+persistent = 0
+ignorehitpause = 1
+
+[State 1700, 1]
+type = playsnd
+trigger1 = moveguarded = 1
+value = 0,34
+persistent = 0
+ignorehitpause = 1
+
+[State 1700, 1]
+type = playsnd
+trigger1 = animelem = 2
+value = 0,12
+
+[State 1700, 1]
+type = NotHitBy
+trigger1 = time = 0
+value = SCA
+time = 6
+
+[State 1700, 0]
+type = SuperPause
+trigger1 = time = 0
+time = 34
+anim = -1
+
+[State 1700, 0]
+type = Envcolor
+trigger1 = time = 0
+persistent = 0
+ignorehitpause = 1
+value = 0, 0, 0
+time = 34
+under = 1
+supermove = 1
+
+[State 1700, 3]
+type = Explod
+trigger1 = time = 0
+persistent = 0
+anim = 999
+pos = -20,50
+postype = p1
+sprpriority = 2
+bindtime = -1
+ignorehitpause = 1
+supermove = 1
+ontop = 1
+
+;rose1
+[State 1700, 3]
+type = Explod
+trigger1 = time = 0
+persistent = 0
+anim = 1711
+pos = 70,20
+postype = p1
+sprpriority = 0
+;bindtime = -1
+ignorehitpause = 1
+supermove = 1
+
+[State 1700, 0]
+type = HitDef
+trigger1 = AnimElem = 1
+attr = S, SA
+damage    = 70,10
+getpower  = 100,100
+givepower = 300,50
+Hitflag = MAFD
+guardflag = HA
+pausetime = 0,0
+guard.pausetime = 0,6
+sparkno = -1
+guard.sparkno = -1
+hitsound = -1
+guardsound = -1
+ground.type = low
+ground.slidetime = 6
+ground.hittime  = 6
+ground.velocity = -1,-10
+guard.velocity = -3
+air.velocity = -1,-9
+airguard.velocity = -2,-5
+down.bounce = 1
+fall.animtype = back
+fall = 1
+air.fall = 1
+
+[State 1700, 3]
+type = Explod
+trigger1 = moveguarded = 1
+persistent = 0
+anim = 4300
+pos = 175,-227
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1700, 3]
+type = Explod
+trigger1 = moveguarded = 1
+persistent = 0
+anim = 4200
+pos = 185,-197
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1700, 3]
+type = Explod
+trigger1 = movehit = 1
+persistent = 0
+anim = 3300
+pos = 190,-212
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1700, 3]
+type = Explod
+trigger1 = movehit = 1
+persistent = 0
+anim = 3900
+pos = 190,-222
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1700, 3]
+type = Explod
+trigger1 = time = 1
+persistent = 0
+anim = 1701
+pos = 0,0
+postype = p1
+sprpriority = 2
+;bindtime = 6
+ignorehitpause = 1
+
+[State 1700, 3]
+type = Explod
+trigger1 = animelem = 3
+persistent = 0
+anim = 1702
+pos = 0,0
+postype = p1
+sprpriority = 2
+;bindtime = 1
+ignorehitpause = 1
+
+[State 1700, 3]
+type = Explod
+trigger1 = animelem = 3
+persistent = 0
+anim = 1703
+pos = 0,0
+postype = p1
+sprpriority = 3
+;bindtime = 1
+ignorehitpause = 1
+
+[State 1700, 3]
+type = changestate
+trigger1 = animtime = 0
+value = 1710
+
+
+;up
+[Statedef 1710]
+type    = A
+movetype= A
+physics = A
+poweradd= 0
+ctrl = 0
+velset = 0
+anim = 1710
+
+[State 1710, 1]
+type = playsnd
+trigger1 = movehit = 1
+value = 0,31
+persistent = 0
+ignorehitpause = 1
+
+[State 1710, 1]
+type = playsnd
+trigger1 = moveguarded = 1
+value = 0,34
+persistent = 0
+ignorehitpause = 1
+
+[State 1710, 1]
+type = NotHitBy
+trigger1 = time = 0
+value = SCA
+time = 33
+
+[State 1710, 0]
+type = HitDef
+trigger1 = AnimElem = 1
+attr = A, SA
+damage    = 250,15
+getpower  = 100,100
+givepower = 300,50
+Hitflag = MAFD
+guardflag = HA
+pausetime = 0,6
+guard.pausetime = 0,22
+sparkno = -1
+guard.sparkno = -1
+hitsound = -1
+guardsound = -1
+ground.type = low
+ground.slidetime = 6
+ground.hittime  = 6
+ground.velocity = -1,-10
+guard.velocity = -3
+air.velocity = -1,-9
+airguard.velocity = -2,-5
+down.bounce = 1
+fall.animtype = back
+fall = 1
+air.fall = 1
+
+
+[State 1710, 3]
+type = Explod
+trigger1 = movehit = 1 && animelem = 12
+persistent = 0
+anim = 3500
+pos = 160,-224
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1710, 3]
+type = Explod
+trigger1 = movehit = 1 && animelem = 5
+persistent = 0
+anim = 3900
+pos = 190,-222
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1710, 3]
+type = Explod
+trigger1 = movehit = 1 && animelem = 11
+persistent = 0
+anim = 3900
+pos = 190,-222
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1710, 3]
+type = Explod
+trigger1 = moveguarded = 1
+persistent = 0
+anim = 4300
+pos = 175,-237
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1710, 3]
+type = Explod
+trigger1 = moveguarded = 1 && animelem = 7
+persistent = 0
+anim = 4300
+pos = 175,-247
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1710, 3]
+type = Explod
+trigger1 = moveguarded = 1 && animelem = 13
+persistent = 0
+anim = 4300
+pos = 175,-257
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1710, 3]
+type = Explod
+trigger1 = moveguarded = 1
+persistent = 0
+anim = 4200
+pos = 185,-207
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1710, 3]
+type = Explod
+trigger1 = moveguarded = 1 && animelem = 7
+persistent = 0
+anim = 4200
+pos = 185,-217
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1710, 3]
+type = Explod
+trigger1 = moveguarded = 1 && animelem = 13
+persistent = 0
+anim = 4200
+pos = 185,-227
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+
+;rose2
+[State 1710, 3]
+type = Explod
+trigger1 = time = 0
+persistent = 0
+anim = 1712
+pos = 70,20
+postype = p1
+sprpriority = 0
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1710, 3]
+type = velset
+trigger1 = AnimElem = 1
+x = 0
+y = -2.8
+
+[State 1710, 3]
+type = veladd
+trigger1 = AnimElem = 1
+x = 0
+y = -4.0
+
+[State 1710, 3]
+type = posadd
+trigger1 = AnimElem = 2
+x = 0
+y = -1
+
+[State 1710, 3]
+type = posadd
+trigger1 = AnimElem = 3
+x = 0
+y = -2
+
+[State 1710, 3]
+type = posadd
+trigger1 = AnimElem = 4
+x = 0
+y = -2
+
+[State 1710, 3]
+type = posadd
+trigger1 = AnimElem = 5
+x = 0
+y = -2
+
+[State 1710, 3]
+type = posadd
+trigger1 = AnimElem = 6
+x = 0
+y = -4
+
+[State 1710, 3]
+type = posadd
+trigger1 = AnimElem = 7
+x = 0
+y = -4
+
+[State 1710, 3]
+type = posadd
+trigger1 = AnimElem = 8
+x = 0
+y = -4
+
+[State 1710, 3]
+type = posadd
+trigger1 = AnimElem = 9
+x = 0
+y = -5
+
+[State 1710, 3]
+type = posadd
+trigger1 = AnimElem = 10
+x = 0
+y = -4
+
+[State 1710, 3]
+type = posadd
+trigger1 = AnimElem = 11
+x = 0
+y = -5
+
+[State 1710, 3]
+type = posadd
+trigger1 = AnimElem = 12
+x = 0
+y = -4
+
+[State 1710, 3]
+type = posadd
+trigger1 = AnimElem = 13
+x = 0
+y = -5
+
+[State 1710, 3]
+type = posadd
+trigger1 = AnimElem = 14
+x = 0
+y = -3
+
+[State 1710, 3]
+type = posadd
+trigger1 = AnimElem = 15
+x = 0
+y = -4
+
+[State 1710, 3]
+type = posadd
+trigger1 = AnimElem = 16
+x = 0
+y = -3
+
+[State 1710, 3]
+type = posadd
+trigger1 = AnimElem = 17
+x = 0
+y = -4
+
+[State 1710, 3]
+type = posadd
+trigger1 = AnimElem = 18
+x = 0
+y = -1
+
+[State 1710, 3]
+type = posadd
+trigger1 = AnimElem = 19
+x = 0
+y = 0
+
+[State 1710, 3]
+type = posadd
+trigger1 = AnimElem = 20
+x = 0
+y = 2
+
+[State 1710, 3]
+type = posadd
+trigger1 = AnimElem = 21
+x = 0
+y = 1
+
+[State 1710, 3]
+type = posadd
+trigger1 = AnimElem = 22
+x = 0
+y = 1
+
+[State 1710, 3]
+type = posadd
+trigger1 = AnimElem = 23
+x = 0
+y = 2
+
+[State 1710, 3]
+type = posadd
+trigger1 = AnimElem = 24
+x = 0
+y = 3
+
+[State 1710, 3]
+type = posadd
+trigger1 = AnimElem = 25
+x = 0
+y = 4
+
+[State 1710, 3]
+type = posadd
+trigger1 = AnimElem = 26
+x = 0
+y = 7
+
+[State 1710, 3]
+type = posadd
+trigger1 = AnimElem = 27
+x = 0
+y = 7
+
+[State 1710, 3]
+type = posadd
+trigger1 = AnimElem = 28
+x = 0
+y = 7
+
+[State 1710, 3]
+type = velset
+trigger1 = AnimElem = 19
+y = 0
+
+[State 1710, 3]
+type = Explod
+trigger1 = animelem = 1
+persistent = 0
+anim = 1352
+pos = 0,0
+postype = p1
+sprpriority = 2
+;bindtime = 1
+ignorehitpause = 1
+
+[State 1710, 3]
+type = Explod
+trigger1 = animelem = 1
+persistent = 0
+anim = 1353
+pos = 0,0
+postype = p1
+sprpriority = 3
+;bindtime = 1
+ignorehitpause = 1
+
+[State 1710, 3]
+type = Explod
+trigger1 = animelem = 1
+persistent = 0
+anim = 1354
+pos = 0,0
+postype = p1
+sprpriority = 2
+;bindtime = 1
+ignorehitpause = 1
+
+[State 1710, 3]
+type = Explod
+trigger1 = animelem = 1
+persistent = 0
+anim = 1355
+pos = 0,0
+postype = p1
+sprpriority = 3
+;bindtime = 1
+ignorehitpause = 1
+
+[State 1710, 3]
+type = Explod
+trigger1 = animelem = 1
+persistent = 0
+anim = 1356
+pos = 0,0
+postype = p1
+sprpriority = 2
+;bindtime = 1
+ignorehitpause = 1
+
+[State 1710, 3]
+type = Explod
+trigger1 = animelem = 1
+persistent = 0
+anim = 1357
+pos = 0,0
+postype = p1
+sprpriority = 3
+;bindtime = 1
+ignorehitpause = 1
+
+[State 1710, 3]
+type = Explod
+trigger1 = animelem = 1
+persistent = 0
+anim = 1358
+pos = 0,0
+postype = p1
+sprpriority = 2
+;bindtime = 1
+ignorehitpause = 1
+
+[State 1710, 3]
+type = Explod
+trigger1 = animelem = 1
+persistent = 0
+anim = 1359
+pos = 0,0
+postype = p1
+sprpriority = 3
+;bindtime = 1
+ignorehitpause = 1
+
+[State 1710, 3]
+type = Explod
+trigger1 = animelem = 1
+persistent = 0
+anim = 1360
+pos = 0,0
+postype = p1
+sprpriority = 2
+;bindtime = 1
+ignorehitpause = 1
+
+[State 1710, 3]
+type = Explod
+trigger1 = animelem = 1
+persistent = 0
+anim = 1361
+pos = 0,0
+postype = p1
+sprpriority = 3
+;bindtime = 1
+ignorehitpause = 1
+
+[State 1710, 3]
+type = Explod
+trigger1 = animelem = 1
+persistent = 0
+anim = 1362
+pos = 0,0
+postype = p1
+sprpriority = 2
+;bindtime = 1
+ignorehitpause = 1
+
+[State 1710, 3]
+type = Explod
+trigger1 = animelem = 1
+persistent = 0
+anim = 1363
+pos = 0,0
+postype = p1
+sprpriority = 3
+;bindtime = 1
+ignorehitpause = 1
+
+[State 1710, 3]
+type = Explod
+trigger1 = animelem = 1
+persistent = 0
+anim = 1364
+pos = 0,0
+postype = p1
+sprpriority = 2
+;bindtime = 1
+ignorehitpause = 1
+
+[State 1710, 3]
+type = Explod
+trigger1 = animelem = 1
+persistent = 0
+anim = 1365
+pos = 0,0
+postype = p1
+sprpriority = 3
+;bindtime = 1
+ignorehitpause = 1
+
+[State 1710, 3]
+type = Explod
+trigger1 = animelem = 1
+persistent = 0
+anim = 1366
+pos = 0,0
+postype = p1
+sprpriority = 2
+;bindtime = 1
+ignorehitpause = 1
+
+[State 1710, 3]
+type = Explod
+trigger1 = animelem = 1
+persistent = 0
+anim = 1367
+pos = 0,-35
+postype = p1
+sprpriority = 3
+;bindtime = 1
+ignorehitpause = 1
+
+[State 1710, 2]
+type = changestate
+trigger1 = AnimTime = 0
+value = 52
+ctrl = 1
+
+
+

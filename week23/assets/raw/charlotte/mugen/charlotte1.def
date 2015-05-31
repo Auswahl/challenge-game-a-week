@@ -1,0 +1,36 @@
+
+[Info]
+name = "CHARLOTTE"
+displayname = "CHARLOTTE"
+versiondate = 2001/08/22
+mugenversion = 2001/04/14
+author = "masquer"
+pal.defaults = 1,2,3,4,5,6
+
+[Files]
+cmd     = charlotte.cmd
+cns     = charlotte.cns
+st      = normal1.cns
+st1     = supers1.cns
+st2     = supers2.cns
+st3     = supers3.cns
+st4     = supers4.cns
+st5     = supers5.cns
+st6     = supers6.cns
+st7     = supers7.cns
+st8     = supers8.cns
+st0     = normal2.cns
+stcommon =common.cns
+sprite  = charlotte.sff
+anim    = charlotte.air
+sound   = charlotte.snd  ;(44100Hz.16bit.mono)
+pal1    = 04.act
+pal2    = 05.act
+pal3    = 06.act
+pal4    = 01.act
+pal5    = 02.act
+pal6    = 03.act
+
+[Arcade]
+intro.storyboard  =
+ending.storyboard = charlottend.def

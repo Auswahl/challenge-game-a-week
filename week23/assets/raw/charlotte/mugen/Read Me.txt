@@ -1,0 +1,55 @@
+------------------------------------------------------------------
+                          Dos2Win 0.2
+------------------------------------------------------------------
+
+Dos2Win is a tool that help you to convert mugen characters from dos to windows.
+
+For an optimal use, you have to put the files "CharSffDtoW.exe" and "dos2win.exe" together.
+As the author of the file "CharSffDtoW.exe" isn't available, I give you this file,
+in his 0.08 version, in this package until his site come back.
+
+What is made by this toll:
+-------------------------
+- convert all the "Clsn2 =" by "Clsn2:" in the AIR file
+- convert all the "MoveContact = 1" by "MoveContact" in the CNS and CMD files
+- convert all the "MoveGuarded = 1" by "MoveGuarded" in the CNS and CMD files
+- convert all the "MoveHit = 1" by "MoveHit" in the CNS and CMD files
+- convert all the "MoveContact = 0" by "!MoveContact" in the CNS and CMD files **new**
+- convert all the "MoveGuarded = 0" by "!MoveGuarded" in the CNS and CMD files **new**
+- convert all the "MoveHit = 0" by "!MoveHit" in the CNS and CMD files **new**
+- execute CharSffDtoW to convert the SFF file
+
+Utilisation:
+------------
+Put the files in the directory of the character you want to convert and execute dos2win.exe, isn't it easy? ;)
+
+Support:
+--------
+There remain some limitations to the converting of the characters,
+the "defaults.pal" aren't fixed in the DEF file, you have to do it 
+manually, but this thing is very rare to do.
+The count of the Clsn2 isn't made also, in this case you have to verify the
+error message made by winmugen and correct the bug by yourself.
+
+This tool can convert the characters for the linux version of mugen
+but it can be unconvertible sometimes (if the files are written in upper case and not in
+lower case). I propose you to use the tool "mugen2linux" avalaible on
+http://zesensei.free.fr/mugen/tools/default.htm in addition.
+
+Distribution:
+-------------
+My application is freeware, you can distribute it freely.
+I give you the source code written in perl, if you want to modify or update it.
+
+Thanks and contacts:
+--------------------------
+I want to thanks Mugenfury for his help about the convertion of the characters.
+You will be able to find my tool and also winmugen support on his site.
+http://www.mugenfury.com/
+
+I want to thanks to Lemmy for his help in perl programmation.
+You will be able to find docs and perl runtimes on 
+http://www.activestate.com/Products/ActivePerl/
+
+29/09/2004 - meldrak@wanadoo.fr
+

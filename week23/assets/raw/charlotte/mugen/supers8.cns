@@ -1,0 +1,436 @@
+
+;sp08
+[Statedef 1800]
+type = S
+movetype = A
+physics = S
+anim = 1800
+velset = 0
+ctrl = 0
+poweradd = 90
+
+[State 1800, 1]
+type = playsnd
+trigger1 = animelem = 1
+value = 0,45
+persistent = 0
+ignorehitpause = 1
+
+[State 1800, 3]
+type = Explod
+trigger1 = animelem = 1
+persistent = 0
+anim = 1810
+pos = 0,0
+postype = p1
+sprpriority = 2
+bindtime = -1
+ignorehitpause = 1
+
+[State 1800, 3]
+type = HitDef
+trigger1 = AnimElem = 4
+attr = S, NA
+animtype = medium
+damage = 30
+getpower = 50,50
+givepower = 50,50
+hitflag = HAF
+guardflag =
+pausetime = 6,12
+sprpriority = -2
+sparkno = -1
+guard.sparkno = -1
+hitsound = S1,(var(3))
+guardsound = S1,(var(6))
+ground.type = high
+ground.slidetime = 8
+ground.hittime = 8
+ground.velocity = -3.5
+guard.velocity = -2.5
+air.velocity = -3,-1
+airguard.velocity = -2,-1
+forcestand = 1
+p2facing = 1
+p1stateno = 1820
+p2stateno = 1830
+p2getp1state = 1
+
+[State 1800, 0]
+type = sprpriority
+trigger1 = movehit= 1
+value = -2
+
+[State 1800, 4]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+
+;1p
+[Statedef 1820]
+type = S
+movetype = A
+physics = S
+anim = 1820
+velset = 0
+ctrl = 0
+poweradd = 0
+
+[State 1820, 1]
+type = playsnd
+trigger1 = animelem = 1
+value = 0,31
+persistent = 0
+ignorehitpause = 1
+
+[State 1800, 1]
+type = playsnd
+trigger1 = time = 28
+value = 0,32
+persistent = 0
+ignorehitpause = 1
+
+[State 1800, 3]
+type = Explod
+trigger1 = time = 28
+persistent = 0
+anim = 3600
+pos = 200,-232
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1800, 3]
+type = Explod
+trigger1 = time = 28
+persistent = 0
+anim = 3400
+pos = 160,-241
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1800, 0]
+type = sprpriority
+trigger1 = time >= 0
+value = -2
+
+[State 1820, 1]
+type = TargetBind
+trigger1 = Time = 0
+pos = 90,0
+time = 4
+
+[State 1820, 1]
+type = TargetBind
+trigger1 = Time = 4
+pos = 70,0
+time = 4
+
+[State 1820, 1]
+type = TargetBind
+trigger1 = Time = 8
+pos = 40,0
+time = 4
+
+[State 1820, 1]
+type = TargetBind
+trigger1 = Time = 12
+pos = 80,-40
+time = 8
+
+[State 1820, 1]
+type = TargetBind
+trigger1 = Time = 20
+pos = 80,-60
+time = 7
+
+[State 1820, 4]
+type = ChangeState
+trigger1 = animTime = 0
+value = 0
+ctrl = 1
+
+;2P
+[Statedef 1830]
+type    = A
+movetype= H
+physics = N
+ctrl = 0
+pos = 0,0
+
+[State 1830, 0]
+type = posSet
+Trigger1 = Time >= 0
+y= 0
+
+[State 1830, 0]
+type = velSet
+Trigger1 = Time = 0
+x = 0
+y = 0
+
+[State 1830, 0]
+type = ChangeAnim2
+Trigger1 = Time = 0
+value = 1830
+
+[State 1830, 2]
+type = ChangeState
+Trigger1 = Time = 17
+value = 1840
+
+[Statedef 1840]
+type = A
+movetype = H
+physics = N
+ctrl = 0
+velset = 0,0
+
+[State 1840, 4]
+type = lifeadd
+trigger1 = Time = 16
+value = -60
+
+[State 1840, 4]
+type = posadd
+trigger1 = Time = 0
+y = -40
+
+[State 1840, 4]
+type = AngleSet
+trigger1 = Time = 0
+value = 45
+
+[State 1840, 4]
+type = AngleSet
+trigger1 = Time = 8
+value = 25
+
+[State 1840, 6]
+type = AngleDraw
+trigger1 = Time = 0
+
+[State 1840, 6]
+type = AngleDraw
+trigger1 = Time = (0,15)
+
+[State 1840,1]
+type = changeanim2
+trigger1 = time = 0
+value = 1840
+
+[State 1840,1]
+type = veladd
+trigger1 = time = 15
+x = -1
+y = -6
+
+[State 1840,1]
+type = changeanim2
+trigger1 = time = 16
+value = 1830
+
+[State 1840,1]
+type = SelfState
+trigger1 = time = 24
+value = 5050;5070
+ctrl = 0
+
+
+;-------------------------------------------------
+
+;sp08b
+[Statedef 1850]
+type = S
+movetype = A
+physics = S
+anim = 1850
+velset = 0
+ctrl = 0
+poweradd = 90
+
+[State 1850, 1]
+type = playsnd
+trigger1 = animelem = 1
+value = 0,45
+persistent = 0
+ignorehitpause = 1
+
+[State 1850, 3]
+type = Explod
+trigger1 = animelem = 1
+persistent = 0
+anim = 1855
+pos = 43,31
+postype = p1
+sprpriority = 2
+bindtime = -1
+ignorehitpause = 1
+
+[State 1850, 3]
+type = HitDef
+trigger1 = AnimElem = 6
+attr = S, NA
+animtype = medium
+damage = 30
+getpower = 50,50
+givepower = 50,50
+hitflag = MFD
+guardflag =
+pausetime = 8,8
+sprpriority = -2
+sparkno = -1
+guard.sparkno = -1
+hitsound = S1,(var(3))
+guardsound = S1,(var(6))
+ground.type = high
+ground.slidetime = 8
+ground.hittime = 8
+ground.velocity = -3.5
+guard.velocity = -2.5
+air.velocity = -3,0
+airguard.velocity = -2,0
+p2facing = 1
+p1stateno = 1860
+p2stateno = 1880
+p2getp1state = 1
+
+[State 1850, 0]
+type = sprpriority
+trigger1 = movehit= 1
+value = -2
+
+[State 1850, 4]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+
+;1p
+[Statedef 1860]
+type = S
+movetype = A
+physics = S
+anim = 1860
+velset = 0
+ctrl = 0
+poweradd = 0
+
+[State 1860, 1]
+type = playsnd
+trigger1 = animelem = 1
+value = 0,31
+persistent = 0
+ignorehitpause = 1
+
+[State 1860, 1]
+type = playsnd
+trigger1 = time = 16
+value = 0,32
+persistent = 0
+ignorehitpause = 1
+
+[State 1860, 3]
+type = Explod
+trigger1 = time = 16
+persistent = 0
+anim = 3600
+pos = 200,-232
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1860, 3]
+type = Explod
+trigger1 = time = 16
+persistent = 0
+anim = 3400
+pos = 160,-241
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1860, 0]
+type = sprpriority
+trigger1 = time >= 0
+value = -2
+
+[State 1860, 1]
+type = TargetBind
+trigger1 = Time = 0
+pos = 80,-40
+time = 8
+
+[State 1860, 1]
+type = TargetBind
+trigger1 = Time = 8
+pos = 80,-60
+time = 7
+
+[State 1860, 4]
+type = ChangeState
+trigger1 = animTime = 0
+value = 0
+ctrl = 1
+
+;2p
+[Statedef 1880]
+type = A
+movetype = H
+physics = N
+ctrl = 0
+velset = 0,0
+
+[State 1880, 4]
+type = lifeadd
+trigger1 = Time = 23
+value = -60
+
+[State 1880, 4]
+type = AngleSet
+trigger1 = Time = 7
+value = 45
+
+[State 1880, 4]
+type = AngleSet
+trigger1 = Time = 15
+value = 25
+
+[State 1880, 6]
+type = AngleDraw
+trigger1 = Time = 7
+
+[State 1880, 6]
+type = AngleDraw
+trigger1 = Time = (7,22)
+
+[State 1880,1]
+type = changeanim2
+trigger1 = time = 7
+value = 1880
+
+[State 1880,1]
+type = veladd
+trigger1 = time = 22
+x = -1
+y = -6
+
+[State 1880,1]
+type = changeanim2
+trigger1 = time = 23
+value = 1870
+
+[State 1880,1]
+type = SelfState
+trigger1 = time = 31
+value = 5050;5070
+ctrl = 0
+

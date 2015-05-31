@@ -1,0 +1,1570 @@
+
+;sp01x
+[Statedef 1100]
+type    = S
+movetype= A
+physics = S
+poweradd= 120
+ctrl = 0
+velset = 0
+anim = 1100
+
+[State 1100, 1]
+type = playsnd
+trigger1 = MoveHit
+value = 0,31
+persistent = 0
+ignorehitpause = 1
+
+[State 1100, 1]
+type = playsnd
+trigger1 = MoveGuarded
+value = 0,34
+persistent = 0
+ignorehitpause = 1
+
+[State 1100, 1]
+type = playsnd
+trigger1 = time = 24
+value = 0,33
+
+[State 1100, 1]
+type = playsnd
+trigger1 = animelem = 1
+value = 0,9
+
+[State 1100, 1]
+type = Helper
+trigger1 = animelem = 20
+ID = 1100
+pos = 0,0
+postype = p1
+stateno = 1120
+helpertype = normal
+keyctrl = 0
+
+[State 1100, 3]
+type = HitDef
+trigger1 = AnimElem = 8
+attr = A, SA
+damage    = 20,5
+getpower  = 20,10
+givepower = 20,10
+guardflag = MA
+pausetime = 0,15
+guard.pausetime = 0,8
+sparkno = -1
+;sparkxy = -235,-208
+guard.sparkno = -1
+;guard.sparkxy = -276,-208
+hitsound = -1
+guardsound = -1
+ground.type = high
+animtype = hard
+ground.slidetime = 6
+ground.hittime  = 6
+ground.velocity = -2,0
+guard.velocity = -3
+air.velocity = -2,0
+airguard.velocity = -2,0
+
+[State 1100, 3]
+type = Explod
+trigger1 = MoveHit
+persistent = 0
+anim = 3100
+pos = 200,-207
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1100, 3]
+type = Explod
+trigger1 = MoveHit
+persistent = 0
+anim = 3600
+pos = 200,-212
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1100, 3]
+type = Explod
+trigger1 = MoveGuarded
+persistent = 0
+anim = 4300
+pos = 175,-232
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1100, 3]
+type = Explod
+trigger1 = MoveGuarded
+persistent = 0
+anim = 4200
+pos = 185,-202
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1100, 2]
+type = changestate
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;01
+[Statedef 1120]
+type    = A
+movetype= A
+;physics = N
+velset = 0,0
+anim = 1120
+
+[State 1120, 1]
+type = playsnd
+trigger1 = MoveGuarded
+value = 0,34
+persistent = 0
+ignorehitpause = 1
+
+[State 1120, 0]
+type = velset
+trigger1 = time = 0
+x = 10
+y = 0
+
+[State 1120, 0]
+type = velset
+trigger1 = time = 1
+x = 0
+y = 0
+
+[State 1120, 0]
+type = sprpriority
+trigger1 = time >= 0
+value = 2
+
+[State 1120, 3]
+type = HitDef
+trigger1 = AnimElem = 1
+trigger2 = AnimElem = 2
+trigger3 = AnimElem = 3
+trigger4 = AnimElem = 4
+trigger5 = AnimElem = 5
+trigger6 = AnimElem = 6
+attr = A, SA
+damage    = 20,4
+getpower  = 20,10
+givepower = 20,10
+guardflag = MA
+pausetime = 0,8
+guard.pausetime = 0,8
+sparkno = -1
+;sparkxy = -235,-208
+guard.sparkno = -1
+;guard.sparkxy = -276,-208
+hitsound = -1
+guardsound = -1
+ground.type = high
+animtype = hard
+ground.slidetime = 6
+ground.hittime  = 6
+ground.velocity = 2,0
+guard.velocity = -3
+air.velocity = 1,0
+airguard.velocity = -2,0
+
+[State 1120, 3]
+type = Explod
+trigger1 = MoveHit
+persistent = 0
+anim = 3100
+pos = 200,-207
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1120, 3]
+type = Explod
+trigger1 = MoveHit
+persistent = 0
+anim = 3600
+pos = 200,-212
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1120, 3]
+type = Explod
+trigger1 = MoveGuarded
+persistent = 0
+anim = 4300
+pos = 175,-232
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1120, 3]
+type = Explod
+trigger1 = MoveGuarded
+persistent = 0
+anim = 4200
+pos = 185,-202
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1120, 4]
+type = changestate
+trigger1 = MoveContact
+value = 1140
+
+[State 1120, 4]
+type = changestate
+trigger1 = time = 37 && !MoveContact
+value = 1150
+
+;hit-guard
+[Statedef 1140]
+type    = A
+movetype= A
+;physics = N
+velset = 0,0
+anim = 1140
+
+[State 1140, 1]
+type = playsnd
+trigger1 = MoveHit
+value = 0,31
+persistent = 0
+ignorehitpause = 1
+
+[State 1140, 1]
+type = playsnd
+trigger1 = MoveGuarded
+value = 0,34
+persistent = 0
+ignorehitpause = 1
+
+[State 1140, 0]
+type = posadd
+trigger1 = time = 0
+x = 10
+y = 0
+
+[State 1140, 0]
+type = velset
+trigger1 = time = 0
+x = 0
+y = 0
+
+[State 1140, 3]
+type = HitDef
+trigger1 = AnimElem = 1
+trigger2 = AnimElem = 2
+trigger3 = AnimElem = 3
+trigger4 = AnimElem = 4
+trigger5 = AnimElem = 5
+trigger6 = AnimElem = 6
+trigger7 = AnimElem = 7
+;trigger8 = AnimElem = 8
+;trigger9 = AnimElem = 9
+;trigger10 = AnimElem = 10
+;trigger11 = AnimElem = 11
+;trigger12 = AnimElem = 12
+attr = A, SA
+damage    = 10,4
+getpower  = 20,10
+givepower = 20,10
+guardflag = MA
+pausetime = 0,8
+guard.pausetime = 0,8
+sparkno = -1
+;sparkxy = -235,-208
+guard.sparkno = -1
+;guard.sparkxy = -276,-208
+hitsound = -1
+guardsound = -1
+ground.type = high
+animtype = hard
+ground.slidetime = 6
+ground.hittime  = 6
+ground.velocity = 0,0
+guard.velocity = -3
+air.velocity = 0,0
+airguard.velocity = -2,0
+
+[State 1140, 3]
+type = Explod
+trigger1 = MoveHit && animelem = 4
+persistent = 0
+anim = 3100
+pos = 180,-207
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1140, 3]
+type = Explod
+trigger1 = MoveHit && animelem = 4
+persistent = 0
+anim = 3600
+pos = 180,-212
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1140, 3]
+type = Explod
+trigger1 = MoveGuarded && animelem = 3
+persistent = 0
+anim = 4300
+pos = 165,-232
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1140, 3]
+type = Explod
+trigger1 = MoveGuarded && animelem = 6
+persistent = 0
+anim = 4300
+pos = 155,-232
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1140, 3]
+type = Explod
+trigger1 = MoveGuarded && animelem = 3
+persistent = 0
+anim = 4200
+pos = 175,-202
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1140, 3]
+type = Explod
+trigger1 = MoveGuarded && animelem = 6
+persistent = 0
+anim = 4200
+pos = 165,-202
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1140, 0]
+type = sprpriority
+trigger1 = time >= 0
+value = 2
+
+[State 1140, 2]
+type = DestroySelf
+trigger1 = screenpos X != [-30,350]
+trigger2 = time = 24
+
+
+;no-hit
+[Statedef 1150]
+type    = A
+movetype= A
+;physics = N
+velset = 0,0
+anim = 1150
+
+[State 1150, 1]
+type = playsnd
+trigger1 = MoveHit
+value = 0,31
+persistent = 0
+ignorehitpause = 1
+
+[State 1150, 1]
+type = playsnd
+trigger1 = MoveGuarded
+value = 0,34
+persistent = 0
+ignorehitpause = 1
+
+[State 1150, 0]
+type = velset
+trigger1 = time = 0
+x = 0
+y = 0
+
+[State 1150, 3]
+type = HitDef
+trigger1 = AnimElem = 1
+trigger2 = AnimElem = 2
+trigger3 = AnimElem = 3
+trigger4 = AnimElem = 4
+trigger5 = AnimElem = 5
+trigger6 = AnimElem = 6
+trigger7 = AnimElem = 7
+;trigger8 = AnimElem = 8
+;trigger9 = AnimElem = 9
+;trigger10 = AnimElem = 10
+;trigger11 = AnimElem = 11
+attr = A, SA
+damage    = 10,4
+getpower  = 20,10
+givepower = 20,10
+guardflag = MA
+pausetime = 0,8
+guard.pausetime = 0,8
+sparkno = -1
+;sparkxy = -235,-208
+guard.sparkno = -1
+;guard.sparkxy = -276,-208
+hitsound = -1
+guardsound = -1
+ground.type = high
+animtype = hard
+ground.slidetime = 6
+ground.hittime  = 6
+ground.velocity = 2,0
+guard.velocity = -3
+air.velocity = 1,0
+airguard.velocity = -2,0
+
+[State 1150, 3]
+type = Explod
+trigger1 = MoveHit && animelem = 4
+persistent = 0
+anim = 3100
+pos = 180,-207
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1150, 3]
+type = Explod
+trigger1 = MoveHit && animelem = 4
+persistent = 0
+anim = 3600
+pos = 180,-212
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1150, 3]
+type = Explod
+trigger1 = MoveGuarded && animelem = 3
+persistent = 0
+anim = 4300
+pos = 165,-232
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1150, 3]
+type = Explod
+trigger1 = MoveGuarded && animelem = 6
+persistent = 0
+anim = 4300
+pos = 155,-232
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1150, 3]
+type = Explod
+trigger1 = MoveGuarded && animelem = 3
+persistent = 0
+anim = 4200
+pos = 175,-202
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1150, 3]
+type = Explod
+trigger1 = MoveGuarded && animelem = 6
+persistent = 0
+anim = 4200
+pos = 165,-202
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1150, 0]
+type = sprpriority
+trigger1 = time >= 0
+value = 2
+
+[State 1150, 2]
+type = DestroySelf
+trigger1 = screenpos X != [-30,350]
+trigger2 = time = 21
+
+;-----------------------------------------------------
+
+;sp01y
+[Statedef 1101]
+type    = S
+movetype= A
+physics = S
+poweradd= 120
+ctrl = 0
+velset = 0
+anim = 1100
+
+[State 1101, 1]
+type = playsnd
+trigger1 = MoveHit
+value = 0,31
+persistent = 0
+ignorehitpause = 1
+
+[State 1101, 1]
+type = playsnd
+trigger1 = MoveGuarded
+value = 0,34
+persistent = 0
+ignorehitpause = 1
+
+[State 1101, 1]
+type = playsnd
+trigger1 = time = 24
+value = 0,33
+
+[State 1101, 1]
+type = playsnd
+trigger1 = animelem = 1
+value = 0,9
+
+[State 1101, 1]
+type = Helper
+trigger1 = animelem = 20
+ID = 1101
+pos = 0,0
+postype = p1
+stateno = 1121
+helpertype = normal
+keyctrl = 0
+
+[State 1101, 3]
+type = HitDef
+trigger1 = AnimElem = 8
+attr = A, SA
+damage    = 20,5
+getpower  = 20,10
+givepower = 20,10
+guardflag = MA
+pausetime = 0,15
+guard.pausetime = 0,8
+sparkno = -1
+;sparkxy = -235,-208
+guard.sparkno = -1
+;guard.sparkxy = -276,-208
+hitsound = -1
+guardsound = -1
+ground.type = high
+animtype = hard
+ground.slidetime = 6
+ground.hittime  = 6
+ground.velocity = -2,0
+guard.velocity = -3
+air.velocity = -2,0
+airguard.velocity = -2,0
+
+[State 1101, 3]
+type = Explod
+trigger1 = MoveHit
+persistent = 0
+anim = 3100
+pos = 200,-207
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1101, 3]
+type = Explod
+trigger1 = MoveHit
+persistent = 0
+anim = 3600
+pos = 200,-212
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1101, 3]
+type = Explod
+trigger1 = MoveGuarded
+persistent = 0
+anim = 4300
+pos = 175,-232
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1101, 3]
+type = Explod
+trigger1 = MoveGuarded
+persistent = 0
+anim = 4200
+pos = 185,-202
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1101, 2]
+type = changestate
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;01
+[Statedef 1121]
+type    = A
+movetype= A
+;physics = N
+velset = 0,0
+anim = 1120
+
+[State 1121, 1]
+type = playsnd
+trigger1 = MoveGuarded
+value = 0,34
+persistent = 0
+ignorehitpause = 1
+
+[State 1121, 0]
+type = velset
+trigger1 = time = 0
+x = 10
+y = 0
+
+[State 1121, 0]
+type = velset
+trigger1 = time = 10
+x = 0
+y = 0
+
+[State 1121, 0]
+type = sprpriority
+trigger1 = time >= 0
+value = 2
+
+[State 1121, 3]
+type = HitDef
+trigger1 = AnimElem = 1
+trigger2 = AnimElem = 2
+trigger3 = AnimElem = 3
+trigger4 = AnimElem = 4
+trigger5 = AnimElem = 5
+trigger6 = AnimElem = 6
+attr = A, SA
+damage    = 20,4
+getpower  = 20,10
+givepower = 20,10
+guardflag = MA
+pausetime = 0,8
+guard.pausetime = 0,8
+sparkno = -1
+;sparkxy = -235,-208
+guard.sparkno = -1
+;guard.sparkxy = -276,-208
+hitsound = -1
+guardsound = -1
+ground.type = high
+animtype = hard
+ground.slidetime = 6
+ground.hittime  = 6
+ground.velocity = 2,0
+guard.velocity = -3
+air.velocity = 1,0
+airguard.velocity = -2,0
+
+[State 1121, 3]
+type = Explod
+trigger1 = MoveHit
+persistent = 0
+anim = 3100
+pos = 200,-207
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1121, 3]
+type = Explod
+trigger1 = MoveHit
+persistent = 0
+anim = 3600
+pos = 200,-212
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1121, 3]
+type = Explod
+trigger1 = MoveGuarded
+persistent = 0
+anim = 4300
+pos = 175,-232
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1121, 3]
+type = Explod
+trigger1 = MoveGuarded
+persistent = 0
+anim = 4200
+pos = 185,-202
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1121, 4]
+type = changestate
+trigger1 = MoveContact
+value = 1141
+
+[State 1121, 4]
+type = changestate
+trigger1 = time = 37 && !MoveContact
+value = 1151
+
+;hit-guard
+[Statedef 1141]
+type    = A
+movetype= A
+;physics = N
+velset = 0,0
+anim = 1140
+
+[State 1141, 1]
+type = playsnd
+trigger1 = MoveHit
+value = 0,31
+persistent = 0
+ignorehitpause = 1
+
+[State 1141, 1]
+type = playsnd
+trigger1 = MoveGuarded
+value = 0,34
+persistent = 0
+ignorehitpause = 1
+
+[State 1141, 0]
+type = posadd
+trigger1 = time = 0
+x = 10
+y = 0
+
+[State 1141, 0]
+type = velset
+trigger1 = time = 0
+x = 0
+y = 0
+
+[State 1141, 3]
+type = HitDef
+trigger1 = AnimElem = 1
+trigger2 = AnimElem = 2
+trigger3 = AnimElem = 3
+trigger4 = AnimElem = 4
+trigger5 = AnimElem = 5
+trigger6 = AnimElem = 6
+trigger7 = AnimElem = 7
+;trigger8 = AnimElem = 8
+;trigger9 = AnimElem = 9
+;trigger10 = AnimElem = 10
+;trigger11 = AnimElem = 11
+;trigger12 = AnimElem = 12
+attr = A, SA
+damage    = 10,4
+getpower  = 20,10
+givepower = 20,10
+guardflag = MA
+pausetime = 0,8
+guard.pausetime = 0,8
+sparkno = -1
+;sparkxy = -235,-208
+guard.sparkno = -1
+;guard.sparkxy = -276,-208
+hitsound = -1
+guardsound = -1
+ground.type = high
+animtype = hard
+ground.slidetime = 6
+ground.hittime  = 6
+ground.velocity = 0,0
+guard.velocity = -3
+air.velocity = 0,0
+airguard.velocity = -2,0
+
+[State 1141, 3]
+type = Explod
+trigger1 = MoveHit && animelem = 4
+persistent = 0
+anim = 3100
+pos = 180,-207
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1141, 3]
+type = Explod
+trigger1 = MoveHit && animelem = 4
+persistent = 0
+anim = 3600
+pos = 180,-212
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1141, 3]
+type = Explod
+trigger1 = MoveGuarded && animelem = 3
+persistent = 0
+anim = 4300
+pos = 165,-232
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1141, 3]
+type = Explod
+trigger1 = MoveGuarded && animelem = 6
+persistent = 0
+anim = 4300
+pos = 155,-232
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1141, 3]
+type = Explod
+trigger1 = MoveGuarded && animelem = 3
+persistent = 0
+anim = 4200
+pos = 175,-202
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1141, 3]
+type = Explod
+trigger1 = MoveGuarded && animelem = 6
+persistent = 0
+anim = 4200
+pos = 165,-202
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1141, 0]
+type = sprpriority
+trigger1 = time >= 0
+value = 2
+
+[State 1141, 2]
+type = DestroySelf
+trigger1 = screenpos X != [-30,350]
+trigger2 = time = 24
+
+
+;no-hit
+[Statedef 1151]
+type    = A
+movetype= A
+;physics = N
+velset = 0,0
+anim = 1150
+
+[State 1151, 1]
+type = playsnd
+trigger1 = MoveHit
+value = 0,31
+persistent = 0
+ignorehitpause = 1
+
+[State 1151, 1]
+type = playsnd
+trigger1 = MoveGuarded
+value = 0,34
+persistent = 0
+ignorehitpause = 1
+
+[State 1151, 0]
+type = velset
+trigger1 = time = 0
+x = 0
+y = 0
+
+[State 1151, 3]
+type = HitDef
+trigger1 = AnimElem = 1
+trigger2 = AnimElem = 2
+trigger3 = AnimElem = 3
+trigger4 = AnimElem = 4
+trigger5 = AnimElem = 5
+trigger6 = AnimElem = 6
+trigger7 = AnimElem = 7
+;trigger8 = AnimElem = 8
+;trigger9 = AnimElem = 9
+;trigger10 = AnimElem = 10
+;trigger11 = AnimElem = 11
+attr = A, SA
+damage    = 10,4
+getpower  = 20,10
+givepower = 20,10
+guardflag = MA
+pausetime = 0,8
+guard.pausetime = 0,8
+sparkno = -1
+;sparkxy = -235,-208
+guard.sparkno = -1
+;guard.sparkxy = -276,-208
+hitsound = -1
+guardsound = -1
+ground.type = high
+animtype = hard
+ground.slidetime = 6
+ground.hittime  = 6
+ground.velocity = 2,0
+guard.velocity = -3
+air.velocity = 1,0
+airguard.velocity = -2,0
+
+[State 1151, 3]
+type = Explod
+trigger1 = MoveHit && animelem = 4
+persistent = 0
+anim = 3100
+pos = 180,-207
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1151, 3]
+type = Explod
+trigger1 = MoveHit && animelem = 4
+persistent = 0
+anim = 3600
+pos = 180,-212
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1151, 3]
+type = Explod
+trigger1 = MoveGuarded && animelem = 3
+persistent = 0
+anim = 4300
+pos = 165,-232
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1151, 3]
+type = Explod
+trigger1 = MoveGuarded && animelem = 6
+persistent = 0
+anim = 4300
+pos = 155,-232
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1151, 3]
+type = Explod
+trigger1 = MoveGuarded && animelem = 3
+persistent = 0
+anim = 4200
+pos = 175,-202
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1151, 3]
+type = Explod
+trigger1 = MoveGuarded && animelem = 6
+persistent = 0
+anim = 4200
+pos = 165,-202
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1151, 0]
+type = sprpriority
+trigger1 = time >= 0
+value = 2
+
+[State 1151, 2]
+type = DestroySelf
+trigger1 = screenpos X != [-30,350]
+trigger2 = time = 21
+
+;-----------------------------------------------------
+
+;sp01z
+[Statedef 1102]
+type    = S
+movetype= A
+physics = S
+poweradd= 120
+ctrl = 0
+velset = 0
+anim = 1100
+
+[State 1102, 1]
+type = playsnd
+trigger1 = MoveHit
+value = 0,31
+persistent = 0
+ignorehitpause = 1
+
+[State 1102, 1]
+type = playsnd
+trigger1 = MoveGuarded
+value = 0,34
+persistent = 0
+ignorehitpause = 1
+
+[State 1102, 1]
+type = playsnd
+trigger1 = time = 24
+value = 0,33
+
+[State 1102, 1]
+type = playsnd
+trigger1 = animelem = 1
+value = 0,9
+
+[State 1102, 1]
+type = Helper
+trigger1 = animelem = 20
+ID = 1102
+pos = 0,0
+postype = p1
+stateno = 1122
+helpertype = normal
+keyctrl = 0
+
+[State 1102, 3]
+type = HitDef
+trigger1 = AnimElem = 8
+attr = A, SA
+damage    = 20,5
+getpower  = 20,10
+givepower = 20,10
+guardflag = MA
+pausetime = 0,15
+guard.pausetime = 0,8
+sparkno = -1
+;sparkxy = -235,-208
+guard.sparkno = -1
+;guard.sparkxy = -276,-208
+hitsound = -1
+guardsound = -1
+ground.type = high
+animtype = hard
+ground.slidetime = 6
+ground.hittime  = 6
+ground.velocity = -2,0
+guard.velocity = -3
+air.velocity = -2,0
+airguard.velocity = -2,0
+
+[State 1102, 3]
+type = Explod
+trigger1 = MoveHit
+persistent = 0
+anim = 3100
+pos = 200,-207
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1102, 3]
+type = Explod
+trigger1 = MoveHit
+persistent = 0
+anim = 3600
+pos = 200,-212
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1102, 3]
+type = Explod
+trigger1 = MoveGuarded
+persistent = 0
+anim = 4300
+pos = 175,-232
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1102, 3]
+type = Explod
+trigger1 = MoveGuarded
+persistent = 0
+anim = 4200
+pos = 185,-202
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1102, 2]
+type = changestate
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;01
+[Statedef 1122]
+type    = A
+movetype= A
+;physics = N
+velset = 0,0
+anim = 1120
+
+[State 1122, 1]
+type = playsnd
+trigger1 = MoveGuarded
+value = 0,34
+persistent = 0
+ignorehitpause = 1
+
+[State 1122, 0]
+type = velset
+trigger1 = time = 0
+x = 10
+y = 0
+
+[State 1122, 0]
+type = velset
+trigger1 = time = 19
+x = 0
+y = 0
+
+[State 1122, 0]
+type = sprpriority
+trigger1 = time >= 0
+value = 2
+
+[State 1122, 3]
+type = HitDef
+trigger1 = AnimElem = 1
+trigger2 = AnimElem = 2
+trigger3 = AnimElem = 3
+trigger4 = AnimElem = 4
+trigger5 = AnimElem = 5
+trigger6 = AnimElem = 6
+attr = A, SA
+damage    = 20,4
+getpower  = 20,10
+givepower = 20,10
+guardflag = MA
+pausetime = 0,8
+guard.pausetime = 0,8
+sparkno = -1
+;sparkxy = -235,-208
+guard.sparkno = -1
+;guard.sparkxy = -276,-208
+hitsound = -1
+guardsound = -1
+ground.type = high
+animtype = hard
+ground.slidetime = 6
+ground.hittime  = 6
+ground.velocity = 2,0
+guard.velocity = -3
+air.velocity = 1,0
+airguard.velocity = -2,0
+
+[State 1122, 3]
+type = Explod
+trigger1 = MoveHit
+persistent = 0
+anim = 3100
+pos = 200,-207
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1122, 3]
+type = Explod
+trigger1 = MoveHit
+persistent = 0
+anim = 3600
+pos = 200,-212
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1122, 3]
+type = Explod
+trigger1 = MoveGuarded
+persistent = 0
+anim = 4300
+pos = 175,-232
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1122, 3]
+type = Explod
+trigger1 = MoveGuarded
+persistent = 0
+anim = 4200
+pos = 185,-202
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1122, 4]
+type = changestate
+trigger1 = MoveContact
+value = 1142
+
+[State 1122, 4]
+type = changestate
+trigger1 = time = 37 && !MoveContact
+value = 1152
+
+;hit-guard
+[Statedef 1142]
+type    = A
+movetype= A
+;physics = N
+velset = 0,0
+anim = 1140
+
+[State 1142, 1]
+type = playsnd
+trigger1 = MoveHit
+value = 0,31
+persistent = 0
+ignorehitpause = 1
+
+[State 1142, 1]
+type = playsnd
+trigger1 = MoveGuarded
+value = 0,34
+persistent = 0
+ignorehitpause = 1
+
+[State 1142, 0]
+type = posadd
+trigger1 = time = 0
+x = 10
+y = 0
+
+[State 1142, 0]
+type = velset
+trigger1 = time = 0
+x = 0
+y = 0
+
+[State 1142, 3]
+type = HitDef
+trigger1 = AnimElem = 1
+trigger2 = AnimElem = 2
+trigger3 = AnimElem = 3
+trigger4 = AnimElem = 4
+trigger5 = AnimElem = 5
+trigger6 = AnimElem = 6
+trigger7 = AnimElem = 7
+;trigger8 = AnimElem = 8
+;trigger9 = AnimElem = 9
+;trigger10 = AnimElem = 10
+;trigger11 = AnimElem = 11
+;trigger12 = AnimElem = 12
+attr = A, SA
+damage    = 10,4
+getpower  = 20,10
+givepower = 20,10
+guardflag = MA
+pausetime = 0,8
+guard.pausetime = 0,8
+sparkno = -1
+;sparkxy = -235,-208
+guard.sparkno = -1
+;guard.sparkxy = -276,-208
+hitsound = -1
+guardsound = -1
+ground.type = high
+animtype = hard
+ground.slidetime = 6
+ground.hittime  = 6
+ground.velocity = 0,0
+guard.velocity = -3
+air.velocity = 0,0
+airguard.velocity = -2,0
+
+[State 1142, 3]
+type = Explod
+trigger1 = MoveHit && animelem = 4
+persistent = 0
+anim = 3100
+pos = 180,-207
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1142, 3]
+type = Explod
+trigger1 = MoveHit && animelem = 4
+persistent = 0
+anim = 3600
+pos = 180,-212
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1142, 3]
+type = Explod
+trigger1 = MoveGuarded && animelem = 3
+persistent = 0
+anim = 4300
+pos = 165,-232
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1142, 3]
+type = Explod
+trigger1 = MoveGuarded && animelem = 6
+persistent = 0
+anim = 4300
+pos = 155,-232
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1142, 3]
+type = Explod
+trigger1 = MoveGuarded && animelem = 3
+persistent = 0
+anim = 4200
+pos = 175,-202
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1142, 3]
+type = Explod
+trigger1 = MoveGuarded && animelem = 6
+persistent = 0
+anim = 4200
+pos = 165,-202
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1142, 0]
+type = sprpriority
+trigger1 = time >= 0
+value = 2
+
+[State 1142, 2]
+type = DestroySelf
+trigger1 = screenpos X != [-30,350]
+trigger2 = time = 24
+
+
+;no-hit
+[Statedef 1152]
+type    = A
+movetype= A
+;physics = N
+velset = 0,0
+anim = 1150
+
+[State 1152, 1]
+type = playsnd
+trigger1 = MoveHit
+value = 0,31
+persistent = 0
+ignorehitpause = 1
+
+[State 1152, 1]
+type = playsnd
+trigger1 = MoveGuarded
+value = 0,34
+persistent = 0
+ignorehitpause = 1
+
+[State 1152, 0]
+type = velset
+trigger1 = time = 0
+x = 0
+y = 0
+
+[State 1152, 3]
+type = HitDef
+trigger1 = AnimElem = 1
+trigger2 = AnimElem = 2
+trigger3 = AnimElem = 3
+trigger4 = AnimElem = 4
+trigger5 = AnimElem = 5
+trigger6 = AnimElem = 6
+trigger7 = AnimElem = 7
+;trigger8 = AnimElem = 8
+;trigger9 = AnimElem = 9
+;trigger10 = AnimElem = 10
+;trigger11 = AnimElem = 11
+attr = A, SA
+damage    = 10,4
+getpower  = 20,10
+givepower = 20,10
+guardflag = MA
+pausetime = 0,8
+guard.pausetime = 0,8
+sparkno = -1
+;sparkxy = -235,-208
+guard.sparkno = -1
+;guard.sparkxy = -276,-208
+hitsound = -1
+guardsound = -1
+ground.type = high
+animtype = hard
+ground.slidetime = 6
+ground.hittime  = 6
+ground.velocity = 2,0
+guard.velocity = -3
+air.velocity = 1,0
+airguard.velocity = -2,0
+
+[State 1152, 3]
+type = Explod
+trigger1 = MoveHit && animelem = 4
+persistent = 0
+anim = 3100
+pos = 180,-207
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1152, 3]
+type = Explod
+trigger1 = MoveHit && animelem = 4
+persistent = 0
+anim = 3600
+pos = 180,-212
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1152, 3]
+type = Explod
+trigger1 = MoveGuarded && animelem = 3
+persistent = 0
+anim = 4300
+pos = 165,-232
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1152, 3]
+type = Explod
+trigger1 = MoveGuarded && animelem = 6
+persistent = 0
+anim = 4300
+pos = 155,-232
+postype = p2
+sprpriority = 3
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1152, 3]
+type = Explod
+trigger1 = MoveGuarded && animelem = 3
+persistent = 0
+anim = 4200
+pos = 175,-202
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1152, 3]
+type = Explod
+trigger1 = MoveGuarded && animelem = 6
+persistent = 0
+anim = 4200
+pos = 165,-202
+postype = p2
+sprpriority = 2
+;bindtime = -1
+ignorehitpause = 1
+
+[State 1152, 0]
+type = sprpriority
+trigger1 = time >= 0
+value = 2
+
+[State 1152, 2]
+type = DestroySelf
+trigger1 = screenpos X != [-30,350]
+trigger2 = time = 21
+
+;-----------------------------------------------------
+

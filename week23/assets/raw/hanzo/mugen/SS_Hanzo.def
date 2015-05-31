@@ -1,0 +1,31 @@
+[Made in Z-CharCAD]
+Home Page=http://www.geocities.com/zmugen
+E-mail=zmugen@yahoo.com.br
+
+[Info]
+name="SS_Hanzo"
+displayname="Hanzo"
+versiondate=3/16/2004
+mugenversion=04,14,2001
+author="Star platinum AKA Damnd"
+pal.defaults=1,2,3,4,5
+
+[Files]
+sprite = Hanzo1.sff
+anim = Hanzo.air
+cmd = Hanzo.cmd
+cns = Hanzo.cns
+st = hanzo.cns
+st1      = common.cns
+sound=Hanzo1.snd
+stcommon = common1.cns
+pal1= hanzo.act
+pal2= hanzo7.act
+pal3= hanzo2.act
+pal4= hanzo6.act
+pal5= hanzo4.act
+pal6= hanzo5.act
+
+[Arcade]
+intro.storyboard=
+ending.storyboard=

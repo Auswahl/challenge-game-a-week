@@ -1,0 +1,57 @@
+------------------------------------------------------------------
+                          Dos2Win 0.2
+------------------------------------------------------------------
+
+Dos2Win est un petit programme aidant à la conversion des personnages
+mugen pour la version windows.
+
+Pour une utilisation optimale du programme il faut placer l'executable
+"CharSffDtoW.exe" avec celui de "dos2win.exe"
+Actuellement le site de l'editeur est tombé donc je me permet de fournir
+cet executable en version 0.08 tant que son site ne sera pas remonté.
+
+Ce que fait ce programme:
+-------------------------
+- remplace tous les "Clsn2 =" par "Clsn2:" dans les fichier AIR
+- remplace tous les "MoveContact = 1" par "MoveContact" dans les fichier CNS et CMD
+- remplace tous les "MoveGuarded = 1" par "MoveGuarded" dans les fichier CNS et CMD
+- remplace tous les "MoveHit = 1" par "MoveHit" dans les fichier CNS et CMD
+- remplace tous les "MoveContact = 0" par "!MoveContact" dans les fichier CNS et CMD **nouveau**
+- remplace tous les "MoveGuarded = 0" par "!MoveGuarded" dans les fichier CNS et CMD **nouveau**
+- remplace tous les "MoveHit = 0" par "!MoveHit" dans les fichier CNS et CMD **nouveau**
+- execute CharSffDtoW sur le fichier SFF
+
+Utilisation:
+------------
+Placez l'executable dans le repertoire du personnage et lancez le, rien de plus simple.
+
+Support:
+--------
+Il existe tout de meme quelques limitations à la correction des personnages,
+les "defaults.pal" ne sont pas corrigés dans le fichier DEF, il faut le faire
+manuellement, mais cela reste un bug assez rare.
+Le comptage des Clsn2 n'est pas fait non plus, dans ce cas il faut verifier le
+message d'erreur renvoyé par winmugen afin d'aller corriger soit meme le bug.
+
+Ce programme peut rendre compatible les personnages pour la version linux de mugen
+mais aussi incompatible dans certain cas (si les fichiers sont en majuscule plutot
+que minuscule). Je conseille d'utiliser le script "mugen2linux" disponible à cette
+adresse http://zesensei.free.fr/mugen/tools/default.htm en plus de ce programme.
+
+Distribution:
+-------------
+Mon logiciel est freeware, donc vous pouvez le distribuer librement.
+Je vous fournis le code source ecrit en perl, afin de le modifier ou l'ameliorer.
+
+Remerciements et contacts:
+--------------------------
+Je tiens à remercier Mugenfury pour son aide à la convertion des personnages.
+Vous trouverez mon programme ainsi qu'un support winmugen sur son site.
+http://www.mugenfury.com/
+
+Je remercie aussi Lemmy pour son aide à la programation en perl.
+Vous trouverez les docs et runtimes perl sur 
+http://www.activestate.com/Products/ActivePerl/
+
+29/09/2004 - meldrak@wanadoo.fr
+

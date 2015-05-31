@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>kick_000.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{231,99},{69,108}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{30,30},{69,108}}</string>
+				<key>sourceSize</key>
+				<string>{155,139}</string>
+			</dict>
+
+			<key>kick_001.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{116,92},{114,102}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{41,37},{114,102}}</string>
+				<key>sourceSize</key>
+				<string>{155,139}</string>
+			</dict>
+
+			<key>kick_002.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,0},{126,91}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{24,48},{126,91}}</string>
+				<key>sourceSize</key>
+				<string>{155,139}</string>
+			</dict>
+
+			<key>kick_003.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,92},{115,79}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{0,60},{115,79}}</string>
+				<key>sourceSize</key>
+				<string>{155,139}</string>
+			</dict>
+
+			<key>kick_004.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{301,99},{66,130}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{29,8},{66,130}}</string>
+				<key>sourceSize</key>
+				<string>{155,139}</string>
+			</dict>
+
+			<key>kick_005.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{368,0},{64,138}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{34,0},{64,138}}</string>
+				<key>sourceSize</key>
+				<string>{155,139}</string>
+			</dict>
+
+			<key>kick_006.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{433,0},{62,117}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{34,21},{62,117}}</string>
+				<key>sourceSize</key>
+				<string>{155,139}</string>
+			</dict>
+
+			<key>kick_007.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{231,0},{83,98}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{33,40},{83,98}}</string>
+				<key>sourceSize</key>
+				<string>{155,139}</string>
+			</dict>
+
+		</dict>
+
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>size</key>
+			<string>{512,256}</string>
+			<key>textureFileName</key>
+			<string>sprites.png</string>
+			</dict>
+		</dict>
+</plist>
