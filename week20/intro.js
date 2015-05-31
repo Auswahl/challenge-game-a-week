@@ -1,31 +1,11 @@
-var TheGame = function(game) {
+var Intro = function(game) {
 
 };
 
-TheGame.prototype = {
-	init: function() {
-		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-		this.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
-		game.scale.maxWidth = 800;
-		game.scale.maxHeight = 600;
-		game.scale.pageAlignVertically = true;
-		game.scale.pageAlignHorizontally = true;
-
-		if (!this.game.device.desktop) {
-			this.scale.forceOrientation(true, false);
-			this.scale.enterIncorrectOrientation.add(this.enterIncorrectOrientation, this);
-			this.scale.leaveIncorrectOrientation.add(this.leaveIncorrectOrientation, this);
-
-
-		}
-		game.scale.refresh();
-	},
-
+Intro.prototype = {
 	preload: function() {
-
 		game.load.image("bg", "assets/background.jpg");
 		game.load.image("buttonStart", "assets/btneng.jpg");
-
 	},
 
 	create: function() {
@@ -36,23 +16,14 @@ TheGame.prototype = {
 		button = this.game.add.button(
 			game.world.centerX,
 			game.world.centerY + game.world.height / 3,
-			'buttonStart', this.setFullScreen, this);
+			'buttonStart', this.startGame, this);
 		button.anchor.setTo(0.5, 0.5);
 	},
 
-	setFullScreen: function() {
+	startIntro: function() {
 		if (!this.game.device.desktop) {
 			game.scale.startFullScreen();
 		}
+		this.game.state.start("Intro");
 	},
-
-	enterIncorrectOrientation: function() {
-		this.orientated = false;
-		document.getElementById('orientation').style.display = 'block';
-	},
-
-	leaveIncorrectOrientation: function() {
-		this.orientated = true;
-		document.getElementById('orientation').style.display = 'none';
-	}
 };
