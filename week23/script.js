@@ -7,4 +7,4 @@ game.state.add("TheGame", TheGame);
 // game.state.add("Win", win);
 // game.state.add("Loose", loose);
 
-game.state.start("TheGame");
+game.state.start("Cover");
