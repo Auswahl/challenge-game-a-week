@@ -48,9 +48,13 @@ Enemy.prototype.actAggressive = function() {
 };
 
 Enemy.prototype.chooseAndAct = function(actions) {
-	this.status = "Acting on: " + actions;
+	this.status = "";
+	for(var a in actions) {
+		this.status += actions[a] + "\n";
+	}
 
 	var action = Phaser.ArrayUtils.getRandomItem(actions);
+
 
 	switch (action) {
 		case "attack":
