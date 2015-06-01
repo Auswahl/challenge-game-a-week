@@ -55,7 +55,7 @@
 		"spriteSourceSize": {"x":6,"y":38,"w":80,"h":114},
 		"sourceSize": {"w":80,"h":114}
 	},
-	"standing-puch_000.png": {
+	"standing-punch_000.png": {
 		"frame": {"x":119, "y":95, "w":82, "h":107},
 		"spriteSourceSize": {"x":0,"y":0,"w":126,"h":107},
 		"sourceSize": {"w":126,"h":107}
