@@ -21,8 +21,8 @@ Cover.prototype = {
 
 	preload: function() {
 
-		game.load.image("bg", "assets/background.jpg");
-		game.load.image("buttonStart", "assets/btneng.jpg");
+		game.load.image("bg", "assets/back/cover.jpg");
+		game.load.image("buttonStart", "assets/back/btnstart.jpg");
 
 	},
 
@@ -42,7 +42,7 @@ Cover.prototype = {
 		if (!this.game.device.desktop) {
 			game.scale.startFullScreen();
 		}
-		this.game.state.start("TheGame");
+		this.game.state.start("Legend");
 	},
 
 	enterIncorrectOrientation: function() {
