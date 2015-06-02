@@ -24,6 +24,7 @@ Herocomes.prototype = {
 		if (!this.game.device.desktop) {
 			game.scale.startFullScreen();
 		}
+		game.sound.play('clickSound');
 		this.game.state.start("Fas");
 	},
 };

@@ -1,12 +1,11 @@
-var Enemy = function(game, key, animationsArgs) {
+var Enemy = function(game, key, animationsArgs, x, hitDistance, hitStrength) {
 	this.direction = -1;
-	Character.call(this, game, key, animationsArgs);
-	this.position.set(500, game.world.centerY);
+	Character.call(this, game, key, animationsArgs, x, hitDistance, hitStrength);
 
 	this.acting = game.time.events.loop(600, function() {
 		this.act();
 	}, this);
-
+	this.isEnemy = true;
 };
 
 Enemy.prototype = Object.create(Character.prototype);

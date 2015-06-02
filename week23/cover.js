@@ -23,6 +23,8 @@ Cover.prototype = {
 
 		game.load.image("bg", "assets/back/cover.jpg");
 		game.load.image("buttonStart", "assets/back/btnstart.jpg");
+		this.game.load.audio('clickSound', 'assets/sound/click.wav');
+		this.game.load.audio('soundtrack', 'assets/sound/soundtrack.mp3');
 
 	},
 
@@ -30,7 +32,9 @@ Cover.prototype = {
 		var bg = game.add.sprite(0, 0, 'bg');
 		bg.height = 600;
 		bg.width = 800;
+		game.sound.play('soundtrack');
 
+		
 		button = this.game.add.button(
 			game.world.centerX,
 			game.world.centerY + game.world.height / 3,
@@ -42,6 +46,7 @@ Cover.prototype = {
 		if (!this.game.device.desktop) {
 			game.scale.startFullScreen();
 		}
+		game.sound.play('clickSound');
 		this.game.state.start("Legend");
 	},
 

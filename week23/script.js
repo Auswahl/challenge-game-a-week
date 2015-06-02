@@ -10,6 +10,6 @@ game.state.add("Choice", Choice);
 game.state.add("TheGame", TheGame);
 // game.state.add("GameOver", gameOver);
 // game.state.add("Win", win);
-// game.state.add("Loose", loose);
+game.state.add("Final", Final);
 
 game.state.start("Cover");

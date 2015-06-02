@@ -1,5 +1,5 @@
-var Character = function(game, key, animationsArgs, hitDistance, hitStrength) {
-	Phaser.Sprite.call(this, game, game.world.centerX, game.world.centerY, key);
+var Character = function(game, key, animationsArgs, x, hitDistance, hitStrength) {
+	Phaser.Sprite.call(this, game, x, 450, key);
 	game.add.existing(this);
 	game.physics.enable(this, Phaser.Physics.P2JS);
 	this.body.collideWorldBounds = true;
@@ -7,7 +7,7 @@ var Character = function(game, key, animationsArgs, hitDistance, hitStrength) {
 	if (!this.direction) this.direction = 1;
 	this.scale.set(1*this.direction, 1);
 
-	this.anchor.setTo(0.5, 0.5);
+	this.anchor.setTo(0.5, 1);
 
 	for(var id in animationsArgs) {
 		this.animations.add.apply(this.animations, animationsArgs[id]);
@@ -20,7 +20,7 @@ var Character = function(game, key, animationsArgs, hitDistance, hitStrength) {
 	this.attacking = false;
 	this.walking = false;
 	this.status = "";
-	this.hitStrength = hitStrength || 40;
+	this.hitStrength = hitStrength || 10;
 	this.events.onAnimationComplete.add(this.animationComplete, this);
 	this.events.onAnimationStart.add(this.animationStart, this);
 
@@ -34,21 +34,27 @@ Character.prototype.setEnemy= function(enemy) {
 };
 
 Character.prototype.animationStart= function(char, animation) {
-	canAct = false;
 
 };
 
 Character.prototype.animationComplete= function(char, animation) {
 	if (animation.name === 'walkForwardStart' && this.walking) {
 		this.walkForwardStart();
+	} else if (animation.name === 'loose') {
+
+	} else if (animation.name === 'win') {
+		if (this.isEnemy) {
+			loose();
+		} else {
+			win();
+		}
 	} else if(animation.name === 'walkBackwardStart' && this.walking) {
 		this.walkBackwardStart();
-	} if (!this.walking && !this.attacking && !this.blocking) {
+	} else if (!this.walking && !this.attacking && !this.blocking) {
 		this.animations.play('standing');
-	} if (animation.name === 'attack' && this.attacking) {
+	} else if (animation.name === 'attack' && this.attacking) {
 		this.attacking = false;
-	}
-	canAct = true;
+	} 
 };
 
 Character.prototype.blockStart = function() {
@@ -75,21 +81,34 @@ Character.prototype.attackStart = function() {
 	this.attacking = true;
 
 	this.animations.play('attack');
+	this.hit();
 
+};
+
+Character.prototype.hit = function() {
 	if (game.globals.distance <= this.hitDistance) {
-		if (!this.enemy.blocking) {
-			this.enemy.health -= this.hitStrength;
+			if (!this.enemy.blocking) {
+				game.globals.sounds.strike.play();
+				this.enemy.health -= this.hitStrength;
 
-			if (this.enemy.health <= 0) {
-				this.enemy.loose();
-				this.win();
+				if (this.enemy.health <= 0) {
+					this.enemy.loose();
+					this.win();
+
+					if (this.isEnemy) {
+						game.globals.sounds.loose.play();
+					} else {
+						game.globals.sounds.win.play();
+					}
+				}
+
+			} else {
+				game.globals.sounds.block.play();
 			}
-
 		} else {
 		}
-	} else {
-	}
 };
+
 
 Character.prototype.walkForwardStart = function() {
 	if (this.attacking || this.blocking) return;
@@ -127,7 +146,6 @@ Character.prototype.walkBackwardStart = function() {
 Character.prototype.walkBackwardStop = function() {
 	this.walking = false;
 	this.body.velocity.x = 0;
-	// this.animations.stop('walkBackwardStart');
 };
 
 Character.prototype.setUpKeys = function(theGame) {

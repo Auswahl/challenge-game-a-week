@@ -29,11 +29,13 @@ Choice.prototype = {
 	},
 
 	startAsMts: function() {
+		game.sound.play('clickSound');
 		this.game.globals.heroIs = 'mts';
 		this.game.state.start("TheGame");
 	},
 
 	startAsMegafon: function() {
+		game.sound.play('clickSound');
 		this.game.globals.heroIs = 'megafon';
 		this.game.state.start("TheGame");
 	},
