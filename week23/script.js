@@ -1,4 +1,4 @@
-var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'phaser-example');
+var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'game');
 
 game.state.add("Cover", Cover);
 // game.state.add("Intro", intro);

@@ -12,10 +12,16 @@ Cover.prototype = {
 		game.scale.pageAlignHorizontally = true;
 
 		if (!this.game.device.desktop) {
-			this.scale.forceOrientation(true, false);
-			this.scale.enterIncorrectOrientation.add(this.enterIncorrectOrientation, this);
-			this.scale.leaveIncorrectOrientation.add(this.leaveIncorrectOrientation, this);
+			// this.scale.forceOrientation(true, false);
+			// this.scale.enterIncorrectOrientation.add(this.enterIncorrectOrientation, this);
+			// this.scale.leaveIncorrectOrientation.add(this.leaveIncorrectOrientation, this);
+			this.checkOrientaion();
+
+			window.addEventListener("resize", this.checkOrientaion, false);
+
 		}
+
+
 		game.scale.refresh();
 	},
 
@@ -45,13 +51,11 @@ Cover.prototype = {
 		this.game.state.start("TheGame");
 	},
 
-	enterIncorrectOrientation: function() {
-		this.orientated = false;
-		document.getElementById('orientation').style.display = 'block';
+	checkOrientaion: function() {
+		if(window.innerHeight > window.innerWidth){
+			document.getElementById('orientation').style.display = 'block';
+		} else {
+			document.getElementById('orientation').style.display = 'none';
+		}
 	},
-
-	leaveIncorrectOrientation: function() {
-		this.orientated = true;
-		document.getElementById('orientation').style.display = 'none';
-	}
 };
