@@ -1,319 +1,142 @@
-var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update, render: render });
-
-function preload() {
-
-    game.load.image('bullet', 'assets/games/invaders/bullet.png');
-    game.load.image('enemyBullet', 'assets/games/invaders/enemy-bullet.png');
-    game.load.spritesheet('invader', 'assets/games/invaders/invader32x32x4.png', 32, 32);
-    game.load.image('ship', 'assets/games/invaders/player.png');
-    game.load.spritesheet('kaboom', 'assets/games/invaders/explode.png', 128, 128);
-    game.load.image('starfield', 'assets/games/invaders/starfield.png');
-    game.load.image('background', 'assets/assets/games/starstruck/background2.png');
-
-}
-
-var player;
-var aliens;
-var bullets;
-var bulletTime = 0;
-var cursors;
-var fireButton;
-var explosions;
-var starfield;
-var score = 0;
-var scoreString = '';
-var scoreText;
-var lives;
-var enemyBullet;
-var firingTimer = 0;
-var stateText;
-var livingEnemies = [];
-
-function create() {
-
-    game.physics.startSystem(Phaser.Physics.ARCADE);
-
-    //  The scrolling starfield background
-    starfield = game.add.tileSprite(0, 0, 800, 600, 'starfield');
-
-    //  Our bullet group
-    bullets = game.add.group();
-    bullets.enableBody = true;
-    bullets.physicsBodyType = Phaser.Physics.ARCADE;
-    bullets.createMultiple(30, 'bullet');
-    bullets.setAll('anchor.x', 0.5);
-    bullets.setAll('anchor.y', 1);
-    bullets.setAll('outOfBoundsKill', true);
-    bullets.setAll('checkWorldBounds', true);
-
-    // The enemy's bullets
-    enemyBullets = game.add.group();
-    enemyBullets.enableBody = true;
-    enemyBullets.physicsBodyType = Phaser.Physics.ARCADE;
-    enemyBullets.createMultiple(30, 'enemyBullet');
-    enemyBullets.setAll('anchor.x', 0.5);
-    enemyBullets.setAll('anchor.y', 1);
-    enemyBullets.setAll('outOfBoundsKill', true);
-    enemyBullets.setAll('checkWorldBounds', true);
-
-    //  The hero!
-    player = game.add.sprite(400, 500, 'ship');
-    player.anchor.setTo(0.5, 0.5);
-    game.physics.enable(player, Phaser.Physics.ARCADE);
-
-    //  The baddies!
-    aliens = game.add.group();
-    aliens.enableBody = true;
-    aliens.physicsBodyType = Phaser.Physics.ARCADE;
-
-    createAliens();
-
-    //  The score
-    scoreString = 'Score : ';
-    scoreText = game.add.text(10, 10, scoreString + score, { font: '34px Arial', fill: '#fff' });
-
-    //  Lives
-    lives = game.add.group();
-    game.add.text(game.world.width - 100, 10, 'Lives : ', { font: '34px Arial', fill: '#fff' });
-
-    //  Text
-    stateText = game.add.text(game.world.centerX,game.world.centerY,' ', { font: '84px Arial', fill: '#fff' });
-    stateText.anchor.setTo(0.5, 0.5);
-    stateText.visible = false;
-
-    for (var i = 0; i < 3; i++) 
-    {
-        var ship = lives.create(game.world.width - 100 + (30 * i), 60, 'ship');
-        ship.anchor.setTo(0.5, 0.5);
-        ship.angle = 90;
-        ship.alpha = 0.4;
-    }
-
-    //  An explosion pool
-    explosions = game.add.group();
-    explosions.createMultiple(30, 'kaboom');
-    explosions.forEach(setupInvader, this);
-
-    //  And some controls to play the game with
-    cursors = game.input.keyboard.createCursorKeys();
-    fireButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-    
-}
-
-function createAliens () {
-
-    for (var y = 0; y < 4; y++)
-    {
-        for (var x = 0; x < 10; x++)
-        {
-            var alien = aliens.create(x * 48, y * 50, 'invader');
-            alien.anchor.setTo(0.5, 0.5);
-            alien.animations.add('fly', [ 0, 1, 2, 3 ], 20, true);
-            alien.play('fly');
-            alien.body.moves = false;
-        }
-    }
-
-    aliens.x = 100;
-    aliens.y = 50;
-
-    //  All this does is basically start the invaders moving. Notice we're moving the Group they belong to, rather than the invaders directly.
-    var tween = game.add.tween(aliens).to( { x: 200 }, 2000, Phaser.Easing.Linear.None, true, 0, 1000, true);
-
-    //  When the tween loops it calls descend
-    tween.onLoop.add(descend, this);
-}
-
-function setupInvader (invader) {
-
-    invader.anchor.x = 0.5;
-    invader.anchor.y = 0.5;
-    invader.animations.add('kaboom');
-
-}
-
-function descend() {
-
-    aliens.y += 10;
-
-}
-
-function update() {
-
-    //  Scroll the background
-    starfield.tilePosition.y += 2;
-
-    if (player.alive)
-    {
-        //  Reset the player, then check for movement keys
-        player.body.velocity.setTo(0, 0);
-
-        if (cursors.left.isDown)
-        {
-            player.body.velocity.x = -200;
-        }
-        else if (cursors.right.isDown)
-        {
-            player.body.velocity.x = 200;
-        }
-
-        //  Firing?
-        if (fireButton.isDown)
-        {
-            fireBullet();
-        }
-
-        if (game.time.now > firingTimer)
-        {
-            enemyFires();
-        }
-
-        //  Run collision
-        game.physics.arcade.overlap(bullets, aliens, collisionHandler, null, this);
-        game.physics.arcade.overlap(enemyBullets, player, enemyHitsPlayer, null, this);
-    }
-
-}
-
-function render() {
-
-    // for (var i = 0; i < aliens.length; i++)
-    // {
-    //     game.debug.body(aliens.children[i]);
-    // }
-
-}
-
-function collisionHandler (bullet, alien) {
-
-    //  When a bullet hits an alien we kill them both
-    bullet.kill();
-    alien.kill();
-
-    //  Increase the score
-    score += 20;
-    scoreText.text = scoreString + score;
-
-    //  And create an explosion :)
-    var explosion = explosions.getFirstExists(false);
-    explosion.reset(alien.body.x, alien.body.y);
-    explosion.play('kaboom', 30, false, true);
-
-    if (aliens.countLiving() == 0)
-    {
-        score += 1000;
-        scoreText.text = scoreString + score;
-
-        enemyBullets.callAll('kill',this);
-        stateText.text = " You Won, \n Click to restart";
-        stateText.visible = true;
-
-        //the "click to restart" handler
-        game.input.onTap.addOnce(restart,this);
-    }
-
-}
-
-function enemyHitsPlayer (player,bullet) {
-    
-    bullet.kill();
-
-    live = lives.getFirstAlive();
-
-    if (live)
-    {
-        live.kill();
-    }
-
-    //  And create an explosion :)
-    var explosion = explosions.getFirstExists(false);
-    explosion.reset(player.body.x, player.body.y);
-    explosion.play('kaboom', 30, false, true);
-
-    // When the player dies
-    if (lives.countLiving() < 1)
-    {
-        player.kill();
-        enemyBullets.callAll('kill');
-
-        stateText.text=" GAME OVER \n Click to restart";
-        stateText.visible = true;
-
-        //the "click to restart" handler
-        game.input.onTap.addOnce(restart,this);
-    }
-
-}
-
-function enemyFires () {
-
-    //  Grab the first bullet we can from the pool
-    enemyBullet = enemyBullets.getFirstExists(false);
-
-    livingEnemies.length=0;
-
-    aliens.forEachAlive(function(alien){
-
-        // put every living enemy in an array
-        livingEnemies.push(alien);
-    });
-
-
-    if (enemyBullet && livingEnemies.length > 0)
-    {
-        
-        var random=game.rnd.integerInRange(0,livingEnemies.length-1);
-
-        // randomly select one of them
-        var shooter=livingEnemies[random];
-        // And fire the bullet from this enemy
-        enemyBullet.reset(shooter.body.x, shooter.body.y);
-
-        game.physics.arcade.moveToObject(enemyBullet,player,120);
-        firingTimer = game.time.now + 2000;
-    }
-
-}
-
-function fireBullet () {
-
-    //  To avoid them being allowed to fire too fast we set a time limit
-    if (game.time.now > bulletTime)
-    {
-        //  Grab the first bullet we can from the pool
-        bullet = bullets.getFirstExists(false);
-
-        if (bullet)
-        {
-            //  And fire it
-            bullet.reset(player.x, player.y + 8);
-            bullet.body.velocity.y = -400;
-            bulletTime = game.time.now + 200;
-        }
-    }
-
-}
-
-function resetBullet (bullet) {
-
-    //  Called if the bullet goes out of the screen
-    bullet.kill();
-
-}
-
-function restart () {
-
-    //  A new level starts
-    
-    //resets the life count
-    lives.callAll('revive');
-    //  And brings the aliens back from the dead :)
-    aliens.removeAll();
-    createAliens();
-
-    //revives the player
-    player.revive();
-    //hides the text
-    stateText.visible = false;
-
-}
+// This example uses the Phaser 2.2.2 framework
+
+// Copyright © 2014 John Watson
+// Licensed under the terms of the MIT License
+
+var GameState = function(game) {
+	this.MAX_MISSILES = 10; // number of missiles
+};
+
+// Load images and sounds
+GameState.prototype.preload = function() {
+	// this.game.load.image('rocket', '/assets/gfx/rocket.png');
+	this.game.load.image('tree1', 'assets/background/trees/1.png');
+	this.game.load.image('tree2', 'assets/background/trees/2.png');
+	this.game.load.image('tree3', 'assets/background/trees/3.png');
+	this.game.load.image('tree4', 'assets/background/trees/4.png');
+	this.game.load.image('tree5', 'assets/background/trees/5.png');
+	this.game.load.image('tree6', 'assets/background/trees/6.png');
+	this.game.load.image('tree7', 'assets/background/trees/7.png');
+	this.game.load.image('tree8', 'assets/background/trees/8.png');
+	this.game.load.image('tree9', 'assets/background/trees/9.png');
+	this.game.load.image('tree10', 'assets/background/trees/10.png');
+	this.game.load.image('tree11', 'assets/background/trees/11.png');
+	this.game.load.image('tree12', 'assets/background/trees/12.png');
+	this.game.load.image('tree13', 'assets/background/trees/13.png');
+	this.game.load.image('tree14', 'assets/background/trees/14.png');
+	this.game.load.image('tree15', 'assets/background/trees/15.png');
+	this.game.load.image('tree16', 'assets/background/trees/16.png');
+	this.game.load.image('tree17', 'assets/background/trees/17.png');
+
+	game.load.atlasJSONHash('crow', 'assets/sprites/crow.png', 'assets/sprites/crow.js');
+	game.load.spritesheet('bird', 'assets/sprites/bird.png', 68, 71);
+};
+
+var target;
+// Setup the example
+GameState.prototype.create = function() {
+	// Set stage background to something sky colored
+	this.game.stage.backgroundColor = 0x4488cc;
+	game.world.setBounds(0, 0, 1920, 600);
+	// Create a group to hold the missile
+	this.missileGroup = this.game.add.group();
+
+	// Create a group for explosions
+	this.explosionGroup = this.game.add.group();
+
+	
+	// Simulate a pointer click/tap input at the center of the stage
+	// when the example begins running.
+	this.game.input.activePointer.x = this.game.width / 2;
+	this.game.input.activePointer.y = this.game.height / 2 - 100;
+
+	this.cursors = game.input.keyboard.createCursorKeys();
+
+	target = this.crow = new Crow(game, this.cursors, 100, 100);
+
+	// // just to try
+	// var N = 50;
+	// for(var i = 0; i < N; i++) {
+	// 	var bush = this.game.add.sprite(game.world.width/N*i, game.world.height, 'bush');
+	// 	bush.anchor.set(0.5, 1);
+	// }
+
+	this.lastSpritePosition = 0;
+	while(this.lastSpritePosition <= game.world.camera.x + game.world.camera.width) {
+		this.addNextSprite(this.lastSpritePosition + SCARCITY);
+	}
+
+	var bush = game.add.sprite(0, game.world.height, 'tree1');
+	bush.anchor.set(0.5, 1);
+	
+};
+
+// The update() method is called every frame
+GameState.prototype.update = function() {
+	// If there are fewer than MAX_MISSILES, launch a new one
+	if (this.missileGroup.countLiving() < this.MAX_MISSILES) {
+		// Set the launch point to a random location below the bottom edge
+		// of the stage
+		this.launchMissile(this.game.rnd.integerInRange(50, this.game.width - 50),
+			this.game.height - 50);
+	}
+
+	this.game.world.setBounds(game.world.camera.x, this.game.world.bounds.y, game.world.width*2, this.game.world.bounds.height);
+	this.updateBackground();
+};
+var SCARCITY = 10;
+GameState.prototype.updateBackground = function() {
+	
+	var right = game.world.camera.x + game.world.camera.width;
+	if (this.lastSpritePosition < right - SCARCITY) {
+		this.addNextSprite(right);
+	}
+
+};
+
+GameState.prototype.addNextSprite = function(right) {
+	var sprite = this.chooseFromSprites(right);
+	this.lastSpritePosition = this.rnd.integerInRange(right, right + SCARCITY);
+	var tree = game.add.sprite(this.lastSpritePosition, game.world.height, sprite);
+	tree.anchor.set(0, 1);
+};
+
+GameState.prototype.chooseFromSprites = function(right) {
+
+	if (right < 1000) {
+		return "tree" + this.rnd.integerInRange(1, 11);	
+	} else if ( 1000 < right && right < 2000) {
+		return "tree" + this.rnd.integerInRange(1, 16);	
+	} else {
+		return "tree" + this.rnd.integerInRange(12, 16);	
+	}
+	
+};
+
+
+// Try to get a missile from the missileGroup
+// If a missile isn't available, create a new one and add it to the group.
+GameState.prototype.launchMissile = function(x, y) {
+	// // Get the first dead missile from the missileGroup
+	var missile = this.missileGroup.getFirstDead();
+
+	// If there aren't any available, create a new one
+	if (missile === null) {
+		missile = new Missile(this.game);
+		this.missileGroup.add(missile);
+	}
+
+	// Revive the missile (set it's alive property to true)
+	// You can also define a onRevived event handler in your explosion objects
+	// to do stuff when they are revived.
+	missile.revive();
+
+	// Move the missile to the given coordinates
+	missile.x = x;
+	missile.y = y;
+
+	return missile;
+};
+
+var game = new Phaser.Game(848, 450, Phaser.AUTO, 'game');
+game.state.add('game', GameState, true);
