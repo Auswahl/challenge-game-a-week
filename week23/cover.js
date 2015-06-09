@@ -31,6 +31,7 @@ Cover.prototype = {
 		game.load.image("buttonStart", "assets/back/btnstart.jpg");
 		this.game.load.audio('clickSound', 'assets/sound/click.wav');
 		this.game.load.audio('soundtrack', 'assets/sound/soundtrack.mp3');
+		this.game.load.audio('blockSound', 'assets/sound/block.wav');
 
 	},
 

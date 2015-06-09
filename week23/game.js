@@ -27,11 +27,7 @@ TheGame.prototype.preload = function() {
 	game.load.spritesheet('blockSprite', 'assets/joystick/block.png', 64, 64);
 	game.load.spritesheet('strikeSprite', 'assets/joystick/strike.png', 64, 64);
 
-	this.game.load.audio('blockSound', 'assets/sound/block.wav');
 	this.game.load.audio('looseSound', 'assets/sound/lose.wav');
-	this.game.load.audio('winSound', 'assets/sound/win.wav');
-	this.game.load.audio('strikeSound', 'assets/sound/strike.wav');
-	this.game.load.audio('battleSound', 'assets/sound/startbattle.wav');
 
 	game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
 

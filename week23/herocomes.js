@@ -6,6 +6,8 @@ Herocomes.prototype = {
 	preload: function() {
 		game.load.image("bg", "assets/back/scenemegafon.jpg");
 		game.load.image("buttonNext", "assets/back/btnnext.jpg");
+		this.game.load.audio('battleSound', 'assets/sound/startbattle.wav');
+
 	},
 
 	create: function() {

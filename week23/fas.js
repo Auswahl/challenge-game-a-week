@@ -6,6 +6,8 @@ Fas.prototype = {
 	preload: function() {
 		game.load.image("bg", "assets/back/scenefas.jpg");
 		game.load.spritesheet("buttonNext", "assets/back/btnnext.jpg");
+		this.game.load.audio('winSound', 'assets/sound/win.wav');
+
 	},
 
 	create: function() {

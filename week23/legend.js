@@ -6,6 +6,8 @@ Legend.prototype = {
 	preload: function() {
 		game.load.image("bg", "assets/back/intro.jpg");
 		game.load.image("buttonNext", "assets/back/btnnext.jpg");
+		this.game.load.audio('strikeSound', 'assets/sound/strike.wav');
+
 	},
 
 	create: function() {
