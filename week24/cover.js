@@ -27,11 +27,11 @@ Cover.prototype = {
 
 	preload: function() {
 
-		game.load.image("bg", "assets/back/cover.jpg");
-		game.load.image("buttonStart", "assets/back/btnstart.jpg");
-		this.game.load.audio('clickSound', 'assets/sound/click.wav');
-		this.game.load.audio('soundtrack', 'assets/sound/soundtrack.mp3');
-		this.game.load.audio('blockSound', 'assets/sound/block.wav');
+		game.load.image("bg", "assets/back/front.png");
+		game.load.image("buttonStart", "assets/control/button1.jpg");
+		this.game.load.audio('explosion', 'assets/sound/explosion.mp3');
+		this.game.load.audio('soundtrack', 'assets/sound/wind.mp3');
+	
 
 	},
 
@@ -39,7 +39,7 @@ Cover.prototype = {
 		var bg = game.add.sprite(0, 0, 'bg');
 		bg.height = 600;
 		bg.width = 800;
-		game.sound.play('soundtrack');
+		game.sound.play('soundtrack', 1, true);
 
 		
 		button = this.game.add.button(
@@ -54,7 +54,7 @@ Cover.prototype = {
 			game.scale.startFullScreen();
 		}
 		game.sound.play('clickSound');
-		this.game.state.start("Legend");
+		this.game.state.start("TheGame");
 	},
 
 	checkOrientaion: function() {
