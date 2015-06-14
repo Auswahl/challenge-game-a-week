@@ -1,10 +1,5 @@
-// This example uses the Phaser 2.2.2 framework
-
-// Copyright © 2014 John Watson
-// Licensed under the terms of the MIT License
-
 var GameState = function(game) {
-	this.MAX_MISSILES = 10; // number of missiles
+	this.MAX_PACK = 10; // number of missiles
 };
 
 // Load images and sounds
@@ -39,12 +34,12 @@ GameState.prototype.create = function() {
 	this.game.stage.backgroundColor = 0x4488cc;
 	game.world.setBounds(0, 0, 1920, 600);
 	// Create a group to hold the missile
-	this.missileGroup = this.game.add.group();
+	this.birdGroup = this.game.add.group();
 
 	// Create a group for explosions
 	this.explosionGroup = this.game.add.group();
 
-	
+
 	// Simulate a pointer click/tap input at the center of the stage
 	// when the example begins running.
 	this.game.input.activePointer.x = this.game.width / 2;
@@ -68,16 +63,16 @@ GameState.prototype.create = function() {
 
 	var bush = game.add.sprite(0, game.world.height, 'tree1');
 	bush.anchor.set(0.5, 1);
-	
+
 };
 
 // The update() method is called every frame
 GameState.prototype.update = function() {
-	// If there are fewer than MAX_MISSILES, launch a new one
-	if (this.missileGroup.countLiving() < this.MAX_MISSILES) {
+	// If there are fewer than MAX_PACK, launch a new one
+	if (this.birdGroup.countLiving() < this.MAX_PACK) {
 		// Set the launch point to a random location below the bottom edge
 		// of the stage
-		this.launchMissile(this.game.rnd.integerInRange(50, this.game.width - 50),
+		this.launchBird(this.game.rnd.integerInRange(50, this.game.width - 50),
 			this.game.height - 50);
 	}
 
@@ -86,7 +81,7 @@ GameState.prototype.update = function() {
 };
 var SCARCITY = 10;
 GameState.prototype.updateBackground = function() {
-	
+
 	var right = game.world.camera.x + game.world.camera.width;
 	if (this.lastSpritePosition < right - SCARCITY) {
 		this.addNextSprite(right);
@@ -104,38 +99,38 @@ GameState.prototype.addNextSprite = function(right) {
 GameState.prototype.chooseFromSprites = function(right) {
 
 	if (right < 1000) {
-		return "tree" + this.rnd.integerInRange(1, 11);	
+		return "tree" + this.rnd.integerInRange(1, 11);
 	} else if ( 1000 < right && right < 2000) {
-		return "tree" + this.rnd.integerInRange(1, 16);	
+		return "tree" + this.rnd.integerInRange(1, 16);
 	} else {
-		return "tree" + this.rnd.integerInRange(12, 16);	
+		return "tree" + this.rnd.integerInRange(12, 16);
 	}
-	
+
 };
 
 
-// Try to get a missile from the missileGroup
+// Try to get a missile from the birdGroup
 // If a missile isn't available, create a new one and add it to the group.
-GameState.prototype.launchMissile = function(x, y) {
-	// // Get the first dead missile from the missileGroup
-	var missile = this.missileGroup.getFirstDead();
+GameState.prototype.launchBird = function(x, y) {
+	// // Get the first dead missile from the birdGroup
+	var bird = this.birdGroup.getFirstDead();
 
 	// If there aren't any available, create a new one
-	if (missile === null) {
-		missile = new Missile(this.game);
-		this.missileGroup.add(missile);
+	if (bird === null) {
+		bird = new TakenBird(this.game);
+		this.birdGroup.add(bird);
 	}
 
-	// Revive the missile (set it's alive property to true)
+	// Revive the bird (set it's alive property to true)
 	// You can also define a onRevived event handler in your explosion objects
 	// to do stuff when they are revived.
-	missile.revive();
+	bird.revive();
 
-	// Move the missile to the given coordinates
-	missile.x = x;
-	missile.y = y;
+	// Move the bird to the given coordinates
+	bird.x = x;
+	bird.y = y;
 
-	return missile;
+	return bird;
 };
 
 var game = new Phaser.Game(848, 450, Phaser.AUTO, 'game');
