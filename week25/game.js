@@ -34,12 +34,9 @@ GameState.prototype.create = function() {
 	this.game.stage.backgroundColor = 0x4488cc;
 	game.world.setBounds(0, 0, 1920, 600);
 	// Create a group to hold the missile
-	this.birdGroup = this.game.add.group();
+	this.darkPack = this.game.add.group();
 
-	// Create a group for explosions
-	this.explosionGroup = this.game.add.group();
-
-
+	this.goodies = new GoodBirdsPack(this.game);
 	// Simulate a pointer click/tap input at the center of the stage
 	// when the example begins running.
 	this.game.input.activePointer.x = this.game.width / 2;
@@ -48,13 +45,6 @@ GameState.prototype.create = function() {
 	this.cursors = game.input.keyboard.createCursorKeys();
 
 	target = this.crow = new Crow(game, this.cursors, 100, 100);
-
-	// // just to try
-	// var N = 50;
-	// for(var i = 0; i < N; i++) {
-	// 	var bush = this.game.add.sprite(game.world.width/N*i, game.world.height, 'bush');
-	// 	bush.anchor.set(0.5, 1);
-	// }
 
 	this.lastSpritePosition = 0;
 	while(this.lastSpritePosition <= game.world.camera.x + game.world.camera.width) {
@@ -69,7 +59,7 @@ GameState.prototype.create = function() {
 // The update() method is called every frame
 GameState.prototype.update = function() {
 	// If there are fewer than MAX_PACK, launch a new one
-	if (this.birdGroup.countLiving() < this.MAX_PACK) {
+	if (this.darkPack.countLiving() < this.MAX_PACK) {
 		// Set the launch point to a random location below the bottom edge
 		// of the stage
 		this.launchBird(this.game.rnd.integerInRange(50, this.game.width - 50),
@@ -78,6 +68,8 @@ GameState.prototype.update = function() {
 
 	this.game.world.setBounds(game.world.camera.x, this.game.world.bounds.y, game.world.width*2, this.game.world.bounds.height);
 	this.updateBackground();
+	this.goodies.update();
+
 };
 var SCARCITY = 10;
 GameState.prototype.updateBackground = function() {
@@ -109,16 +101,16 @@ GameState.prototype.chooseFromSprites = function(right) {
 };
 
 
-// Try to get a missile from the birdGroup
+// Try to get a missile from the darkPack
 // If a missile isn't available, create a new one and add it to the group.
 GameState.prototype.launchBird = function(x, y) {
-	// // Get the first dead missile from the birdGroup
-	var bird = this.birdGroup.getFirstDead();
+	// // Get the first dead missile from the darkPack
+	var bird = this.darkPack.getFirstDead();
 
 	// If there aren't any available, create a new one
 	if (bird === null) {
 		bird = new TakenBird(this.game);
-		this.birdGroup.add(bird);
+		this.darkPack.add(bird);
 	}
 
 	// Revive the bird (set it's alive property to true)

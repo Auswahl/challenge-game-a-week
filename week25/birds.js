@@ -1,8 +1,9 @@
-var Bird = function(game, x, y) {
-	Phaser.Sprite.call(this, game, x, y, 'bird');
+var Bird = function(game, tint) {
+	Phaser.Sprite.call(this, game, 0, 0, 'bird');
 	// Set the pivot point for this sprite to the center
 	this.anchor.setTo(0.5, 0.5);
 	this.scale.setTo(0.5, 0.5);
+	this.tint = tint;
 
 	// Enable physics on the Bird
 	this.game.physics.enable(this, Phaser.Physics.ARCADE);
@@ -36,9 +37,8 @@ Bird.prototype = Object.create(Phaser.Sprite.prototype);
 Bird.prototype.constructor = Bird;
 
 // Bird constructor
-var TakenBird = function(game, x, y) {
-	Bird.call(this, game, x, y);
-	this.tint = 0x000;
+var TakenBird = function(game) {
+	Bird.call(this, game, 0x000);
 
 	this.SMOKE_LIFETIME = 1000; // milliseconds
 
@@ -153,3 +153,36 @@ TakenBird.prototype.update = function() {
 	this.body.velocity.x = Math.cos(this.direction) * this.SPEED;
 	this.body.velocity.y = Math.sin(this.direction) * this.SPEED;
 };
+
+
+var GoodBirdsPack = function(game) {
+	this.game = game;
+	this.lightPack = this.game.add.group();
+	this.SCARCITY = 300;
+};
+
+GoodBirdsPack.prototype.update = function() {
+
+	var right = game.world.camera.x + game.world.camera.width;
+	if (this.lastSpritePosition < right - SCARCITY) {
+
+	if (this.firstIsOutOfBounds()) {
+		removeFirst();
+	}
+	var left, right;
+	if (!this.lastBird) {
+		right = this.game.height;
+		left = 0;
+	} else {
+		left = this.lastBird.x;
+		right = left + this.SCARCITY;
+	}
+
+	this.lastBird = new Bird(this.game, 0x00ff00);
+	this.lastBird.x = this.game.rnd.integerInRange(left+50, right - 50);
+	this.lastBird.y = this.game.rnd.integerInRange(50, this.game.height - 50);
+	this.lightPack.add(this.lastBird);
+
+
+};
+
