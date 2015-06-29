@@ -23,7 +23,7 @@ GameState.prototype.preload = function() {
 	this.game.load.image('tree16', 'assets/background/trees/16.png');
 	this.game.load.image('tree17', 'assets/background/trees/17.png');
 
-	game.load.atlasJSONHash('crow', 'assets/sprites/crow.png', 'assets/sprites/crow.js');
+	game.load.atlasJSONHash('raven', 'assets/sprites/crow.png', 'assets/sprites/crow.js');
 	game.load.spritesheet('bird', 'assets/sprites/bird.png', 68, 71);
 };
 
@@ -33,10 +33,11 @@ GameState.prototype.create = function() {
 	// Set stage background to something sky colored
 	this.game.stage.backgroundColor = 0x4488cc;
 	game.world.setBounds(0, 0, 1920, 600);
-	// Create a group to hold the missile
-	this.darkPack = this.game.add.group();
 
-	this.goodies = new GoodBirdsPack(this.game);
+	// Create a group to hold the missile
+	this.murder = new Murder(this.game);
+	this.goodies = new Flock(this.game);
+
 	// Simulate a pointer click/tap input at the center of the stage
 	// when the example begins running.
 	this.game.input.activePointer.x = this.game.width / 2;
@@ -44,7 +45,7 @@ GameState.prototype.create = function() {
 
 	this.cursors = game.input.keyboard.createCursorKeys();
 
-	target = this.crow = new Crow(game, this.cursors, 100, 100);
+	target = this.raven = new Raven(game, this.cursors, 100, 100);
 
 	this.lastSpritePosition = 0;
 	while(this.lastSpritePosition <= game.world.camera.x + game.world.camera.width) {
@@ -58,16 +59,14 @@ GameState.prototype.create = function() {
 
 // The update() method is called every frame
 GameState.prototype.update = function() {
-	// If there are fewer than MAX_PACK, launch a new one
-	if (this.darkPack.countLiving() < this.MAX_PACK) {
-		// Set the launch point to a random location below the bottom edge
-		// of the stage
-		this.launchBird(this.game.rnd.integerInRange(50, this.game.width - 50),
-			this.game.height - 50);
-	}
+	this.game.world.setBounds(
+		game.world.camera.x,
+		this.game.world.bounds.y,
+		game.world.width*2,
+		this.game.world.bounds.height);
 
-	this.game.world.setBounds(game.world.camera.x, this.game.world.bounds.y, game.world.width*2, this.game.world.bounds.height);
 	this.updateBackground();
+	this.murder.update();
 	this.goodies.update();
 
 };
@@ -98,31 +97,6 @@ GameState.prototype.chooseFromSprites = function(right) {
 		return "tree" + this.rnd.integerInRange(12, 16);
 	}
 
-};
-
-
-// Try to get a missile from the darkPack
-// If a missile isn't available, create a new one and add it to the group.
-GameState.prototype.launchBird = function(x, y) {
-	// // Get the first dead missile from the darkPack
-	var bird = this.darkPack.getFirstDead();
-
-	// If there aren't any available, create a new one
-	if (bird === null) {
-		bird = new TakenBird(this.game);
-		this.darkPack.add(bird);
-	}
-
-	// Revive the bird (set it's alive property to true)
-	// You can also define a onRevived event handler in your explosion objects
-	// to do stuff when they are revived.
-	bird.revive();
-
-	// Move the bird to the given coordinates
-	bird.x = x;
-	bird.y = y;
-
-	return bird;
 };
 
 var game = new Phaser.Game(848, 450, Phaser.AUTO, 'game');
