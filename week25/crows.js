@@ -1,6 +1,24 @@
-var Crow = function(game) {
+var Crow = function(game, raven) {
 	Bird.call(this, game, 0x000);
+	// Define constants that affect motion
+	this.SPEED = 290; // Bird speed pixels/second
+	this.TURN_RATE = 5; // turn rate in degrees/frame
+	this.WOBBLE_LIMIT = 15; // degrees
+	this.WOBBLE_SPEED = 200; // milliseconds
+	this.AVOID_DISTANCE = 30; // pixels
 
+	// Create a variable called wobble that tweens back and forth between
+	// -this.WOBBLE_LIMIT and +this.WOBBLE_LIMIT forever
+	this.wobble = this.WOBBLE_LIMIT;
+	this.game.add.tween(this)
+		.to({
+				wobble: -this.WOBBLE_LIMIT
+			},
+			this.WOBBLE_SPEED, Phaser.Easing.Sinusoidal.InOut, true, 0,
+			Number.POSITIVE_INFINITY, true
+		);
+
+	this.raven = raven;
 	this.SMOKE_LIFETIME = 1000; // milliseconds
 
 	// Add a smoke emitter with 100 particles positioned relative to the
@@ -51,7 +69,7 @@ Crow.prototype.update = function() {
 	// target coordinates you need.
 	var targetAngle = this.game.math.angleBetween(
 		this.x, this.y,
-		target.x, target.y
+		this.raven.x, this.raven.y
 	);
 
 	// Add our "wobble" factor to the targetAngle to make the Bird wobble
@@ -115,10 +133,13 @@ Crow.prototype.update = function() {
 	this.body.velocity.y = Math.sin(this.direction) * this.SPEED;
 };
 
-var Murder = function(game) {
+var Murder = function(game, raven) {
 	this.game = game;
+	this.raven = raven;
 	this.pack = this.game.add.group();
 	this.SCARCITY = 300;
+	globalGroup.add(this.pack);
+	this.MAX = 10;
 };
 
 Murder.prototype.update = function() {
@@ -132,12 +153,15 @@ Murder.prototype.update = function() {
 };
 
 Murder.prototype.launchBird = function(x, y) {
+	if (this.pack.total >= this.MAX) {
+		this.pack.getFirstAlive().kill();
+	}
 	// // Get the first dead missile from the pack
 	var bird = this.pack.getFirstDead();
 
 	// If there aren't any available, create a new one
 	if (bird === null) {
-		bird = new TakenBird(this.game);
+		bird = new Crow(this.game, this.raven);
 		this.pack.add(bird);
 	}
 

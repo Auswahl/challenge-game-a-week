@@ -13,3 +13,6 @@ game.state.add("TheGame", TheGame);
 game.state.add("Final", Final);
 
 game.state.start("Cover");
+
+
+

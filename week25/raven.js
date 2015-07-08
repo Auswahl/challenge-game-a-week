@@ -1,5 +1,5 @@
-var Raven = function(game, cursors, x, y) {
-	Phaser.Sprite.call(this, game, x, y, 'raven');
+var Raven = function(game, cursors) {
+	Phaser.Sprite.call(this, game, 100, 100, 'raven');
 	game.add.existing(this);
 
 	this.cursors = cursors;
@@ -18,6 +18,8 @@ var Raven = function(game, cursors, x, y) {
 	this.animations.play('fly-right');
 	game.camera.follow(this);
 	this.body.collideWorldBounds = true;
+	this.z = 7;
+	globalGroup.addChild(this);
 
 };
 Raven.prototype = Object.create(Phaser.Sprite.prototype);
@@ -29,8 +31,8 @@ Raven.prototype.update = function() {
 		this.angle += 5;
 	} else if (this.cursors.right.isDown) {
 		this.angle -= 5;
-
 	}
+
 
 	game.physics.arcade.velocityFromAngle(this.angle, 300, this.body.velocity);
 
