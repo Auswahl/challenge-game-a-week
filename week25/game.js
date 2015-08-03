@@ -37,45 +37,87 @@ GameState.prototype.create = function() {
 	this.game.stage.backgroundColor = 0x4488cc;
 	game.world.setBounds(0, 0, 1920, 450);
 	this.cursors = game.input.keyboard.createCursorKeys();
+	this.input.recordPointerHistory = true;
+	this.input.recordLimit = 10;
+	game.input.onUp.add(this.attack, this);
+	game.input.onDown.add(this.ready, this);
 
 	globalGroup = game.add.group();
 
-	this.raven = new Raven(game, this.cursors);
 	this.murder = new Murder(this.game, this.raven);
 	this.prey = new Flock(this.game, this.raven);
-
-
-
 	this.background = new Background(game);
 
-	// Simulate a pointer click/tap input at the center of the stage
-	// when the example begins running.
-	// this.game.input.activePointer.x = this.game.width / 2;
-	// this.game.input.activePointer.y = this.game.height / 2 - 100;
+	// this.raven = new Raven(game, this.cursors);
+	// this.raven.inputEnabled = true;
+	// this.raven.events.onInputDown.add(this.loginput, this);
+	// this.raven.events.onInputUp.add(this.loginput, this);
+
 	this.previousCameraPosition = 0;
 	globalGroup.sort();
 	this.CAM_SPEED = 3;
+
+
 };
+
+GameState.prototype.ready = function(pointer) {
+	SPEED = 0;
+};
+
+GameState.prototype.attack = function(pointer) {
+
+	var bmd = game.add.bitmapData(game.world.width, game.world.height);
+	var sprite = game.add.sprite(0, 0, bmd);
+	bmd.ctx.fillStyle = "rgba(0, 1, 1, 0.1)";
+	bmd.ctx.fillRect(0, 0, 800, 600);
+	bmd.ctx.beginPath();
+	bmd.ctx.strokeStyle = "white";
+
+
+	var drawLine = function(point) {
+		bmd.ctx.lineTo(point.x, point.y);
+		bmd.ctx.lineWidth = 2;
+		bmd.ctx.stroke();
+		bmd.dirty = true;
+	};
+
+	for(var i in pointer._history) {
+		console.log(pointer._history[i]);
+		game.time.events.add(100*i, drawLine.bind(this, pointer._history[i]));
+	}
+
+	game.time.events.add(100 * pointer._history.length + 200, function() {
+		bmd.ctx.closePath();
+
+		sprite.destroy();
+		SPEED = 2;
+	});
+
+
+};
+
 
 // The update() method is called every frame
 GameState.prototype.update = function() {
-	var velocity = this.camera.x - this.previousCameraPosition;
-	if (velocity <= this.CAM_SPEED) {
-		this.camera.x += this.CAM_SPEED;
-	}
-	this.previousCameraPosition = this.camera.x;
+	// var velocity = this.camera.x - this.previousCameraPosition;
+	// if (velocity <= this.CAM_SPEED) {
+	// 	this.camera.x += this.CAM_SPEED;
+	// }
+	// this.previousCameraPosition = this.camera.x;
 
-	this.game.world.setBounds(
-		game.world.camera.x,
-		this.game.world.bounds.y,
-		game.world.width*2,
-		this.game.world.bounds.height);
+	// this.game.world.setBounds(
+	// 	game.world.camera.x,
+	// 	this.game.world.bounds.y,
+	// 	game.world.width*2,
+	// 	this.game.world.bounds.height);
 
 	this.background.update();
-	this.murder.update();
-	this.prey.update();
+	// this.murder.update();
+	// this.prey.update();
 
-	game.physics.arcade.collide(this.raven, this.prey, this.attackHandler, null, this);
+	// game.physics.arcade.collide(this.raven, this.prey, this.attackHandler, null, this);
+
+
 
 };
 
@@ -100,5 +142,5 @@ var extend = function(defaults, options) {
 	return extended;
 };
 
-var game = new Phaser.Game(848, 450, Phaser.AUTO, 'game');
+var game = new Phaser.Game(800, 450, Phaser.AUTO, 'game');
 game.state.add('game', GameState, true);

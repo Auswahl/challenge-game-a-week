@@ -1,3 +1,4 @@
+var SPEED = 1;
 var Background = function(game) {
 	this.SCARCITY = 10;
 	this.lastSpritePosition = 0;
@@ -5,46 +6,45 @@ var Background = function(game) {
 	this.layers = [];
 
 	this.layers.push(new BgLayer(game, {
-		scrollFactor: 0.2,
+		scrollFactor: 0.8,
 		y: game.world.height - 40,
 		z: 9,
 		scale: 0.8,
 
 	}));
 	this.layers.push(new BgLayer(game, {
-		scrollFactor: 0.4,
+		scrollFactor: 0.6,
 		y: game.world.height - 80,
 		z: 8,
 		scale: 0.6
 	}));
 	this.layers.push(new BgLayer(game, {
-		scrollFactor: 0.6,
+		scrollFactor: 0.4,
 		y: game.world.height - 120,
 		z: 6,
 		scale: 0.4
 	}));
 
 	this.layers.push(new BgLayer(game, {
-		scrollFactor: 0.9,
+		scrollFactor: 0.1,
 		y: 200,
 		z: -1,
 		scale: 0.3,
 		// scarcity: 2000,
 		sprites: ["cloud"]
-
 	}));
 
-	var grass = game.add.tileSprite(0, game.world.height, 20000, 128, "grass");
-	grass.anchor.set(0, 1);
-	grass.z = 10;
+	this.grass = game.add.tileSprite(0, game.world.height, 20000, 128, "grass");
+	this.grass.anchor.set(0, 1);
+	this.grass.z = 10;
 
-	var terrain = game.add.tileSprite(0, game.world.height, 1920, 200, "terrain");
-	terrain.anchor.set(0, 1);
-	terrain.fixedToCamera = true;
-	terrain.z = 0;
+	this.terrain = game.add.tileSprite(0, game.world.height, 1920, 200, "terrain");
+	this.terrain.anchor.set(0, 1);
+	this.terrain.fixedToCamera = true;
+	this.terrain.z = 0;
 
-	globalGroup.addChild(grass);
-	globalGroup.addChild(terrain);
+	globalGroup.addChild(this.grass);
+	globalGroup.addChild(this.terrain);
 };
 
 var BgLayer = function(game, options) {
@@ -74,7 +74,7 @@ var BgLayer = function(game, options) {
 };
 
 BgLayer.prototype.update = function() {
-	this.group.x = this.game.camera.x * this.scrollFactor;
+	this.group.x -= SPEED * this.scrollFactor;
 
 	if (this.lastSpritePosition <= this.game.world.camera.x + this.game.world.camera.width) {
 		this.createSprite();
@@ -104,6 +104,7 @@ Background.prototype.fillClouds = function(group) {
 };
 
 Background.prototype.update = function() {
+	this.grass.tilePosition.x -= SPEED;
 
 	for (var id in this.layers) {
 		this.layers[id].update();
