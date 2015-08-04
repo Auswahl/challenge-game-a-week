@@ -32,6 +32,11 @@ Flock.prototype = Object.create(Phaser.Group.prototype);
 Flock.prototype.constructor = Flock;
 
 Flock.prototype.update = function() {
+
+	this.forEach(function(bird) {
+		bird.x -= SPEED;
+	});
+
 	var left, right;
 	right = game.world.camera.x + game.world.camera.width;
 	if (this.lastBird && this.lastBird.x > right - this.SCARCITY) {
@@ -45,6 +50,7 @@ Flock.prototype.update = function() {
 	this.lastBird.y = this.game.rnd.integerInRange(50, this.game.height - 50);
 
 	this.add(this.lastBird);
+
 
 };
 

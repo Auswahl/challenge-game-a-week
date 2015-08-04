@@ -2,7 +2,6 @@ var GameState = function(game) {
 	this.MAX_PACK = 10; // number of missiles
 };
 
-
 // Load images and sounds
 GameState.prototype.preload = function() {
 	// this.game.load.image('rocket', '/assets/gfx/rocket.png');
@@ -39,8 +38,6 @@ GameState.prototype.create = function() {
 	this.cursors = game.input.keyboard.createCursorKeys();
 	this.input.recordPointerHistory = true;
 	this.input.recordLimit = 10;
-	game.input.onUp.add(this.attack, this);
-	game.input.onDown.add(this.ready, this);
 
 	globalGroup = game.add.group();
 
@@ -48,54 +45,12 @@ GameState.prototype.create = function() {
 	this.prey = new Flock(this.game, this.raven);
 	this.background = new Background(game);
 
-	// this.raven = new Raven(game, this.cursors);
-	// this.raven.inputEnabled = true;
-	// this.raven.events.onInputDown.add(this.loginput, this);
-	// this.raven.events.onInputUp.add(this.loginput, this);
+	this.raven = new Raven(game, this.cursors);
 
 	this.previousCameraPosition = 0;
 	globalGroup.sort();
 	this.CAM_SPEED = 3;
-
-
 };
-
-GameState.prototype.ready = function(pointer) {
-	SPEED = 0;
-};
-
-GameState.prototype.attack = function(pointer) {
-
-	var bmd = game.add.bitmapData(game.world.width, game.world.height);
-	var sprite = game.add.sprite(0, 0, bmd);
-	bmd.ctx.fillStyle = "rgba(0, 1, 1, 0.1)";
-	bmd.ctx.fillRect(0, 0, 800, 600);
-	bmd.ctx.beginPath();
-	bmd.ctx.strokeStyle = "white";
-
-
-	var drawLine = function(point) {
-		bmd.ctx.lineTo(point.x, point.y);
-		bmd.ctx.lineWidth = 2;
-		bmd.ctx.stroke();
-		bmd.dirty = true;
-	};
-
-	for(var i in pointer._history) {
-		console.log(pointer._history[i]);
-		game.time.events.add(100*i, drawLine.bind(this, pointer._history[i]));
-	}
-
-	game.time.events.add(100 * pointer._history.length + 200, function() {
-		bmd.ctx.closePath();
-
-		sprite.destroy();
-		SPEED = 2;
-	});
-
-
-};
-
 
 // The update() method is called every frame
 GameState.prototype.update = function() {
@@ -112,13 +67,10 @@ GameState.prototype.update = function() {
 	// 	this.game.world.bounds.height);
 
 	this.background.update();
-	// this.murder.update();
-	// this.prey.update();
+	this.murder.update();
+	this.prey.update();
 
 	// game.physics.arcade.collide(this.raven, this.prey, this.attackHandler, null, this);
-
-
-
 };
 
 GameState.prototype.attackHandler = function(raven, bird) {

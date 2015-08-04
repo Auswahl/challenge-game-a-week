@@ -21,21 +21,57 @@ var Raven = function(game, cursors) {
 	this.z = 7;
 	globalGroup.addChild(this);
 
+	this.inputEnabled = true;
+	this.events.onInputDown.add(this.ready, this);
+	this.events.onInputUp.add(this.attack, this);
+	this.input.recordPointerHistory = true;
+	this.input.recordLimit = 10;
+
 };
 Raven.prototype = Object.create(Phaser.Sprite.prototype);
 Raven.prototype.constructor = Raven;
 
+Raven.prototype.ready = function(raven, pointer) {
+	SPEED = 0;
+};
 
-Raven.prototype.update = function() {
-	if(this.cursors.left.isDown) {
-		this.angle += 5;
-	} else if (this.cursors.right.isDown) {
-		this.angle -= 5;
+Raven.prototype.attack = function(raven, pointer) {
+
+	var bmd = game.add.bitmapData(game.world.width, game.world.height);
+	var sprite = game.add.sprite(0, 0, bmd);
+	bmd.ctx.fillStyle = "rgba(0, 1, 1, 0.1)";
+	bmd.ctx.fillRect(0, 0, 800, 600);
+	bmd.ctx.beginPath();
+	bmd.ctx.strokeStyle = "white";
+
+
+	var drawLine = function(point) {
+		bmd.ctx.lineTo(point.x, point.y);
+		bmd.ctx.lineWidth = 2;
+		bmd.ctx.stroke();
+		bmd.dirty = true;
+	};
+
+	for(var i in pointer._history) {
+		console.log(pointer._history[i]);
+		game.time.events.add(100*i, drawLine.bind(this, pointer._history[i]));
 	}
 
+	game.time.events.add(100 * pointer._history.length + 200, function() {
+		bmd.ctx.closePath();
 
-	game.physics.arcade.velocityFromAngle(this.angle, 300, this.body.velocity);
+		sprite.destroy();
+		SPEED = 2;
+	});
 
+
+};
+Raven.prototype.update = function() {
+	// this.move();
+	this.animate();
+};
+
+Raven.prototype.animate = function() {
 	if (-3*Math.PI/4 <= this.rotation && this.rotation <= -Math.PI/4) {
 		this.animations.play('fly-down');
 	} else if (3*Math.PI/4 <= this.rotation || this.rotation <= -3 *Math.PI/4) {
@@ -45,4 +81,13 @@ Raven.prototype.update = function() {
 	} else {
 		this.animations.play('fly-right');
 	}
+};
+Raven.prototype.move = function() {
+	if(this.cursors.left.isDown) {
+		this.angle += 5;
+	} else if (this.cursors.right.isDown) {
+		this.angle -= 5;
+	}
+
+	game.physics.arcade.velocityFromAngle(this.angle, 300, this.body.velocity);
 };
