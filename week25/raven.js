@@ -24,15 +24,17 @@ var Raven = function(game, cursors) {
 	this.inputEnabled = true;
 	this.events.onInputDown.add(this.ready, this);
 	this.events.onInputUp.add(this.attack, this);
-	this.input.recordPointerHistory = true;
-	this.input.recordLimit = 10;
 
+	this.recordRate = 100;
+	this._history = [];
 };
 Raven.prototype = Object.create(Phaser.Sprite.prototype);
 Raven.prototype.constructor = Raven;
 
 Raven.prototype.ready = function(raven, pointer) {
 	SPEED = 0;
+	this.recordMoves = true;
+	this._nextDrop = this.game.time.time;
 };
 
 Raven.prototype.attack = function(raven, pointer) {
@@ -52,23 +54,35 @@ Raven.prototype.attack = function(raven, pointer) {
 		bmd.dirty = true;
 	};
 
-	for(var i in pointer._history) {
-		console.log(pointer._history[i]);
-		game.time.events.add(100*i, drawLine.bind(this, pointer._history[i]));
+	for(var i in this._history) {
+		console.log(this._history[i]);
+		game.time.events.add(100*i, drawLine.bind(this, this._history[i]));
 	}
 
-	game.time.events.add(100 * pointer._history.length + 200, function() {
+	game.time.events.add(100 * this._history.length + 200, (function() {
 		bmd.ctx.closePath();
 
 		sprite.destroy();
 		SPEED = 2;
-	});
+		this._history = [];
+		this.recordMoves = false;
+	}).bind(this));
 
 
 };
 Raven.prototype.update = function() {
 	// this.move();
 	this.animate();
+
+	if (this.recordMoves && this.game.time.time >= this._nextDrop && this._history.length <= 20) {
+	    this._nextDrop = this.game.time.time + this.recordRate;
+
+	    this._history.push({
+	        x: game.input.position.x,
+	        y: game.input.position.y
+	    });
+
+	}
 };
 
 Raven.prototype.animate = function() {
